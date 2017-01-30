@@ -16,29 +16,6 @@ import wayfinder.db.DBController;
  */
 public class RouteDA {
 
-    public static ArrayList<String> getDummyRoute1(){
-        ArrayList<String> dR = new ArrayList<String>();
-        dR.add("A1A5");
-        dR.add("A4B2");
-        dR.add("B3B5");
-        return dR;
-    }
-    public static ArrayList<String> getDummyRoute2(){
-        ArrayList<String> dR = new ArrayList<String>();
-        dR.add("A1A4");
-        dR.add("A5B3");
-        dR.add("B3B5");
-        return dR;
-    }
-    public static ArrayList<String> getDummyRoute3(){
-        ArrayList<String> dR = new ArrayList<String>();
-        dR.add("A1A4");
-        dR.add("A4B2");
-        dR.add("B2B3");
-        dR.add("B3B5");
-        return dR;
-    }
-
     public Route getRoute(String routeId) throws SQLException {
         DBController dbController = new DBController();
         Connection myConn = dbController.getConnection();
