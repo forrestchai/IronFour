@@ -90,13 +90,6 @@
             li.appendChild(document.createTextNode("<%= waypointNames.get(0)%>"));
             ul.appendChild(li);
             alert("hello world");
-            <%--li.removeChild(li.childNodes[0]);--%>
-            <%--li.appendChild(document.createTextNode("<%= waypointNames.get(1)%>"));--%>
-            <%--ul.appendChild(li);--%>
-            <%--li.removeChild(li.childNodes[0]);--%>
-            <%--li.appendChild(document.createTextNode("<%= waypointNames.get(2)%>"));--%>
-            <%--ul.appendChild(li);--%>
-            <%--li.removeChild(li.childNodes[0]);--%>
 
 
             for (i = 0; i < 3; i++) {

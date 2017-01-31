@@ -20,36 +20,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="..\css\qq.css" rel="stylesheet" type="text/css">
 
-        var counter = <%=session.getAttribute("current")%>;
-        var listSize = <%=routeList.size()%>;
-        function scanFunction(){
-
-            counter++;
-            var i;
-            for(i = 1; i <= counter; i++)
-            {
-                $("li.list-group-item:nth-child("+i+")").css({
-                    "background-color" : "grey",
-                    "color" : "white"
-                });
-            }
-
-            document.getElementById("numbercounter").innerHTML = listSize - counter;
-
-
-        };
-
-        if(listSize == 3)
-        {
-            $("#fourth").slideUp();
-        }
-
-            </script>
-            <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-            <link href="..\css\qq.css" rel="stylesheet" type="text/css">
-        </head><body>
+</head>
+<body>
 <div class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -79,48 +54,18 @@
         </div>
     </div>
 </div>
-        <div class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>Step 4: Set Sail</h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p>Scan the NFC tags when you see them! &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                            <br>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="text-left">Locations Remaining:<p style="display:inline-block" id="numbercounter"><%=routeList.size() - Integer.parseInt(session.getAttribute("current").toString())%>
-                    <br>
-                </h2>
-            </div>
-        </div>
-        <div class="row text-left">
-            <div class="col-md-6 col-md-offset-3 text-left">
-                <ul class="list-group">
-                    <li class="list-group-item" id="first-accordion"><p><%=waypointList.get(0).getName()%></p><p><%=routeList.get(0).getDescription()%></p></li>
-                    <li class="list-group-item nf"><p><%=waypointList.get(1).getName()%></p><p><%=routeList.get(1).getDescription()%></p></li>
-                    <li class="list-group-item nf"><p><%=waypointList.get(2).getName()%></p><p><%=routeList.get(2).getDescription()%></p></li>
-                    <li class="list-group-item nf" id="fourth"><p><%=waypointList.size() == 4 ? waypointList.get(3).getName(): ""%></p><p><%=routeList.size() == 4 ? routeList.get(3).getDescription() : ""%></p></li>
-                </ul>
+<div class="section text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Step 4: Wayfinding</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <a class="btn btn-primary" id="button-scan" onclick="scanFunction()">Scan NFC tag<br></a>
-            </div>
-            <div class="col-md-6">
-                <a class="btn btn-primary" href="WayfinderFeedback.jsp">Feedback on location</a>
+            <div class="col-md-12">
+                <p>Review your current location or move on!
+                    <br>
+                </p>
             </div>
         </div>
     </div>
@@ -128,12 +73,34 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <a class="btn btn-primary" href="WayfinderLanding.jsp">Back<br></a>
+            <div class="col-xs-12"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <br>
+                <a class="btn btn-primary">Continue</a>
             </div>
         </div>
     </div>
 </div>
+<div class="section" style="padding-top: 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Waypoint Reached:</h2>
+                <h3>Cardiology Department</h3>
+                <br>
+                <a class="btn btn-primary">Leave Feedback</a>
+                <br>
+                <br>
+                <a class="btn btn-primary">Change Destination</a>
+                <br>
+                <br>
+                <a class="btn btn-primary">End Wayfinding</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 
-
-</body></html>
+</html>
