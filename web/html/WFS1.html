@@ -9,7 +9,10 @@
     <link href="..\css\qq.css" rel="stylesheet" type="text/css">
     <link href="..\css\style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-    <script>
+
+
+    <script type="text/javascript">
+
         function openCity(cityName) {
             var i;
             var x = document.getElementsByClassName("city");
@@ -18,18 +21,31 @@
             }
             document.getElementById(cityName).style.display = "block";
         }
-    </script>
-    <script type="text/javascript">
+        function displayFilter() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementsByClassName("myUL");
+            li = ul.getElementsByTagName('li');
+
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
 
         window.setTimeout(function() {
             window.alert(5 + 6);
-            document.write(5 + 6);
             alert("hello world");
         }, 0);
 
         $(document).ready(function() {
-            $("#myUL").append('<li><a href="/user/messages"><span class="tab">Message Center</span></a></li>');
-            var ul = document.getElementById("myUL");
+            $(".myUL").append('<li class="list-group-item"><a href="/user/messages">Message Center</a></li>');
+            var ul = document.getElementsByClassName("myUL");
             var li = document.createElement("li");
             li.appendChild(document.createTextNode("<%= waypointNames.get(0)%>"));
             ul.appendChild(li);
@@ -43,24 +59,13 @@
             li.appendChild(document.createTextNode("<%= waypointNames.get(0)%>"));
             ul.appendChild(li);
             alert("hello world");
-
-
-            for (i = 0; i < 3; i++) {
-                var array = [];
-                array.push(<%=allWaypointList.get(1)%>);
-            }
-
-            for (i = 0; i < 3; i++) {
-
-            }
         }
 
         function displayFilter() {
-            document.write(5 + 10);
             var input, filter, ul, li, a, i;
             input = document.getElementById('myInput');
             filter = input.value.toUpperCase();
-            ul = document.getElementById("myUL");
+            ul = document.getElementsByClassName("myUL");
             li = ul.getElementsByTagName('li');
 
             for (i = 0; i < li.length; i++) {
@@ -86,29 +91,28 @@
             margin-bottom: 12px; /* Add some space below the input */
         }
 
-        #myUL {
+        .myUL {
             /* Remove default list styling */
             list-style-type: none;
             padding: 0;
             margin: 0;
         }
 
-        #myUL li{
+        .myUL li{
             border: 1px solid #ddd; /* Add a border to all links */
+            padding:0;
         }
 
-        #myUL li a {
-
-            margin-top: -1px, 0,0, 0; /* Prevent double borders */
+        .myUL li a {
+            margin: -1px 0 0 0; /* Prevent double borders */
             background-color: #f6f6f6; /* Grey background color */
             padding: 12px; /* Add some padding */
             text-decoration: none; /* Remove default text underline */
-            font-size: 18px; /* Increase the font-size */
             color: black; /* Add a black text color */
             display: block; /* Make it into a block element to fill the whole list */
         }
 
-        #myUL li a:hover:not(.header) {
+        .myUL li a:hover:not(.header) {
             background-color: #eee; /* Add a hover effect to all links, except for headers */
         }
 
@@ -176,27 +180,26 @@
               </ul>
 
               <div id="London" class="w3-container city">
-                  <ul class="list-group" id="myUL">
+                  <ul class="list-group myUL">
                       <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
-                      <li class="list-group-item"><a> Dapibus ac facilisis in </a></li>
-                      <li class="list-group-item">Morbi leo risus</li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
                   </ul>
               </div>
 
               <div id="Paris" class="w3-container city" style="display:none">
-                  <ul class="list-group">
-                      <li class="list-group-item">Morbi leo risus</li>
-                      <li class="list-group-item">Porta ac consectetur ac</li>
-                      <li class="list-group-item">Vestibulum at eros</li>
+                  <ul class="list-group myUL">
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
                   </ul>
               </div>
 
               <div id="Tokyo" class="w3-container city" style="display:none">
-                  <ul class="list-group">
-                      <li class="list-group-item">Cras justo odio</li>
-                      <li class="list-group-item">Dapibus ac facilisis in</li>
-                      <li class="list-group-item">Porta ac consectetur ac</li>
-                      <li class="list-group-item">Vestibulum at eros</li>
+                  <ul class="list-group myUL">
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
                   </ul>
               </div>
           </div>
