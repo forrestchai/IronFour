@@ -11,7 +11,7 @@
 
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>src/WayfinderController</param-value>
+            <param-value>src.WayfinderController</param-value>
         </init-param>
 
         <init-param>

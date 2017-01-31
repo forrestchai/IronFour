@@ -13,13 +13,15 @@
 
     <script type="text/javascript">
 
-        function openCity(cityName) {
+        function openCity(cityName, optionName) {
             var i;
             var x = document.getElementsByClassName("city");
             for (i = 0; i < x.length; i++) {
                 x[i].style.display = "none";
             }
             document.getElementById(cityName).style.display = "block";
+            document.getElementById(optionName).className = "active";
+
         }
         function displayFilter() {
             var input, filter, ul, li, a, i;
@@ -51,15 +53,6 @@
             ul.appendChild(li);
             alert("hello world");
         });
-
-        function addLocation() {
-
-            var ul = document.getElementById("myUL");
-            var li = document.createElement("li");
-            li.appendChild(document.createTextNode("<%= waypointNames.get(0)%>"));
-            ul.appendChild(li);
-            alert("hello world");
-        }
 
         function displayFilter() {
             var input, filter, ul, li, a, i;
@@ -177,6 +170,12 @@
                   <li><a href="javascript:void(0)" onclick="openCity('London')">London</a></li>
                   <li><a href="javascript:void(0)" onclick="openCity('Paris')">Paris</a></li>
                   <li><a href="javascript:void(0)" onclick="openCity('Tokyo')">Tokyo</a></li>
+
+              </ul>
+              <ul class="nav nav-justified nav-pills">
+                  <li class="active" id="landmarks"><a href="#" onclick="openCity('London', 'landmarks')">Wheelchair accessible</a></li>
+                  <li id="wards"><a href="#" onclick="openCity('Paris', 'wards')">Best Route</a></li>
+                  <li id="depts"><a href="#" onclick="openCity('Tokyo', 'depts')">Less Waypoints</a></li>
               </ul>
 
               <div id="London" class="w3-container city">
