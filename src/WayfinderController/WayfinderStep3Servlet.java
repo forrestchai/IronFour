@@ -14,41 +14,20 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  * Created by admin on 12/14/2016.
  */
-@WebServlet(name = "WayfinderStep3Servlet", urlPatterns = "/wayfinderstep3")
+@Path("/hello")
 public class WayfinderStep3Servlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getMessage() {
+        return "Hello world!";
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-//        ArrayList<String> routeIDList = RouteDA.getDummyRoute3();
-//        ArrayList<Route> routeList = null;
-//        try {
-//            RouteDA rd = new RouteDA();
-//            routeList = rd.getRouteList(routeIDList);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        ArrayList<String> waypointIDList = WaypointDA.getDummyWaypoint3();
-//        ArrayList<Waypoint> waypointList = null;
-//        try {
-//            waypointList = WaypointDA.getWaypointList(waypointIDList);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        HttpSession session = request.getSession();
-//        session.setAttribute("routeList", routeList);
-//        session.setAttribute("waypointList", waypointList);
-//
-//        response.sendRedirect("/html/WayfinderStep4.jsp");
-//        System.out.println("Servlet executed.");
-
-    }
 }
