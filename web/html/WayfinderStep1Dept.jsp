@@ -80,8 +80,8 @@
                 <div class="btn-group btn-group-lg">
                     <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Hospital Department &nbsp;<span class="fa fa-caret-down"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Action</a></li>
+                        <li><a href="#">A&E</a></li>
+                        <li><a href="#">Cardiology</a></li>
                         <li><a href="#">Action</a></li>
                     </ul>
                 </div>

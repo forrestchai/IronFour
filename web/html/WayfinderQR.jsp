@@ -25,7 +25,8 @@
 
         #video-container {
             margin: 2em auto 0;
-            width: 500px;
+            width: 450px;
+            height:350px;
             padding: 2em;
             background: white;
             -webkit-box-shadow: 0 1px 10px #D9D9D9;
@@ -37,6 +38,10 @@
 
         #qr-canvas{
             visibility: hidden;
+        }
+
+        #camera-stream{
+            margin: 0;
         }
 
     </style>
@@ -192,7 +197,7 @@
 
 </head>
 <body>
-<div class="section text-center">
+<div class="section text-center" style="margin-bottom: 0;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -208,19 +213,13 @@
         </div>
     </div>
 </div>
-<div class="section">
+<div class="section" style="margin-top: 0;">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
                 <div id="video-container">
 
-                    <video id="camera-stream" width="500" height="250" autoplay></video>
-                    <%--<object  id="iembedflash" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="320" height="240">--%>
-                    <%--<param name="movie" value="camcanvas.swf" />--%>
-                    <%--<param name="quality" value="high" />--%>
-                    <%--<param name="allowScriptAccess" value="always" />--%>
-                    <%--<embed  allowScriptAccess="always"  id="embedflash" src="camcanvas.swf" quality="high" width="320" height="240" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" mayscript="true"  />--%>
-                    <%--</object>--%>
+                    <video id="camera-stream" width="400" height="300" autoplay></video>
 
                 </div>
             </div>
