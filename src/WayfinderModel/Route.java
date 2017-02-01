@@ -112,7 +112,7 @@ public class Route {
         return exist;
     }
 
-    public void setShortestRoute(ArrayList<Point> pointList)
+    public ArrayList<String> setShortestRoute(ArrayList<Point> pointList)
     {
         ArrayList<ArrayList<String>> routeList = new ArrayList<ArrayList<String>>();
 
@@ -277,6 +277,7 @@ public class Route {
                 {
                     if(j != i)
                     {
+                        contain = 0;
                         for(String s: routeList.get(i))
                         {
                             if(routeList.get(j).contains(s))
@@ -284,14 +285,18 @@ public class Route {
                                 contain++;
                             }
                         }
-                        if(contain == routeList.get(i).size())
+                        int size = routeList.get(i).size();
+                        String dest = this.getDestPoint();
+                        String lastString = routeList.get(i).get(routeList.get(i).size() - 1);
+                        boolean remove = contain == routeList.get(i).size() && !routeList.get(i).get(routeList.get(i).size() -1).equalsIgnoreCase(this.getDestPoint());
+                        if(remove)
                         {
                             routeList.remove(i);
                             i--;
                             contain = 0;
                             break breakloop;
                         }
-                        contain = 0;
+
                     }
                 }
             }
@@ -299,57 +304,35 @@ public class Route {
 
 
         }while(finish == false);
-        //test print
-        for(ArrayList<String> route: routeList)
-        {
-            System.out.println("Route:");
-            for(String s : route)
-            {
-                System.out.print(s + ", ");
 
-            }
-            System.out.println("");
-        }
 
-        for(int i = 0; i < routeList.size(); i++)
-        {
-            int frequency = 0;
-            frequency = Collections.frequency(routeList, routeList.get(i));
-            while(frequency > 1)
-            {
-                int indexes[] = new int[frequency];
-                int count = 0;
-                for(int j = routeList.size()-1; j >=0; j--)
-                {
-                    if(routeList.get(j).equals(routeList.get(i)))
-                    {
-                        indexes[count] = j;
-                        count++;
-                    }
-                }
-                for(int j = 0; j < frequency-1; j++)
-                {
-                    routeList.remove(indexes[j]);
-                    frequency--;
-                }
+//        for(int i = 0; i < routeList.size(); i++)
+//        {
+//            int frequency = 0;
+//            frequency = Collections.frequency(routeList, routeList.get(i));
+//            while(frequency > 1)
+//            {
+//                int indexes[] = new int[frequency];
+//                int count = 0;
+//                for(int j = routeList.size()-1; j >=0; j--)
+//                {
+//                    if(routeList.get(j).equals(routeList.get(i)))
+//                    {
+//                        indexes[count] = j;
+//                        count++;
+//                    }
+//                }
+//                for(int j = 0; j < frequency-1; j++)
+//                {
+//                    routeList.remove(indexes[j]);
+//                    frequency--;
+//                }
+//
+//            }
+//        }
 
-            }
-        }
 
-        //test print 2
-        System.out.println("Test print 2");
-        for(ArrayList<String> route: routeList)
-        {
-            System.out.println("Route:");
-            for(String s : route)
-            {
-                System.out.print(s + ", ");
-
-            }
-            System.out.println("");
-        }
-
-        ArrayList<String> shortestRoute = getShortestRoute(routeList, pointList);
+        ArrayList<String> shortestRoute = getBestRoute(routeList);
         System.out.println("");
         System.out.println("The shortest route is : ");
         for(String a: shortestRoute)
@@ -361,7 +344,7 @@ public class Route {
         this.setShortestList(shortestRoute);
 
 
-        ArrayList<String> bestRoute = getBestRoute(routeList, pointList);
+        ArrayList<String> bestRoute = getBestRoute(routeList);
         System.out.print("");
         System.out.println("The best route is: ");
         for(String a: bestRoute)
@@ -372,8 +355,7 @@ public class Route {
 
         this.setPointList(bestRoute);
 
-
-
+        return this.getBestRoute(routeList);
         //compute distance and effort
     }
 
@@ -411,36 +393,9 @@ public class Route {
 
     public ArrayList<String> getShortestRoute(ArrayList<ArrayList<String>> routeList, ArrayList<Point> pointList)
     {
+        ArrayList<ArrayList<String>> debugList = routeList;
         ArrayList<String> shortestRoute = null;
-        int totalDistance = 0;
-        int shortestDistance = 0;
-        int shortestRouteIndex = 0;
-        for(int j = 0; j < routeList.size(); j++)
-        {
-            for(int i = 0; i < routeList.get(j).size() - 1 ; i++)
-            {
-                int ints[] = Route.computeDistanceAndEffort(routeList.get(j).get(i), routeList.get(j).get(i+1), pointList);
-                System.out.println(ints[0]);
-                totalDistance += ints[0];
-            }
-            //debug print
-            System.out.println("Distance: " + totalDistance);
-            if(shortestDistance == 0)
-            {
-                shortestDistance = totalDistance;
-                shortestRouteIndex = j;
-                totalDistance = 0;
-            }else if(totalDistance < shortestDistance)
-            {
-                shortestDistance = totalDistance;
-                shortestRouteIndex = j;
-                totalDistance = 0;
-            }
-            System.out.println("Shortest: " + shortestDistance);
-        }
-
-        shortestRoute = routeList.get(shortestRouteIndex);
-        this.setShortestDistance(shortestDistance);
+        shortestRoute = getBestRoute(routeList);
         return shortestRoute;
     }
 
@@ -491,20 +446,20 @@ public class Route {
             rtaList.add(new Route(this.getStartPoint(), p.getId()));
 
         }
-        int shortestRTA = 0;
+        int leastRTA = 0;
         int shortIndex = -1;
         for(int i = 0; i < rtaList.size(); i++)
         {
-            rtaList.get(i).setShortestRoute(pointList);
+            int routeSize = rtaList.get(i).setShortestRoute(pointList).size();
             if(shortIndex == -1)
             {
-                shortestRTA = rtaList.get(i).getShortestDistance();
                 shortIndex = i;
+                leastRTA = rtaList.get(i).setShortestRoute(pointList).size();
                 nearestEntry = rtaList.get(i).getDestPoint();
-            }else if(rtaList.get(i).getShortestDistance() < shortestRTA)
+            }else if(routeSize < leastRTA)
             {
-                shortestRTA = rtaList.get(i).getShortestDistance();
                 shortIndex = i;
+                leastRTA = rtaList.get(i).setShortestRoute(pointList).size();
                 nearestEntry = rtaList.get(i).getDestPoint();
             }
         }
@@ -514,20 +469,21 @@ public class Route {
         {
             rfaList.add(new Route(p.getId(), this.getDestPoint()));
         }
-        int shortestRFA = 0;
         int outIndex = -1;
+        int leastRFA = 0;
         for(int i = 0; i < rfaList.size(); i++)
         {
-            rfaList.get(i).setShortestRoute(pointList);
+            int routeSize = rfaList.get(i).setShortestRoute(pointList).size();
             if(outIndex == -1)
             {
-                shortestRFA = rfaList.get(i).getShortestDistance();
                 outIndex = i;
+                leastRFA = rfaList.get(i).setShortestRoute(pointList).size();
                 nearestExit = rfaList.get(i).getStartPoint();
-            }else if(rfaList.get(i).getShortestDistance() < shortestRFA)
+
+            }else if(routeSize < leastRFA)
             {
-                shortestRFA = rfaList.get(i).getShortestDistance();
                 outIndex = i;
+                leastRFA = rfaList.get(i).setShortestRoute(pointList).size();
                 nearestExit = rfaList.get(i).getStartPoint();
             }
         }
@@ -567,229 +523,6 @@ public class Route {
         return accessRoute;
     }
 
-//    public void setAccessRoute(ArrayList<Point> accessPointList) {
-//        ArrayList<String> accessPaths = null;
-//        for (Point p : accessPointList) {
-//            ArrayList<ArrayList<String>> routeList = new ArrayList<ArrayList<String>>();
-//
-//            //add first point
-//            Point current = null;
-//            for (Point a : accessPointList) {
-//                if (a.getId().equalsIgnoreCase(this.getStartPoint())) {
-//                    current = a;
-//                    routeList.add(new ArrayList<String>(Arrays.asList(current.getId())));
-//                    //debug print
-//                    System.out.println("added first");
-//                }
-//            }
-//
-//            ArrayList<String> tempCPList = new ArrayList<String>();
-//            boolean finish = true;
-//            //debug print
-//            System.out.println("next go to loop");
-//            do
-//            {
-//                boolean test = true;
-//                finish = true;
-//                breakloop:
-//                for(ArrayList<String> route: routeList)
-//                {
-//                    if(!route.get(route.size()-1).equalsIgnoreCase(this.getDestPoint()))
-//                    {
-//                        for(Point a: accessPointList)
-//                        {
-//                            if(a.getId().equalsIgnoreCase(route.get(route.size()-1)))
-//                            {
-//                                current = a;
-//                                //debug print
-//                                System.out.println("new current");
-//                                if(test)
-//                                {
-//                                    this.previousCurrent = route.size() > 1? route.get(route.size() - 2): route.get(0);
-//                                    test = false;
-//                                }
-//                                break breakloop;
-//                            }
-//                        }
-//                    }
-//                }
-//
-//                int count = -1;
-//
-//                for(int i = 0; i < current.getConnectedPointList().size(); i++)
-//                {
-//
-//                    for(ArrayList<String> route: routeList)
-//                    {
-//
-//                        if(!route.contains(current.getConnectedPointList().get(i)) && route.get(route.size()-1).equalsIgnoreCase(current.getId()))
-//                        {
-//                            boolean addCP = route.size() > 1 ? route.get(route.size() -2).equalsIgnoreCase(this.previousCurrent) : true;
-//                            if(addCP)
-//                            {
-//                                String debugString = route.get(route.size() > 1 ? route.size()-2 : 0);
-//                                ArrayList<String> debugRoute = route;
-//                                String debugString2 = current.getConnectedPointList().get(i);
-//                                if(!isReverse(accessPointList, current.getId(), route.get(route.size() > 1 ? route.size()-2 : 0), current.getConnectedPointList().get(i)))
-//                                {
-//
-//                                    tempCPList.add(current.getConnectedPointList().get(i));
-//                                    count++;
-//                                    //debug print
-//                                    System.out.println("added tempCP");
-//                                }
-//                            }
-//
-//
-//                        }
-//                    }
-//                }
-//
-//                if(count == -1)
-//                {
-//                    for(int i = 0; i < routeList.size(); i++)
-//                    {
-//                        if(routeList.get(i).get(routeList.get(i).size()-1).equalsIgnoreCase(current.getId()))
-//                        {
-//                            routeList.remove(i);
-//                            //debug print
-//                            System.out.println("removed death end");
-//                        }
-//                    }
-//                }
-//
-//
-//                while(count>0)
-//                {
-//                    ArrayList<String> tempList = null;
-//
-//                    for(ArrayList<String> route: routeList)
-//                    {
-//                        if(route.get(route.size()-1).equalsIgnoreCase(current.getId())) {
-//                            tempList = new ArrayList<String>(route);
-//
-//                        }
-//                    }
-//                    routeList.add(tempList);
-//                    //debug print
-//                    System.out.println("copied list");
-//                    count--;
-//                }
-//                if(count == 0)
-//                {
-//                    for(ArrayList<String> route: routeList)
-//                    {
-//                        if(route.get(route.size()-1).equalsIgnoreCase(current.getId()))
-//                        {
-//
-//                        }
-//                    }
-//                }
-//
-//                for(String cp: tempCPList)
-//                {
-//                    breakloop:
-//                    for(ArrayList<String> route: routeList)
-//                    {
-//                        if(route.get(route.size()-1).equalsIgnoreCase(current.getId()))
-//                        {
-//                            boolean append = false;
-//                            if(route.size() > 1)
-//                            {
-//                                append = route.get(route.size() - 2).equalsIgnoreCase(this.previousCurrent);
-//                            }else
-//                            {
-//                                append = true;
-//                            }
-//                            if(append)
-//                            {
-//                                {
-//                                    route.add(cp);
-//                                    //debug print
-//                                    System.out.println("routed new points");
-//
-//                                    break breakloop;
-//                                }
-//                            }
-//                        }
-//
-//
-//
-//                    }
-//                }
-//                breakloop:
-//                for(ArrayList<String> route: routeList)
-//                {
-//                    if(!route.get(route.size()-1).equalsIgnoreCase(this.getDestPoint()))
-//                    {
-//                        finish = false;
-//                        //debug print
-//                        System.out.println("checked for completion");
-//                        break breakloop;
-//                    }
-//                }
-//                tempCPList.clear();
-//                //remove duplicated routes
-//                for(int i = 0; i < routeList.size(); i++)
-//                {
-//                    int contain = 0;
-//                    breakloop:
-//                    for(int j = 0; j < routeList.size(); j++)
-//                    {
-//                        if(j != i)
-//                        {
-//                            for(String s: routeList.get(i))
-//                            {
-//                                if(routeList.get(j).contains(s))
-//                                {
-//                                    contain++;
-//                                }
-//                            }
-//                            if(contain == routeList.size())
-//                            {
-//                                routeList.remove(i);
-//                                i--;
-//                                contain = 0;
-//                                break breakloop;
-//                            }
-//                            contain = 0;
-//                        }
-//                    }
-//                }
-//
-//
-//
-//            }while(finish == false);
-//            //test print
-//            for (ArrayList<String> route : routeList) {
-//                System.out.println("Route:");
-//                for (String s : route) {
-//                    System.out.print(s + ", ");
-//
-//                }
-//                System.out.println("");
-//            }
-//
-//            for (int i = 0; i < routeList.size(); i++) {
-//                int frequency = 0;
-//                frequency = Collections.frequency(routeList, routeList.get(i));
-//                while (frequency > 1) {
-//                    int indexes[] = new int[frequency];
-//                    int count = 0;
-//                    for (int j = routeList.size() - 1; j >= 0; j--) {
-//                        if (routeList.get(j).equals(routeList.get(i))) {
-//                            indexes[count] = j;
-//                            count++;
-//                        }
-//                    }
-//                    for (int j = 0; j < frequency - 1; j++) {
-//                        routeList.remove(indexes[j]);
-//                        frequency--;
-//                    }
-//                }
-//            }
-//        }
-//    }
     public boolean isReverse(ArrayList<Point> universalPoints, String id1, String id2, String id3)
     {
         boolean reverse = false;
@@ -851,4 +584,18 @@ public class Route {
     }
 
 
+    public static ArrayList<String> getBestRoute(ArrayList<ArrayList<String>> routeList)
+    {
+        int smallest = routeList.get(0).size();
+        int index = 0;
+        for(int i = 0; i < routeList.size(); i++)
+        {
+            if(routeList.get(i).size() < smallest)
+            {
+                smallest = routeList.get(i).size();
+                index = i;
+            }
+        }
+        return routeList.get(index);
+    }
 }

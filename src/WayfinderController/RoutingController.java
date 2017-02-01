@@ -58,7 +58,17 @@ public class RoutingController {
         //Best routing test
         System.out.println("Routing for best between 1 and 12: ");
         RoutingController rc = new RoutingController();
-        ArrayList<String> bestRouteResult = rc.routeBest("A1-001", "A1-012");
+//        ArrayList<String> bestRouteResult = rc.routeBest("A1-001", "A1-012");
+//        System.out.println("");
+//        System.out.print("End Test Best Route: ");
+//        for(int i = 0; i < bestRouteResult.size(); i++)
+//        {
+//            System.out.print(bestRouteResult.get(i));
+//            if(i != bestRouteResult.size()-1)
+//            {
+//                System.out.print(", ");
+//            }
+//        }
 
 
 
@@ -67,17 +77,6 @@ public class RoutingController {
         //Access routing test
         System.out.println("Routing for access route between 1 and 12");
         ArrayList<String> accessRouteResult = rc.routeAccess("A1-001", "A1-013");
-
-        System.out.println("");
-        System.out.print("End Test Best Route: ");
-        for(int i = 0; i < bestRouteResult.size(); i++)
-        {
-            System.out.print(bestRouteResult.get(i));
-            if(i != bestRouteResult.size()-1)
-            {
-                System.out.print(", ");
-            }
-        }
         System.out.println("");
         System.out.println("");
         System.out.print("End Test Access Route: ");
