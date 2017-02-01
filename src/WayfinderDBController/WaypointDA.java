@@ -2,6 +2,7 @@ package WayfinderDBController;
 
 import WayfinderModel.Waypoint;
 import wayfinder.db.DBController;
+import WayfinderModel.Point;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,8 +44,9 @@ public class WaypointDA {
         double coeff = myRs.getDouble(7);
         int count = myRs.getInt(8);
         int feedbackAmt = myRs.getInt(9);
+        String cpString = myRs.getString(10);
 
-        return new Waypoint(id, name, pointX, pointY, listValue, access, coeff, count, feedbackAmt);
+        return new Waypoint(id, name, pointX, pointY, listValue, access, coeff, count, feedbackAmt, cpString);
     }
 
     public static ArrayList<Waypoint> getAllWaypoint() throws SQLException{
@@ -105,5 +107,75 @@ public class WaypointDA {
             waypointList.add(convertToWaypoint(myRs));
         }
         return waypointList;
+    }
+
+    public static ArrayList<Point> getPointList() throws SQLException
+    {
+        ArrayList<Point> pointList = new ArrayList<Point>();
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("SELECT * FROM WAYPOINT WHERE ID NOT LIKE 'A1-02%';");
+        myRs = myStmt.executeQuery();
+        while(myRs.next())
+        {
+            pointList.add((Point)convertToWaypoint(myRs));
+        }
+        return pointList;
+    }
+
+    public static ArrayList<Point> getAccessPointList()throws SQLException
+    {
+        ArrayList<Point> accessPointList = new ArrayList<Point>();
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("SELECT * FROM WAYPOINT WHERE access = 1;");
+        myRs = myStmt.executeQuery();
+        while(myRs.next())
+        {
+            accessPointList.add((Point)convertToWaypoint(myRs));
+        }
+        for(Point p: accessPointList)
+        {
+            if(p.getId().equals("A1-002"))
+            {
+                p.getConnectedPointList().add("A1-020");
+            }else if(p.getId().equals("A1-004"))
+            {
+                p.getConnectedPointList().add("A1-021");
+            }else if(p.getId().equals("A1-007"))
+            {
+                p.getConnectedPointList().add("A1-020");
+                p.getConnectedPointList().add("A1-021");
+            }else if(p.getId().equals("A1-008"))
+            {
+                p.getConnectedPointList().add("A1-021");
+            }else if(p.getId().equals("A1-010"))
+            {
+                p.getConnectedPointList().add("A1-020");
+            }else if(p.getId().equals("A1-012"))
+            {
+                p.getConnectedPointList().add("A1-021");
+            }
+        }
+        return accessPointList;
+    }
+
+    public static ArrayList<Point> getAccessBorderList()throws SQLException
+    {
+        ArrayList<Point> accessBorderList = new ArrayList<Point>();
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("SELECT * FROM WAYPOINT WHERE ACCESSBORDER = 1;");
+        myRs = myStmt.executeQuery();
+        while(myRs.next())
+        {
+
+        }
     }
 }

@@ -1,29 +1,35 @@
 package WayfinderModel;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  * Created by admin on 12/13/2016.../assets/
  */
-public class Waypoint {
+public class Waypoint extends Point{
     String id;
     String name;
-    double pointX;
-    double pointY;
+    double offX;
+    double offY;
     String listValue;
     boolean access;
     double coeff;
     int count;
     int feedBackAmt;
+    String cpString;
 
-    public Waypoint(String id, String name, double pointX, double pointY, String listValue, boolean access, double coeff, int count, int feedBackAmt) {
+    public Waypoint(String id, String name, double offX, double offY, String listValue, boolean access, double coeff, int count, int feedBackAmt, String cpString) {
         this.id = id;
         this.name = name;
-        this.pointX = pointX;
-        this.pointY = pointY;
+        this.offX = offX;
+        this.offY = offY;
         this.listValue = listValue;
         this.access = access;
         this.coeff = coeff;
         this.count = count;
         this.feedBackAmt = feedBackAmt;
+        this.cpString = cpString;
+        this.setConnectedPointList(this.cpString);
     }
 
     public String getId() {
@@ -42,20 +48,20 @@ public class Waypoint {
         this.name = name;
     }
 
-    public double getPointX() {
-        return pointX;
+    public double getOffX() {
+        return offX;
     }
 
-    public void setPointX(double pointX) {
-        this.pointX = pointX;
+    public void setOffX(double offX) {
+        this.offX = offX;
     }
 
-    public double getPointY() {
-        return pointY;
+    public double getOffY() {
+        return offY;
     }
 
-    public void setPointY(double pointY) {
-        this.pointY = pointY;
+    public void setOffY(double offY) {
+        this.offY = offY;
     }
 
     public String getListValue() {
@@ -96,5 +102,17 @@ public class Waypoint {
 
     public void setFeedBackAmt(int feedBackAmt) {
         this.feedBackAmt = feedBackAmt;
+    }
+
+    public void setConnectedPointList(String cpString)
+    {
+        ArrayList<String> connectedPointList = new ArrayList<String>();
+        Scanner sc = new Scanner(cpString);
+        sc.useDelimiter(";");
+        while(sc.hasNext())
+        {
+            connectedPointList.add(sc.next());
+        }
+        this.setConnectedPointList(connectedPointList);
     }
 }

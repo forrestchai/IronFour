@@ -23,6 +23,8 @@ public class ImageRenderController {
     private BufferedImage east;
     private BufferedImage west;
     private BufferedImage currentIndicator;
+    private int previousCurrentX;
+    private int previousCurrentY;
 
 
 
@@ -35,6 +37,8 @@ public class ImageRenderController {
         this.setEast(null);
         this.setWest(null);
         this.setCurrentIndicator(null);
+        this.setPreviousCurrentX(-1);
+        this.setPreviousCurrentY(-1);
         try
         {
             backImage = ImageIO.read(new File(this.getBACKIMAGESRC()));
@@ -79,6 +83,22 @@ public class ImageRenderController {
 
     public static String getSPAWNABLESRC6() {
         return SPAWNABLESRC6;
+    }
+
+    public int getPreviousCurrentX() {
+        return previousCurrentX;
+    }
+
+    public void setPreviousCurrentX(int previousCurrentX) {
+        this.previousCurrentX = previousCurrentX;
+    }
+
+    public int getPreviousCurrentY() {
+        return previousCurrentY;
+    }
+
+    public void setPreviousCurrentY(int previousCurrentY) {
+        this.previousCurrentY = previousCurrentY;
     }
 
     public BufferedImage getBackImage() {
@@ -169,8 +189,14 @@ public class ImageRenderController {
     }
 
     public void spawnCurrentIndicator(int offX, int offY) {
+        if(this.getPreviousCurrentX() != -1 && this.getPreviousCurrentY() != -1)
+        {
+            this.spawnWaypoint(this.getPreviousCurrentX(), this.getPreviousCurrentY());
+        }
         Graphics2D ci2d = backImage.createGraphics();
         ci2d.drawImage(this.getCurrentIndicator(), offX, offY, null);
+        this.setPreviousCurrentX(offX);
+        this.setPreviousCurrentY(offY);
         updateGeneratedImage();
     }
 
