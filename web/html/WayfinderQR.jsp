@@ -126,6 +126,7 @@
         function read(a)
         {
             alert(a);
+            window.location.href = "http://localhost:8080/qrscan?id="+a+"&usage=origin";
         }
 
         function load()
@@ -176,21 +177,11 @@
         }
 
         function captureToCanvas() {
-//            flash = document.getElementById("embedflash");
-//            flash.ccCapture();
-            //            var canvas = document.getElementById("qr-canvas");
-//            var context = canvas.getContext("2d");
-//            context.fillRect(0,0,w,h);
-//            context.drawImage(video, 0,0, w, h);
 
             var canvas = document.getElementById("qr-canvas");
             var video = document.getElementById("camera-stream");
             var context = canvas.getContext("2d");
-            //if (localMediaStream) {
             context.drawImage(video, 0, 0);
-            // "image/webp" works in Chrome.
-            // Other browsers will fall back to image/png.
-            //document.querySelector('img').src = canvas.toDataURL('image/webp');
             qrcode.decode();
         }
     </script>
@@ -227,7 +218,7 @@
         <div class="row">
             <div class="col-xs-12 text-center">
                 <br>
-                <a class="btn btn-primary" onclick="captureToCanvas()">Click me</a>
+                <a class="btn btn-primary" onclick="captureToCanvas()">Scan</a>
             </div>
         </div>
         <div class="row">
