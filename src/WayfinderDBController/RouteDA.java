@@ -1,6 +1,6 @@
 package WayfinderDBController;
 
-import WayfinderModel.Route;
+import WayfinderModel.Path;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import WayfinderModel.Waypoint;
 import wayfinder.db.DBController;
 
 /**
@@ -16,7 +15,7 @@ import wayfinder.db.DBController;
  */
 public class RouteDA {
 
-    public Route getRoute(String routeId) throws SQLException {
+    public Path getRoute(String routeId) throws SQLException {
         DBController dbController = new DBController();
         Connection myConn = dbController.getConnection();
         PreparedStatement myStmt = null;
@@ -27,17 +26,17 @@ public class RouteDA {
         return convertToRoute(myRs);
     }
 
-    public ArrayList<Route> getRouteList(ArrayList<String> idList)throws SQLException{
-        ArrayList<Route> routeList = new ArrayList<Route>();
+    public ArrayList<Path> getRouteList(ArrayList<String> idList)throws SQLException{
+        ArrayList<Path> pathList = new ArrayList<Path>();
         for(int i=0; i<idList.size(); i++){
             System.out.println(idList.size() + " :TRUESIZE" );
-            routeList.add(getRoute(idList.get(i)));
-            System.out.println(routeList.size());
+            pathList.add(getRoute(idList.get(i)));
+            System.out.println(pathList.size());
         }
-        return routeList;
+        return pathList;
     }
 
-    public static Route convertToRoute(ResultSet myRs) throws SQLException{
+    public static Path convertToRoute(ResultSet myRs) throws SQLException{
         String id = myRs.getString(1);
         String parentA = myRs.getString(2);
         System.out.println(parentA);
@@ -47,11 +46,11 @@ public class RouteDA {
         String desciption = myRs.getString(6);
         System.out.println(desciption);
 
-        return new Route(id, parentA, parentB, access, avail, desciption);
+        return new Path(id, parentA, parentB, access, avail, desciption);
     }
 
-    public static ArrayList<Route> getAllRoute() throws SQLException{
-        ArrayList<Route> routeList = new ArrayList<Route>();
+    public static ArrayList<Path> getAllRoute() throws SQLException{
+        ArrayList<Path> pathList = new ArrayList<Path>();
         DBController dbController = new DBController();
         Connection myConn = dbController.getConnection();
         PreparedStatement myStmt = null;
@@ -60,9 +59,9 @@ public class RouteDA {
         myRs = myStmt.executeQuery();
         while(myRs.next())
         {
-            routeList.add(convertToRoute(myRs));
+            pathList.add(convertToRoute(myRs));
         }
-        return routeList;
+        return pathList;
     }
 
 }

@@ -1,5 +1,5 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="WayfinderModel.Route" %>
+<%@ page import="WayfinderModel.Path" %>
 <%@ page import="WayfinderDBController.WaypointDA" %>
 <%@ page import="WayfinderModel.Waypoint" %>
 
@@ -9,16 +9,16 @@
 
 //    RouteDA rda = new RouteDA();
 //    ArrayList<String> routeIDList = RouteDA.getDummyRoute1();
-//    ArrayList<Route> routeList = rda.getRouteList(routeIDList);
+//    ArrayList<Path> pathList = rda.getRouteList(routeIDList);
 //    ArrayList<String> waypointIDList = WaypointDA.getDummyWaypoint1();
 //    ArrayList<Waypoint> waypointList = WaypointDA.getWaypointList(waypointIDList);
 //
-//    session.setAttribute("routeList", routeList);
+//    session.setAttribute("pathList", pathList);
 //    session.setAttribute("waypointList", waypointList);
 //
 //    session.setAttribute("startPoint", waypointList.get(0));
 //    session.setAttribute("endPoint", waypointList.get(waypointList.size()-1));
-//    ArrayList<Route> allRouteList = RouteDA.getAllRoute();
+//    ArrayList<Path> allRouteList = RouteDA.getAllRoute();
 //    ArrayList<Waypoint> allWaypointList = WaypointDA.getAllWaypoint();
 //
 //    session.setAttribute("allRouteList", allRouteList);

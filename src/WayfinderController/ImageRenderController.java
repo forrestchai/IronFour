@@ -9,15 +9,19 @@ import java.io.IOException;
  * Created by admin on 2/1/2017.
  */
 public class ImageRenderController {
-    private final static String BACKIMAGESRC = "originalMap.png";
-    private final static String SPAWNABLESRC1 = "waypoint.png";
-    private final static String SPAWNABLESRC2 = "knot.png";
-    private final static String SPAWNABLESRC3 = "arrow.png";
-    private final static String SPAWNABLESRC4 = "currentIndicator.png";
+    private final static String BACKIMAGESRC = "/web/img/originalMap.png";
+    private final static String SPAWNABLESRC1 = "/web/img/waypoint.png";
+    private final static String SPAWNABLESRC2 = "/web/img/north.png";
+    private final static String SPAWNABLESRC3 = "/web/img/south.png";
+    private final static String SPAWNABLESRC4 = "/web/img/east.png";
+    private final static String SPAWNABLESRC5 = "/web/img/west.png";
+    private final static String SPAWNABLESRC6 = "/web/img/currentIndicator.png";
     private BufferedImage backImage;
     private BufferedImage waypoint;
-    private BufferedImage knot;
-    private BufferedImage arrow;
+    private BufferedImage north;
+    private BufferedImage south;
+    private BufferedImage east;
+    private BufferedImage west;
     private BufferedImage currentIndicator;
 
 
@@ -26,16 +30,20 @@ public class ImageRenderController {
     {
         this.setBackImage(null);
         this.setWaypoint(null);
-        this.setArrow(null);
-        this.setKnot(null);
+        this.setNorth(null);
+        this.setSouth(null);
+        this.setEast(null);
+        this.setWest(null);
         this.setCurrentIndicator(null);
         try
         {
             backImage = ImageIO.read(new File(this.getBACKIMAGESRC()));
             waypoint = ImageIO.read(new File(this.getSPAWNABLESRC1()));
-            knot = ImageIO.read(new File(this.getSPAWNABLESRC2()));
-            arrow = ImageIO.read(new File(this.getSPAWNABLESRC3()));
-            currentIndicator = ImageIO.read(new File(this.getSPAWNABLESRC4()));
+            north = ImageIO.read(new File(this.getSPAWNABLESRC2()));
+            south = ImageIO.read(new File(this.getSPAWNABLESRC3()));
+            east = ImageIO.read(new File(this.getSPAWNABLESRC4()));
+            west = ImageIO.read(new File(this.getSPAWNABLESRC5()));
+            currentIndicator = ImageIO.read(new File(this.getSPAWNABLESRC6()));
 
 
         }catch(IOException e)
@@ -65,6 +73,14 @@ public class ImageRenderController {
         return SPAWNABLESRC4;
     }
 
+    public static String getSPAWNABLESRC5() {
+        return SPAWNABLESRC5;
+    }
+
+    public static String getSPAWNABLESRC6() {
+        return SPAWNABLESRC6;
+    }
+
     public BufferedImage getBackImage() {
         return backImage;
     }
@@ -81,20 +97,36 @@ public class ImageRenderController {
         this.waypoint = waypoint;
     }
 
-    public BufferedImage getArrow() {
-        return arrow;
+    public BufferedImage getNorth() {
+        return north;
     }
 
-    public void setArrow(BufferedImage arrow) {
-        this.arrow = arrow;
+    public void setNorth(BufferedImage north) {
+        this.north = north;
     }
 
-    public BufferedImage getKnot() {
-        return knot;
+    public BufferedImage getSouth() {
+        return south;
     }
 
-    public void setKnot(BufferedImage knot) {
-        this.knot = knot;
+    public void setSouth(BufferedImage south) {
+        this.south = south;
+    }
+
+    public BufferedImage getEast() {
+        return east;
+    }
+
+    public void setEast(BufferedImage east) {
+        this.east = east;
+    }
+
+    public BufferedImage getWest() {
+        return west;
+    }
+
+    public void setWest(BufferedImage west) {
+        this.west = west;
     }
 
     public BufferedImage getCurrentIndicator() {
@@ -106,31 +138,47 @@ public class ImageRenderController {
     }
 
     public void spawnWaypoint(int offX, int offY) {
-        System.out.println(offX + " " + offY);
         Graphics2D wp2d = backImage.createGraphics();
         wp2d.drawImage(this.getWaypoint(), offX, offY, null);
+        updateGeneratedImage();
     }
 
-    public void spawnKnot(int offX, int offY) {
-        Graphics2D knot2d = backImage.createGraphics();
-        knot2d.drawImage(this.getKnot(), offX, offY, null);
+    public void spawnNorth(int offX, int offY, int height) {
+        Graphics2D n2d = backImage.createGraphics();
+        n2d.drawImage(this.getNorth(), offX, offY, this.getNorth().getWidth(), height, null);
+        updateGeneratedImage();
+
     }
 
-    public void spawnArrow(int offX, int offY) {
-        Graphics2D arrow2d = backImage.createGraphics();
-        arrow2d.drawImage(this.getArrow(), offX, offY, null);
+    public void spawnSouth(int offX, int offY, int height) {
+        Graphics2D s2d = backImage.createGraphics();
+        s2d.drawImage(this.getSouth(), offX, offY, this.getSouth().getWidth(), height, null);
+        updateGeneratedImage();
+    }
+
+    public void spawnEast(int offX, int offY, int width) {
+        Graphics2D e2d = backImage.createGraphics();
+        e2d.drawImage(this.getEast(), offX, offY, width, this.getEast().getHeight(), null);
+        updateGeneratedImage();
+    }
+
+    public void spawnWest(int offX, int offY, int width) {
+        Graphics2D w2d = backImage.createGraphics();
+        w2d.drawImage(this.getWest(), offX, offY, width, this.getWest().getHeight(), null);
+        updateGeneratedImage();
     }
 
     public void spawnCurrentIndicator(int offX, int offY) {
         Graphics2D ci2d = backImage.createGraphics();
         ci2d.drawImage(this.getCurrentIndicator(), offX, offY, null);
+        updateGeneratedImage();
     }
 
     public void updateGeneratedImage()
     {
         try
         {
-            File output = new File("generatedMap.png");
+            File output = new File("/web/img/generatedMap.png");
             ImageIO.write(this.getBackImage(), "png", output);
         }catch(IOException e)
         {

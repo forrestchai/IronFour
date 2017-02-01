@@ -2,7 +2,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="WayfinderModel.Waypoint" %>
 <%@ page import="WayfinderDBController.RouteDA" %>
-<%@ page import="WayfinderModel.Route" %><%--
+<%@ page import="WayfinderModel.Path" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 12/13/2016
@@ -14,14 +14,14 @@
 
 //    ArrayList<String> routeIDList = RouteDA.getDummyRoute2();
 //    RouteDA rd = new RouteDA();
-//    ArrayList<Route> routeList =rd.getRouteList(routeIDList);
+//    ArrayList<Path> pathList =rd.getRouteList(routeIDList);
 //    ArrayList<String> waypointIDList = WaypointDA.getDummyWaypoint2();
 //    ArrayList<Waypoint> waypointList = WaypointDA.getWaypointList(waypointIDList);
 //
 //    waypointList.add(3, new Waypoint("","","",false,false));
 //
 //
-//    session.setAttribute("routeList", routeList);
+//    session.setAttribute("pathList", pathList);
 //    session.setAttribute("waypointList", waypointList);
 %>
 <html>

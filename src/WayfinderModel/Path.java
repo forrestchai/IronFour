@@ -3,7 +3,7 @@ package WayfinderModel;
 /**
  * Created by admin on 12/13/2016.
  */
-public class Route {
+public class Path {
     String id;
     String parentA;
     String parentB;
@@ -11,7 +11,7 @@ public class Route {
     boolean availability;
     String description;
 
-    public Route(String id, String parentA, String parentB, boolean accessibility, boolean availability, String description) {
+    public Path(String id, String parentA, String parentB, boolean accessibility, boolean availability, String description) {
         this.id = id;
         this.parentA = parentA;
         this.parentB = parentB;

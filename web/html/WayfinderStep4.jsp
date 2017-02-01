@@ -1,6 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="WayfinderDBController.RouteDA" %>
-<%@ page import="WayfinderModel.Route" %>
+<%@ page import="WayfinderModel.Path" %>
 <%@ page import="WayfinderModel.Waypoint" %>
 <%--
   Created by IntelliJ IDEA.
@@ -11,7 +11,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    ArrayList<Route> routeList = (ArrayList) session.getAttribute("routeList");
+    ArrayList<Path> pathList = (ArrayList) session.getAttribute("pathList");
     ArrayList<Waypoint> waypointList = (ArrayList) session.getAttribute("waypointList");
     System.out.println(session.getAttribute("current"));
 %>

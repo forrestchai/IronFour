@@ -1,5 +1,5 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="WayfinderModel.Route" %>
+<%@ page import="WayfinderModel.Path" %>
 <%@ page import="WayfinderModel.Waypoint" %>
 <%@ page import="WayfinderDBController.WaypointDA" %>
 <%@ page import="WayfinderDBController.RouteDA" %><%--
