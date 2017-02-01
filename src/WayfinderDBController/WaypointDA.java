@@ -175,7 +175,8 @@ public class WaypointDA {
         myRs = myStmt.executeQuery();
         while(myRs.next())
         {
-
+            accessBorderList.add((Point)convertToWaypoint(myRs));
         }
+        return accessBorderList;
     }
 }
