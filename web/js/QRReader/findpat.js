@@ -391,6 +391,7 @@ function FinderPatternFinder()
 			if (startSize < 3)
 			{
 				// Couldn't find enough finder patterns
+				alert("Sorry, please scan again. Try to align the pattern better.")
 				throw "Couldn't find enough finder patterns";
 			}
 			

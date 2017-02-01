@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Created by User on 2/1/2017.
  */
-@WebServlet(name = "QRServlet", urlPatterns = "qrscan")
+@WebServlet(name = "QRServlet", urlPatterns = "/qrscan")
 public class QRServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

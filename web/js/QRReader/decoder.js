@@ -44,6 +44,7 @@ Decoder.correctErrors=function( codewordBytes,  numDataCodewords)
 	}
 	catch ( rse)
 	{
+		alert("Sorry, please scan again. Try to align the pattern better.")
 		throw rse;
 	}
 	// Copy back into array of bytes -- only need to worry about the bytes that were data

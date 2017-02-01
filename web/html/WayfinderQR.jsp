@@ -36,9 +36,9 @@
             box-shadow: 0 1px 10px #D9D9D9;
         }
 
-        #qr-canvas{
-            visibility: hidden;
-        }
+        /*#qr-canvas{*/
+            /*visibility: hidden;*/
+        /*}*/
 
         #camera-stream{
             margin: 0;
@@ -65,126 +65,7 @@
     <script type="text/javascript" src="../js/QRReader/alignpat.js"></script>
     <script type="text/javascript" src="../js/QRReader/databr.js"></script>
 
-    <script type="text/javascript">
-        var gCtx = null;
-        var gCanvas = null;
 
-        var imageData = null;
-        var ii=0;
-        var jj=0;
-        var c=0;
-
-        var video = document.getElementById("camera-stream");
-        var canvas = document.getElementById("qr-canvas");
-        var context = canvas.getContext("2d");
-        var w, h, ratio;
-
-        video.addEventListener("loadedmetadata", function() {
-            ratio = video.videoWidth / video.videoHeight;
-            w = video.videoWidth - 100;
-            h = parseInt(w / ratio, 10);
-            canvas.width = w;
-            canvas.height = h;
-        }, false);
-
-        function dragenter(e) {
-            e.stopPropagation();
-            e.preventDefault();
-        }
-
-        function dragover(e) {
-            e.stopPropagation();
-            e.preventDefault();
-        }
-        function drop(e) {
-            e.stopPropagation();
-            e.preventDefault();
-
-            var dt = e.dataTransfer;
-            var files = dt.files;
-
-            handleFiles(files);
-        }
-
-        function handleFiles(f)
-        {
-            var o=[];
-            for(var i =0;i<f.length;i++)
-            {
-                var reader = new FileReader();
-
-                reader.onload = (function(theFile) {
-                    return function(e) {
-                        qrcode.decode(e.target.result);
-                    };
-                })(f[i]);
-
-                // Read in the image file as a data URL.
-                reader.readAsDataURL(f[i]);	}
-        }
-
-        function read(a)
-        {
-            alert(a);
-            window.location.href = "http://localhost:8080/qrscan?id="+a+"&usage=origin";
-        }
-
-        function load()
-        {
-            initCanvas(640,480);
-            qrcode.callback = read;
-            qrcode.decode("meqrthumb.png");
-        }
-
-        function initCanvas(ww,hh)
-        {
-            gCanvas = document.getElementById("qr-canvas");
-            gCanvas.addEventListener("dragenter", dragenter, false);
-            gCanvas.addEventListener("dragover", dragover, false);
-            gCanvas.addEventListener("drop", drop, false);
-            var w = ww;
-            var h = hh;
-            gCanvas.style.width = w + "px";
-            gCanvas.style.height = h + "px";
-            gCanvas.width = w;
-            gCanvas.height = h;
-            gCtx = gCanvas.getContext("2d");
-            gCtx.clearRect(0, 0, w, h);
-            imageData = gCtx.getImageData( 0,0,320,240);
-        }
-
-        function passLine(stringPixels) {
-            //a = (intVal >> 24) & 0xff;
-
-            var coll = stringPixels.split("-");
-
-            for(var i=0;i<320;i++) {
-                var intVal = parseInt(coll[i]);
-                r = (intVal >> 16) & 0xff;
-                g = (intVal >> 8) & 0xff;
-                b = (intVal ) & 0xff;
-                imageData.data[c+0]=r;
-                imageData.data[c+1]=g;
-                imageData.data[c+2]=b;
-                imageData.data[c+3]=255;
-                c+=4;
-            }
-
-            if(c>=320*240*4) {
-                c=0;
-                gCtx.putImageData(imageData, 0,0);
-            }
-        }
-
-        function captureToCanvas() {
-
-            var canvas = document.getElementById("qr-canvas");
-            var video = document.getElementById("camera-stream");
-            var context = canvas.getContext("2d");
-            context.drawImage(video, 0, 0);
-            qrcode.decode();
-        }
-    </script>
 
 </head>
 <body>
@@ -218,7 +99,7 @@
         <div class="row">
             <div class="col-xs-12 text-center">
                 <br>
-                <a class="btn btn-primary" onclick="captureToCanvas()">Scan</a>
+                <a class="btn btn-primary" id="button1" onclick="captureToCanvas()">Scan</a>
             </div>
         </div>
         <div class="row">
@@ -228,6 +109,144 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    var gCtx = null;
+    var gCanvas = null;
+
+    var imageData = null;
+    var ii=0;
+    var jj=0;
+    var c=0;
+
+    var video = document.getElementById("camera-stream");
+    var canvas = document.getElementById("qr-canvas");
+    var context = canvas.getContext("2d");
+    var w, h, ratio;
+
+    video.addEventListener("loadedmetadata", function() {
+        ratio = video.videoWidth / video.videoHeight;
+        w = video.videoWidth - 100;
+        h = parseInt(w / ratio, 10);
+        canvas.width = w;
+        canvas.height = h;
+    }, false);
+
+    function dragenter(e) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
+    function dragover(e) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+    function drop(e) {
+        e.stopPropagation();
+        e.preventDefault();
+
+        var dt = e.dataTransfer;
+        var files = dt.files;
+
+        handleFiles(files);
+    }
+
+    function handleFiles(f)
+    {
+        var o=[];
+        for(var i =0;i<f.length;i++)
+        {
+            var reader = new FileReader();
+
+            reader.onload = (function(theFile) {
+                return function(e) {
+                    qrcode.decode(e.target.result);
+                };
+            })(f[i]);
+
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(f[i]);	}
+    }
+
+    function read(a)
+    {
+        alert(a);
+    }
+
+    function load()
+    {
+        initCanvas(640,480);
+        qrcode.callback = read;
+        qrcode.decode("meqrthumb.png");
+    }
+
+    function initCanvas(ww,hh)
+    {
+        gCanvas = document.getElementById("qr-canvas");
+        gCanvas.addEventListener("dragenter", dragenter, false);
+        gCanvas.addEventListener("dragover", dragover, false);
+        gCanvas.addEventListener("drop", drop, false);
+        var w = ww;
+        var h = hh;
+        gCanvas.style.width = w + "px";
+        gCanvas.style.height = h + "px";
+        gCanvas.width = w;
+        gCanvas.height = h;
+        gCtx = gCanvas.getContext("2d");
+        gCtx.clearRect(0, 0, w, h);
+        imageData = gCtx.getImageData( 0,0,320,240);
+    }
+
+    function passLine(stringPixels) {
+        //a = (intVal >> 24) & 0xff;
+
+        var coll = stringPixels.split("-");
+
+        for(var i=0;i<320;i++) {
+            var intVal = parseInt(coll[i]);
+            r = (intVal >> 16) & 0xff;
+            g = (intVal >> 8) & 0xff;
+            b = (intVal ) & 0xff;
+            imageData.data[c+0]=r;
+            imageData.data[c+1]=g;
+            imageData.data[c+2]=b;
+            imageData.data[c+3]=255;
+            c+=4;
+        }
+
+        if(c>=320*240*4) {
+            c=0;
+            gCtx.putImageData(imageData, 0,0);
+        }
+    }
+
+    function captureToCanvas() {
+//            flash = document.getElementById("embedflash");
+//            flash.ccCapture();
+        //            var canvas = document.getElementById("qr-canvas");
+//            var context = canvas.getContext("2d");
+//            context.fillRect(0,0,w,h);
+//            context.drawImage(video, 0,0, w, h);
+
+        var canvas = document.getElementById("qr-canvas");
+        var video = document.getElementById("camera-stream");
+        var context = canvas.getContext("2d");
+        //if (localMediaStream) {
+        context.drawImage(video, 0, 0);
+        // "image/webp" works in Chrome.
+        // Other browsers will fall back to image/png.
+        //document.querySelector('img').src = canvas.toDataURL('image/webp');
+        qrcode.decode();
+        alert("Proceeding to Step 3");
+        console.log("123"+qrcode.result);
+        window.location.href = "http://localhost:8080/qrscan?id="+qrcode.result+"&usage=origin";
+    }
+
+
+
+</script>
+
+
 </body>
 
 </html>
