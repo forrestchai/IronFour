@@ -7,8 +7,8 @@ import java.util.ArrayList;
  */
 public class Point {
     private String id;
-    private double offX;
-    private double offY;
+    private int offX;
+    private int offY;
     private boolean access;
     private ArrayList<String> connectedPointList;
 
@@ -17,7 +17,7 @@ public class Point {
 
     };
 
-    public Point(String id, double offX, double offY, boolean access)
+    public Point(String id, int offX, int offY, boolean access)
     {
         this.setId(id);
         this.setOffX(offX);
@@ -33,19 +33,19 @@ public class Point {
         this.connectedPointList = connectedPointList;
     }
 
-    public double getOffX() {
+    public int getOffX() {
         return offX;
     }
 
-    public void setOffX(double offX) {
+    public void setOffX(int offX) {
         this.offX = offX;
     }
 
-    public double getOffY() {
+    public int getOffY() {
         return offY;
     }
 
-    public void setOffY(double offY) {
+    public void setOffY(int offY) {
         this.offY = offY;
     }
 

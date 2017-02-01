@@ -37,8 +37,8 @@ public class WaypointDA {
     public static Waypoint convertToWaypoint(ResultSet myRs) throws SQLException{
         String id = myRs.getString(1);
         String name = myRs.getString(2);
-        double pointX = myRs.getDouble(3);
-        double pointY = myRs.getDouble(4);
+        int pointX = myRs.getInt(3);
+        int pointY = myRs.getInt(4);
         String listValue = myRs.getString(5);
         boolean access = myRs.getBoolean(6);
         double coeff = myRs.getDouble(7);

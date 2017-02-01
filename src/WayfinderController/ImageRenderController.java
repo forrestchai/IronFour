@@ -171,14 +171,14 @@ public class ImageRenderController {
 
     public void spawnNorth(int offX, int offY, int height) {
         Graphics2D n2d = backImage.createGraphics();
-        n2d.drawImage(this.getNorth(), offX, offY, this.getNorth().getWidth(), height, null);
+        n2d.drawImage(this.getNorth(), offX - this.getNorth().getWidth()/2, offY, this.getNorth().getWidth(), height, null);
         updateGeneratedImage();
 
     }
 
     public void spawnSouth(int offX, int offY, int height) {
         Graphics2D s2d = backImage.createGraphics();
-        s2d.drawImage(this.getSouth(), offX, offY, this.getSouth().getWidth(), height, null);
+        s2d.drawImage(this.getSouth(), offX - this.getSouth().getWidth()/2, offY, this.getSouth().getWidth(), height, null);
         updateGeneratedImage();
     }
 
@@ -228,21 +228,48 @@ public class ImageRenderController {
         }
 
     }
+    
+    public char getDirection(Point one, Point two)
+    {
+        char direction = 0;
+        if((two.getOffX() - one.getOffX() == 0) && (two.getOffY() - one.getOffY() > 0))
+        {
+            direction = 'S';
+        }else if((two.getOffX() - one.getOffX() == 0) && (two.getOffY() - one.getOffY() < 0))
+        {
+            direction = 'N';
+        }else if((two.getOffX() - one.getOffX() > 0) && (two.getOffY() - one.getOffY() == 0))
+        {
+            direction = 'E';
+        }else if((two.getOffX() - one.getOffX() < 0) && (two.getOffY() - one.getOffY() == 0))
+        {
+            direction = 'W';
+        }
+        return direction;
+    }
 
     public void spawnArrows(ArrayList<String> idList)throws SQLException
     {
-        ArrayList<Integer> offXList = new ArrayList<Integer>();
-        ArrayList<Integer> offYList = new ArrayList<Integer>();
         ArrayList<Point> points = new ArrayList<Point>();
 
         for(String id: idList)
         {
             points.add((Point) WaypointDA.getWaypoint(id));
         }
-        for(Point p: points)
+        for(int i = 0; i < points.size() - 1; i++)
         {
-            offXList.add((int)p.getOffX());
-            offYList.add((int)p.getOffY());
+            char direction = getDirection(points.get(i), points.get(i+1));
+            switch(direction){
+                case 'N':spawnNorth(points.get(i+1).getOffX(), points.get(i+1).getOffY(), (int)Math.abs(points.get(i).getOffY() - points.get(i+1).getOffY()));
+                break;
+                case 'S':spawnSouth(points.get(i).getOffX(), points.get(i).getOffY(), (int)Math.abs(points.get(i).getOffY() - points.get(i+1).getOffY()));
+                break;
+                case 'E':spawnEast(points.get(i).getOffX(), points.get(i).getOffY(), (int)Math.abs(points.get(i).getOffX() - points.get(i+1).getOffX()));
+                break;
+                case 'W':spawnWest(points.get(i+1).getOffX(), points.get(i+1).getOffY(), (int)Math.abs(points.get(i).getOffX() - points.get(i+1).getOffX()));
+                break;
+            }
+
         }
     }
 
@@ -284,6 +311,10 @@ public class ImageRenderController {
         sc.nextLine();
 
         System.out.print("Spawn arrows? (0/1): ");
+        if(Integer.parseInt(sc.next()) == 1)
+        {
+            irc.spawnArrows(waypointIDList);
+        }
 
 
     }
