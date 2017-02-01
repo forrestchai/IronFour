@@ -1,4 +1,7 @@
-<%--
+<%@ page import="WayfinderModel.Waypoint" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="WayfinderDBController.WaypointDA" %>
+<%@ page import="java.sql.SQLException" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 12/14/2016
@@ -31,16 +34,7 @@
             document.getElementById('listAll').style.display = "none";
         }
 
-        window.setTimeout(function() {
-
-        }, 0);
-
         $(document).ready(function() {
-            $(".myUL").append('<li class="list-group-item"><a href="/user/messages">Message Center</a></li>');
-            var ul = document.getElementsByClassName("myUL");
-            var li = document.createElement("li");
-            li.appendChild(document.createTextNode("<%= waypointNames.get(0)%>"));
-            ul.appendChild(li);
             alert("hello world");
         });
 
@@ -134,6 +128,20 @@
 
     </style>
 
+    <%
+        ArrayList<Waypoint> waLa = new ArrayList<Waypoint>();
+        ArrayList<Waypoint> waWa = new ArrayList<Waypoint>();
+        ArrayList<Waypoint> waDept = new ArrayList<Waypoint>();
+        ArrayList<Waypoint> waAll = new ArrayList<Waypoint>();
+
+        try{
+            waLa = WaypointDA.getLandmarkWaypoints();
+            waWa = WaypointDA.getWardWaypoints();
+            waDept = WaypointDA.getDeptWaypoint();
+            waAll = WaypointDA.getAllWaypoint();
+        }catch (SQLException e){e.printStackTrace();}
+
+        %>
 
 </head>
 
@@ -198,24 +206,52 @@
                 <div id="listAll" class="w3-container city" >
                     <ul class="list-group" id="ulAll">
                         <h2>All locations</h2>
+                        <%
+                        for (int i=0;i<waAll.size();i++) {
+                        String name = (String) waAll.get(i).getName();
+                        String id = (String) waAll.get(i).getId();
+                        %>
+                        <li class="list-group-item"><a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>"><%=name%></a></li>
+                        <%}%>
                     </ul>
                 </div>
 
                 <div id="London" class="w3-container city"style="display:none" >
                     <ul class="list-group myUL">
                         <h2>Landmarks</h2>
+                        <%
+                            for (int i=0;i<waLa.size();i++) {
+                                String name = (String) waLa.get(i).getName();
+                                String id = (String) waLa.get(i).getId();
+                        %>
+                        <li class="list-group-item"><a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>"><%=name%></a></li>
+                        <%}%>
                     </ul>
                 </div>
 
                 <div id="Paris" class="w3-container city" style="display:none">
                     <ul class="list-group myUL">
                         <h2>Wards / Clinics</h2>
+                        <%
+                            for (int i=0;i<waWa.size();i++) {
+                                String name = (String) waWa.get(i).getName();
+                                String id = (String) waWa.get(i).getId();
+                        %>
+                        <li class="list-group-item"><a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>"><%=name%></a></li>
+                        <%}%>
                     </ul>
                 </div>
 
                 <div id="Tokyo" class="w3-container city" style="display:none">
                     <ul class="list-group myUL">
                         <h2>Departments</h2>
+                        <%
+                            for (int i=0;i<waDept.size();i++) {
+                                String name = (String) waDept.get(i).getName();
+                                String id = (String) waDept.get(i).getId();
+                        %>
+                        <li class="list-group-item"><a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>"><%=name%></a></li>
+                        <%}%>
                     </ul>
                 </div>
 

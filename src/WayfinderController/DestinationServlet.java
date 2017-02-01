@@ -22,34 +22,19 @@ import java.util.function.ToIntFunction;
  */
 @WebServlet(name = "DestinationServlet", urlPatterns = "/selectDestination")
 public class DestinationServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ArrayList<Waypoint> waLa = new ArrayList<Waypoint>();
-        ArrayList<Waypoint> waWa = new ArrayList<Waypoint>();
-        ArrayList<Waypoint> waDept = new ArrayList<Waypoint>();
-        ArrayList<Waypoint> waAll = new ArrayList<Waypoint>();
+        HttpSession session=request.getSession();
+        session.setAttribute("destName", request.getParameter("name"));
+        session.setAttribute("destId", request.getParameter("id"));
 
-        try{
-            waLa = WaypointDA.getLandmarkWaypoints();
-            waWa = WaypointDA.getWardWaypoints();
-            waDept = WaypointDA.getDeptWaypoint();
-            waAll = WaypointDA.getDeptWaypoint();
-        }catch (SQLException e){e.printStackTrace();}
-
-
-        HttpSession session = request.getSession();
-        session.setAttribute("landList", waLa);
-        session.setAttribute("wardList", waWa);
-        session.setAttribute("deptList", waDept);
-        session.setAttribute("allList", waAll);
-
-        response.sendRedirect("/html/WayfinderStep4.jsp");
         System.out.println("Servlet executed.");
-
+        response.sendRedirect("html/WayfinderStep2.jsp");
     }
 
 
