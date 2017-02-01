@@ -179,4 +179,16 @@ public class WaypointDA {
         }
         return accessBorderList;
     }
+
+    public static ArrayList<Point> getUniversalPoints()throws SQLException
+    {
+        ArrayList<Point> universalPoints = new ArrayList<Point>();
+        ArrayList<Waypoint> allPoints = getAllWaypoint();
+        for(Waypoint wp: allPoints)
+        {
+            universalPoints.add((Point)wp);
+        }
+
+        return universalPoints;
+    }
 }

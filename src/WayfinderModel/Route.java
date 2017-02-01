@@ -18,11 +18,11 @@ public class Route {
     private ArrayList<String> shortestList;
     private ArrayList<String> accessList;
 
-    public Route(String start, String dest, String type)
+    public Route(String start, String dest)
     {
         this.setStartPoint(start);
         this.setDestPoint(dest);
-        this.setType(type);
+        this.setType("");
         this.setTotalEffort(0);
         this.setTotalDistance(0);
         this.setShortestDistance(0);
@@ -439,7 +439,7 @@ public class Route {
         ArrayList<Route> rtaList = new ArrayList<Route>();
         for(Point p: accessBorderList)
         {
-            rtaList.add(new Route(this.getStartPoint(), p.getId(), "Short"));
+            rtaList.add(new Route(this.getStartPoint(), p.getId()));
 
         }
         int shortestRTA = 0;
@@ -463,7 +463,7 @@ public class Route {
 
         for(Point p: accessBorderList)
         {
-            rfaList.add(new Route(p.getId(), this.getDestPoint(), "Short"));
+            rfaList.add(new Route(p.getId(), this.getDestPoint()));
         }
         int shortestRFA = 0;
         int outIndex = -1;
@@ -484,7 +484,7 @@ public class Route {
         }
         ArrayList<String> tempRoute = new ArrayList<String>();
 
-        Route tRoute = new Route(nearestEntry, nearestExit, "Access");
+        Route tRoute = new Route(nearestEntry, nearestExit);
         for(String a: rtaList.get(shortIndex).getShortestList())
         {
             tempRoute.add(a);
