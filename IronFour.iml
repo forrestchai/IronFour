@@ -29,11 +29,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.6" level="application_server_libraries" />
     <orderEntry type="library" name="jax-rs-jersey-1.12" level="project" />
     <orderEntry type="library" name="JPA 2.0-2.0" level="project" />
     <orderEntry type="library" name="mysql:mysql-connector-java:5.1.40" level="project" />
     <orderEntry type="library" name="org.eclipse.persistence:eclipselink:2.6.2" level="project" />
     <orderEntry type="library" name="com.google.code.gson:gson:2.8.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.11" level="application_server_libraries" />
   </component>
 </module>

@@ -89,6 +89,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h3>Route Preference</h3>
+                <hr>
             </div>
         </div>
         <div class="row">
