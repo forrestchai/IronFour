@@ -20,29 +20,12 @@
                 x[i].style.display = "none";
             }
             document.getElementById(cityName).style.display = "block";
-            document.getElementById(optionName).className = "active";
-
-        }
-        function displayFilter() {
-            var input, filter, ul, li, a, i;
-            input = document.getElementById('myInput');
-            filter = input.value.toUpperCase();
-            ul = document.getElementsByClassName("myUL");
-            li = ul.getElementsByTagName('li');
-
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
-                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
-                }
-            }
+            document.getElementById('myInput').reset();
+            document.getElementById('listAll').style.display = "none";
         }
 
         window.setTimeout(function() {
-            window.alert(5 + 6);
-            alert("hello world");
+
         }, 0);
 
         $(document).ready(function() {
@@ -53,6 +36,11 @@
             ul.appendChild(li);
             alert("hello world");
         });
+
+        function inputFocus() {
+            document.getElementById('listAll').style.display = "";
+            document.getElementsByClassName('myUL').style.display = "none";
+        }
 
         function displayFilter() {
             var input, filter, ul, li, a, i;
@@ -82,6 +70,31 @@
             padding: 12px 20px 12px 40px; /* Add some padding */
             border: 1px solid #ddd; /* Add a grey border */
             margin-bottom: 12px; /* Add some space below the input */
+        }
+
+
+        #ulAll {
+            /* Remove default list styling */
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #ulAll li{
+            border: 1px solid #ddd; /* Add a border to all links */
+            padding:0;
+        }
+
+        #ulAll li a {
+            margin: -1px 0 0 0; /* Prevent double borders */
+            background-color: #f6f6f6; /* Grey background color */
+            padding: 12px; /* Add some padding */
+            text-decoration: none; /* Remove default text underline */
+            color: black; /* Add a black text color */
+            display: block; /* Make it into a block element to fill the whole list */
+        }
+        #ulAll li a:hover:not(.header) {
+            background-color: #eee; /* Add a hover effect to all links, except for headers */
         }
 
         .myUL {
@@ -164,22 +177,17 @@
       <div class="container">
         <div class="row">
           <div class="col-xs-12">
-              <input type="text" id="myInput" onkeyup="displayFilter()" placeholder="Search for wards/rooms..">
+              <input type="text" id="myInput" onfocus="inputFocus()" onkeyup="displayFilter()" placeholder="Search for wards/rooms..">
 
-              <ul class="w3-navbar w3-blue">
-                  <li><a href="javascript:void(0)" onclick="openCity('London')">London</a></li>
-                  <li><a href="javascript:void(0)" onclick="openCity('Paris')">Paris</a></li>
-                  <li><a href="javascript:void(0)" onclick="openCity('Tokyo')">Tokyo</a></li>
-
-              </ul>
-              <ul class="nav nav-justified nav-pills">
-                  <li class="active" id="landmarks"><a href="#" onclick="openCity('London', 'landmarks')">Wheelchair accessible</a></li>
+              <ul class="nav nav-justified nav-pills" style="border: 2px; border-color: gainsboro; margin-bottom: 10px;">
+                  <li id="landmarks"><a href="#" onclick="openCity('London', 'landmarks')">Wheelchair accessible</a></li>
                   <li id="wards"><a href="#" onclick="openCity('Paris', 'wards')">Best Route</a></li>
                   <li id="depts"><a href="#" onclick="openCity('Tokyo', 'depts')">Less Waypoints</a></li>
               </ul>
 
               <div id="London" class="w3-container city">
                   <ul class="list-group myUL">
+                      <h2>Landmarks</h2>
                       <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
                       <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
                   </ul>
@@ -187,6 +195,7 @@
 
               <div id="Paris" class="w3-container city" style="display:none">
                   <ul class="list-group myUL">
+                      <h2>Wards</h2>
                       <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
                       <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
                       <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
@@ -195,8 +204,23 @@
 
               <div id="Tokyo" class="w3-container city" style="display:none">
                   <ul class="list-group myUL">
+                      <h2>Departments</h2>
+                      <li class="list-group-item "><a href="WayfinderLanding.html">Cras justo odio</a></li>
                       <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
                       <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                  </ul>
+              </div>
+
+              <div id="listAll" class="w3-container city" style="display:none">
+                  <ul class="list-group" id="ulAll">
+                      <h2>All locations</h2>
+                      <li class="list-group-item "><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Karalis Questor</a></li>
+                      <li class="list-group-item "><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Serpe Mentalis</a></li>
                       <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
                       <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
                   </ul>
@@ -205,6 +229,6 @@
         </div>
       </div>
     </div>
-  
+
 
 </body></html>
