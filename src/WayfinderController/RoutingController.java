@@ -30,12 +30,65 @@ public class RoutingController {
         }
     }
 
-    public ArrayList<String> route(String start, String dest)
+    public ArrayList<String> routeBest(String start, String dest)
     {
         ArrayList<String> routingResult = new ArrayList<String>();
         Route r = new Route(start, dest);
-        r.set
+        r.setStartPoint(start);
+        r.setDestPoint(dest);
+        r.setShortestRoute(pointList);
+        routingResult = r.getShortestList();
 
         return routingResult;
+    }
+
+    public ArrayList<String> routeAccess(String start, String dest)
+    {
+        ArrayList<String> routingResult = new ArrayList<String>();
+        Route r = new Route(start, dest);
+        r.setStartPoint(start);
+        r.setDestPoint(dest);
+        routingResult = r.getAccessRoute(pointList, accessPointList, accessBorderList, universalPoints);
+
+        return routingResult;
+    }
+
+    public static void main(String[]args)
+    {
+        //Best routing test
+        System.out.println("Routing for best between 1 and 12: ");
+        RoutingController rc = new RoutingController();
+        ArrayList<String> bestRouteResult = rc.routeBest("A1-001", "A1-012");
+
+
+
+
+
+        //Access routing test
+        System.out.println("Routing for access route between 1 and 12");
+        ArrayList<String> accessRouteResult = rc.routeAccess("A1-001", "A1-013");
+
+        System.out.println("");
+        System.out.print("End Test Best Route: ");
+        for(int i = 0; i < bestRouteResult.size(); i++)
+        {
+            System.out.print(bestRouteResult.get(i));
+            if(i != bestRouteResult.size()-1)
+            {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("");
+        System.out.println("");
+        System.out.print("End Test Access Route: ");
+        for(int i = 0; i < accessRouteResult.size(); i++)
+        {
+            System.out.print(accessRouteResult.get(i));
+            if(i != accessRouteResult.size()-1)
+            {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("");
     }
 }

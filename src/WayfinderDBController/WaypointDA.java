@@ -140,24 +140,30 @@ public class WaypointDA {
         }
         for(Point p: accessPointList)
         {
-            if(p.getId().equals("A1-002"))
+            if(p.getId().equalsIgnoreCase("A1-002"))
             {
+                p.getConnectedPointList().clear();
                 p.getConnectedPointList().add("A1-020");
-            }else if(p.getId().equals("A1-004"))
+            }else if(p.getId().equalsIgnoreCase("A1-004"))
             {
+                p.getConnectedPointList().clear();
                 p.getConnectedPointList().add("A1-021");
-            }else if(p.getId().equals("A1-007"))
+            }else if(p.getId().equalsIgnoreCase("A1-007"))
             {
+                p.getConnectedPointList().clear();
                 p.getConnectedPointList().add("A1-020");
                 p.getConnectedPointList().add("A1-021");
-            }else if(p.getId().equals("A1-008"))
+            }else if(p.getId().equalsIgnoreCase("A1-008"))
             {
+                p.getConnectedPointList().clear();
                 p.getConnectedPointList().add("A1-021");
             }else if(p.getId().equals("A1-010"))
             {
+                p.getConnectedPointList().clear();
                 p.getConnectedPointList().add("A1-020");
             }else if(p.getId().equals("A1-012"))
             {
+                p.getConnectedPointList().clear();
                 p.getConnectedPointList().add("A1-021");
             }
         }
