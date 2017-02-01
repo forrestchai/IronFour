@@ -61,4 +61,49 @@ public class WaypointDA {
         }
         return waypointList;
     }
+
+    public static ArrayList<Waypoint> getLandmarkWaypoints() throws SQLException{
+        ArrayList<Waypoint> waypointList = new ArrayList<Waypoint>();
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("SELECT * FROM waypoint WHERE id LIKE 'A%';");
+        myRs = myStmt.executeQuery();
+        while(myRs.next())
+        {
+            waypointList.add(convertToWaypoint(myRs));
+        }
+        return waypointList;
+    }
+
+    public static ArrayList<Waypoint> getWardWaypoints() throws SQLException{
+        ArrayList<Waypoint> waypointList = new ArrayList<Waypoint>();
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("SELECT * FROM waypoint WHERE id LIKE 'B%';");
+        myRs = myStmt.executeQuery();
+        while(myRs.next())
+        {
+            waypointList.add(convertToWaypoint(myRs));
+        }
+        return waypointList;
+    }
+
+    public static ArrayList<Waypoint> getDeptWaypoint() throws SQLException{
+        ArrayList<Waypoint> waypointList = new ArrayList<Waypoint>();
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("SELECT * FROM waypoint WHERE id LIKE 'B%';");
+        myRs = myStmt.executeQuery();
+        while(myRs.next())
+        {
+            waypointList.add(convertToWaypoint(myRs));
+        }
+        return waypointList;
+    }
 }

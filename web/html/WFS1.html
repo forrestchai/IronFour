@@ -14,6 +14,7 @@
     <script type="text/javascript">
 
         function openCity(cityName, optionName) {
+            document.getElementsByClassName('myUL').disabled = false;
             var i;
             var x = document.getElementsByClassName("city");
             for (i = 0; i < x.length; i++) {
@@ -39,14 +40,16 @@
 
         function inputFocus() {
             document.getElementById('listAll').style.display = "";
-            document.getElementsByClassName('myUL').style.display = "none";
+            document.getElementById('London').style.display = "none";
+            document.getElementById('Paris').style.display = "none";
+            document.getElementById('Tokyo').style.display = "none";
         }
 
         function displayFilter() {
             var input, filter, ul, li, a, i;
             input = document.getElementById('myInput');
             filter = input.value.toUpperCase();
-            ul = document.getElementsByClassName("myUL");
+            ul = document.getElementById("ulAll");
             li = ul.getElementsByTagName('li');
 
             for (i = 0; i < li.length; i++) {
@@ -58,6 +61,7 @@
                 }
             }
         }
+
     </script>
 
     <style>
@@ -180,12 +184,26 @@
               <input type="text" id="myInput" onfocus="inputFocus()" onkeyup="displayFilter()" placeholder="Search for wards/rooms..">
 
               <ul class="nav nav-justified nav-pills" style="border: 2px; border-color: gainsboro; margin-bottom: 10px;">
-                  <li id="landmarks"><a href="#" onclick="openCity('London', 'landmarks')">Wheelchair accessible</a></li>
-                  <li id="wards"><a href="#" onclick="openCity('Paris', 'wards')">Best Route</a></li>
-                  <li id="depts"><a href="#" onclick="openCity('Tokyo', 'depts')">Less Waypoints</a></li>
+                  <li id="landmarks"><a href="#" onclick="openCity('London', 'landmarks')">Hospital Landmarks</a></li>
+                  <li id="wards"><a href="#" onclick="openCity('Paris', 'wards')">Wards / Clinics</a></li>
+                  <li id="depts"><a href="#" onclick="openCity('Tokyo', 'depts')">Departments</a></li>
               </ul>
 
-              <div id="London" class="w3-container city">
+              <div id="listAll" class="w3-container city" >
+                  <ul class="list-group" id="ulAll">
+                      <h2>All locations</h2>
+                      <li class="list-group-item "><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Karalis Questor</a></li>
+                      <li class="list-group-item "><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Serpe Mentalis</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
+                  </ul>
+              </div>
+
+              <div id="London" class="w3-container city"style="display:none" >
                   <ul class="list-group myUL">
                       <h2>Landmarks</h2>
                       <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
@@ -195,7 +213,7 @@
 
               <div id="Paris" class="w3-container city" style="display:none">
                   <ul class="list-group myUL">
-                      <h2>Wards</h2>
+                      <h2>Wards / Clinics</h2>
                       <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
                       <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
                       <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
@@ -212,19 +230,6 @@
                   </ul>
               </div>
 
-              <div id="listAll" class="w3-container city" style="display:none">
-                  <ul class="list-group" id="ulAll">
-                      <h2>All locations</h2>
-                      <li class="list-group-item "><a href="WayfinderLanding.html">Cras justo odio</a></li>
-                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
-                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
-                      <li class="list-group-item"><a href="WayfinderLanding.html">Karalis Questor</a></li>
-                      <li class="list-group-item "><a href="WayfinderLanding.html">Cras justo odio</a></li>
-                      <li class="list-group-item"><a href="WayfinderLanding.html">Serpe Mentalis</a></li>
-                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
-                      <li class="list-group-item"><a href="WayfinderLanding.html">Cras justo odio</a></li>
-                  </ul>
-              </div>
           </div>
         </div>
       </div>

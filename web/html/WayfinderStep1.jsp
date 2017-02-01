@@ -16,25 +16,130 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="..\css\qq.css" rel="stylesheet" type="text/css">
     <link href="..\css\style.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript">
-        function openAlpha(x, y) {
-            document.getElementById(x).style.display = 'block';
-            document.getElementById(y).style.display = 'none';
-        }
-        function openBravo(x, y){
-            document.getElementById(x).style.display = 'none';
-            document.getElementById(y).style.display = 'block';
-        }
-        $(document).ready(function(){
-            openAlpha('alphaList', 'bravoList');
-        });
-    </script>
-    <%
-        session.setAttribute("current", 0);
-    %>
-</head>
-<body>
 
+    <script type="text/javascript">
+
+        function openCity(cityName, optionName) {
+            document.getElementsByClassName('myUL').disabled = false;
+            var i;
+            var x = document.getElementsByClassName("city");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(cityName).style.display = "block";
+            document.getElementById('myInput').reset();
+            document.getElementById('listAll').style.display = "none";
+        }
+
+        window.setTimeout(function() {
+
+        }, 0);
+
+        $(document).ready(function() {
+            $(".myUL").append('<li class="list-group-item"><a href="/user/messages">Message Center</a></li>');
+            var ul = document.getElementsByClassName("myUL");
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode("<%= waypointNames.get(0)%>"));
+            ul.appendChild(li);
+            alert("hello world");
+        });
+
+        function inputFocus() {
+            document.getElementById('listAll').style.display = "";
+            document.getElementById('London').style.display = "none";
+            document.getElementById('Paris').style.display = "none";
+            document.getElementById('Tokyo').style.display = "none";
+        }
+
+        function displayFilter() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("ulAll");
+            li = ul.getElementsByTagName('li');
+
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+
+    </script>
+
+    <style>
+
+        #myInput {
+            background-position: 10px 12px; /* Position the search icon */
+            background-repeat: no-repeat; /* Do not repeat the icon image */
+            width: 100%; /* Full-width */
+            font-size: 16px; /* Increase font-size */
+            padding: 12px 20px 12px 40px; /* Add some padding */
+            border: 1px solid #ddd; /* Add a grey border */
+            margin-bottom: 12px; /* Add some space below the input */
+        }
+
+
+        #ulAll {
+            /* Remove default list styling */
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #ulAll li{
+            border: 1px solid #ddd; /* Add a border to all links */
+            padding:0;
+        }
+
+        #ulAll li a {
+            margin: -1px 0 0 0; /* Prevent double borders */
+            background-color: #f6f6f6; /* Grey background color */
+            padding: 12px; /* Add some padding */
+            text-decoration: none; /* Remove default text underline */
+            color: black; /* Add a black text color */
+            display: block; /* Make it into a block element to fill the whole list */
+        }
+        #ulAll li a:hover:not(.header) {
+            background-color: #eee; /* Add a hover effect to all links, except for headers */
+        }
+
+        .myUL {
+            /* Remove default list styling */
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .myUL li{
+            border: 1px solid #ddd; /* Add a border to all links */
+            padding:0;
+        }
+
+        .myUL li a {
+            margin: -1px 0 0 0; /* Prevent double borders */
+            background-color: #f6f6f6; /* Grey background color */
+            padding: 12px; /* Add some padding */
+            text-decoration: none; /* Remove default text underline */
+            color: black; /* Add a black text color */
+            display: block; /* Make it into a block element to fill the whole list */
+        }
+
+        .myUL li a:hover:not(.header) {
+            background-color: #eee; /* Add a hover effect to all links, except for headers */
+        }
+
+    </style>
+
+
+</head>
+
+
+
+<body>
 <div class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -81,30 +186,43 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-xs-6 text-center">
-                <a href="WayfinderStep1Dept.jsp"><img src="../img/pic1.jpg" class="img-responsive"></a>
-                <a class="btn btn-primary">Hospital Depts</a>
+            <div class="col-xs-12">
+                <input type="text" id="myInput" onfocus="inputFocus()" onkeyup="displayFilter()" placeholder="Search for wards/rooms..">
+
+                <ul class="nav nav-justified nav-pills" style="border: 2px; border-color: gainsboro; margin-bottom: 10px;">
+                    <li id="landmarks"><a href="#" onclick="openCity('London', 'landmarks')">Hospital Landmarks</a></li>
+                    <li id="wards"><a href="#" onclick="openCity('Paris', 'wards')">Wards / Clinics</a></li>
+                    <li id="depts"><a href="#" onclick="openCity('Tokyo', 'depts')">Departments</a></li>
+                </ul>
+
+                <div id="listAll" class="w3-container city" >
+                    <ul class="list-group" id="ulAll">
+                        <h2>All locations</h2>
+                    </ul>
+                </div>
+
+                <div id="London" class="w3-container city"style="display:none" >
+                    <ul class="list-group myUL">
+                        <h2>Landmarks</h2>
+                    </ul>
+                </div>
+
+                <div id="Paris" class="w3-container city" style="display:none">
+                    <ul class="list-group myUL">
+                        <h2>Wards / Clinics</h2>
+                    </ul>
+                </div>
+
+                <div id="Tokyo" class="w3-container city" style="display:none">
+                    <ul class="list-group myUL">
+                        <h2>Departments</h2>
+                    </ul>
+                </div>
+
             </div>
-            <div class="col-xs-6 text-center">
-                <a href="WayfinderStep1Ward.jsp"><img src="../img/pic2.jpg" class="img-responsive"></a>
-                <a href="WayfinderStep1Ward.jsp" class="btn btn-primary">Wards/Consltn Rooms</a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="section">
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-xs-3 text-center"></div>
-            <div class="col-xs-6 text-center">
-                <a href="WayfinderStep1Land.jsp"><img src="../img/pic3.jpg" class="img-responsive"></a>
-                <a class="btn btn-primary">Landmarks</a>
-            </div>
-            <div class="col-xs-3 text-center"></div>
         </div>
     </div>
 </div>
 
 
-</body>
-</html>
+</body></html>
