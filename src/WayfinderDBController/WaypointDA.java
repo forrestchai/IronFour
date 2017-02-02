@@ -87,7 +87,7 @@ public class WaypointDA {
         Connection myConn = dbController.getConnection();
         PreparedStatement myStmt = null;
         ResultSet myRs = null;
-        myStmt = myConn.prepareStatement("SELECT * FROM waypoint WHERE id LIKE 'A%' AND accessLimiter = 0;");
+        myStmt = myConn.prepareStatement("SELECT * FROM waypoint WHERE id LIKE 'B%' AND accessLimiter = 0;");
         myRs = myStmt.executeQuery();
         while(myRs.next())
         {
@@ -102,22 +102,7 @@ public class WaypointDA {
         Connection myConn = dbController.getConnection();
         PreparedStatement myStmt = null;
         ResultSet myRs = null;
-        myStmt = myConn.prepareStatement("SELECT * FROM waypoint WHERE id LIKE 'B%' AND accessLimiter = 0;");
-        myRs = myStmt.executeQuery();
-        while(myRs.next())
-        {
-            waypointList.add(convertToWaypoint(myRs));
-        }
-        return waypointList;
-    }
-
-    public static ArrayList<Waypoint> getDeptWaypoint() throws SQLException{
-        ArrayList<Waypoint> waypointList = new ArrayList<Waypoint>();
-        DBController dbController = new DBController();
-        Connection myConn = dbController.getConnection();
-        PreparedStatement myStmt = null;
-        ResultSet myRs = null;
-        myStmt = myConn.prepareStatement("SELECT * FROM waypoint WHERE id LIKE 'C%' AND accessLimiter = 0;");
+        myStmt = myConn.prepareStatement("SELECT * FROM waypoint WHERE id LIKE 'A%' AND accessLimiter = 0;");
         myRs = myStmt.executeQuery();
         while(myRs.next())
         {
