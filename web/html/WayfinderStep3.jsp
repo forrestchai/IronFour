@@ -34,7 +34,22 @@
     %>
 
     <script>
+        var y=1;
+
+        function indicate(choice){
+            y=choice;
+        }
+
+        function openStep4(){
+            if(y=1){
+                window.location.href = "http://localhost:8080/mapServlet?selectedRoute=bestRoute";
+            }else{
+                window.location.href = "http://localhost:8080/mapServlet=accessRoute";
+            }
+        }
+
         function displayList(listName) {
+
             var i;
             var x = document.getElementsByClassName("city");
             for (i = 0; i < x.length; i++) {
@@ -114,7 +129,7 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 text-center"><a class="btn btn-primary" href="">Confirm Route</a></div>
+            <div class="col-xs-12 text-center"><a class="btn btn-primary" onclick="openStep4()">Confirm Route</a></div>
         </div>
     </div>
 </div>
@@ -129,24 +144,24 @@
         <div class="row">
             <div class="col-md-12">
                 <ul class="nav nav-justified nav-pills" style="border: 2px; border-color: gainsboro; margin-bottom: 10px;">
-                    <li id="landmarks"><a href="#" onclick="displayList('bestRouteList')">Best Route</a></li>
-                    <li id="wards"><a href="#" onclick="displayList('accessList')">Accessibility route</a></li>
+                    <li id="landmarks"><a href="#" onclick="displayList('bestRouteList'); indicate('1')">Best Route</a></li>
+                    <li id="wards"><a href="#" onclick="displayList('accessList'); indicate('2')">Accessibility route</a></li>
                 </ul>
 
                 <div id="bestRouteList" class="city" >
                     <ul class="list-group">
                         <h2>Best Route</h2>
                         <p>The route is calcluated to be the most straightforward and least crowded based on past data.</p>
-                        <%
-                        for (int i=0;i<bestRouteList.size();i++) {
-                            String name = (String) bestRouteList.get(i).getName();
-                            String desc =  (String) bestRouteList.get(i).getDesc();
-                        %>
-                        <li class="list-group-item">
-                        <h4><%=name%></h4>
-                        <p><%=desc%></p>
-                        </li>
-                        <%}%>
+                        <%--<%--%>
+                        <%--for (int i=0;i<bestRouteList.size();i++) {--%>
+                            <%--String name = (String) bestRouteList.get(i).getName();--%>
+                            <%--String desc =  (String) bestRouteList.get(i).getDesc();--%>
+                        <%--%>--%>
+                        <%--<li class="list-group-item">--%>
+                        <%--<h4><%=name%></h4>--%>
+                        <%--<p><%=desc%></p>--%>
+                        <%--</li>--%>
+                        <%--<%}%>--%>
                     </ul>
                 </div>
 
@@ -154,16 +169,16 @@
                     <ul class="list-group">
                         <h2>Accessibility Route</h2>
                         <p>This route is designed to aid those with accessibilities to find their way with ease.</p>
-                        <%
-                            for (int i=0;i<accessRouteList.size();i++) {
-                                String name = (String) accessRouteList.get(i).getName();
-                                String desc =  (String) accessRouteList.get(i).getDesc();
-                        %>
-                        <li class="list-group-item">
-                                <h4><%=name%></h4>
-                                <p><%=desc%></p>
-                        </li>
-                        <%}%>
+                        <%--<%--%>
+                            <%--for (int i=0;i<accessRouteList.size();i++) {--%>
+                                <%--String name = (String) accessRouteList.get(i).getName();--%>
+                                <%--String desc =  (String) accessRouteList.get(i).getDesc();--%>
+                        <%--%>--%>
+                        <%--<li class="list-group-item">--%>
+                                <%--<h4><%=name%></h4>--%>
+                                <%--<p><%=desc%></p>--%>
+                        <%--</li>--%>
+                        <%--<%}%>--%>
                     </ul>
                 </div>
 

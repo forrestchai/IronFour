@@ -17,21 +17,17 @@
         }
 
         #video-container {
-            margin: 2em auto 0;
+            margin: auto;
             width: 450px;
             height:350px;
             padding: 2em;
             background: white;
-            -webkit-box-shadow: 0 1px 10px #D9D9D9;
-            -moz-box-shadow: 0 1px 10px #D9D9D9;
-            -ms-box-shadow: 0 1px 10px #D9D9D9;
-            -o-box-shadow: 0 1px 10px #D9D9D9;
             box-shadow: 0 1px 10px #D9D9D9;
         }
 
-        /*#qr-canvas{*/
-            /*visibility: hidden;*/
-        /*}*/
+        #qr-canvas{
+            visibility: hidden;
+        }
 
         #camera-stream{
             margin: 0;
@@ -78,6 +74,7 @@
         </div>
     </div>
 </div>
+
 <div class="section" style="margin-top: 0;">
     <div class="container">
         <div class="row">
@@ -89,12 +86,20 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="section" style="margin-top: 0;">
+    <div class="container">
         <div class="row">
             <div class="col-xs-12 text-center">
                 <br>
                 <a class="btn btn-primary" id="button1" onclick="captureToCanvas()">Scan</a>
             </div>
         </div>
+    </div>
+</div>
+<div class="section" style="margin-top: 0;">
+    <div class="container">
         <div class="row">
             <div class="col-xs-12 text-center">
                 <canvas id="qr-canvas" width="640" height="480"></canvas>

@@ -24,12 +24,33 @@
     <link href="..\css\qq.css" rel="stylesheet" type="text/css">
 
     <style>
-        #map-canvas{
-            margin: auto;
+        #map-canvas
+        {
+            margin: 0px auto;
             width: 500px;
             height: 500px;
             border: 2px;
             border-color: #0f0f0f;
+        }
+        @media (min-width:350px)
+        {
+            #map-canvas
+            {
+                margin: auto;
+                width: 350px;
+                height: 350px;
+                border: 2px;
+            }
+        }
+        @media (min-width:1000px)
+        {
+            #map-canvas
+            {
+                margin: 0px auto;
+                width: 500px;
+                height: 500px;
+                border: 2px;
+            }
         }
     </style>
 
@@ -91,7 +112,7 @@
         <div class="row">
             <div class="col-xs-12 text-center">
                 <br>
-                <a class="btn btn-primary">Continue</a>
+                <a class="btn btn-primary" href="WayfinderStep4Route.jsp">Continue</a>
             </div>
         </div>
     </div>

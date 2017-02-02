@@ -61,10 +61,21 @@ public class QRServlet extends HttpServlet {
             response.sendRedirect("html/WayfinderStep3.jsp");
         }
         else if(session.getAttribute("usage").equals("map")){
-            session.setAttribute("currId", request.getParameter("id"));
+            String currId = (String) session.getAttribute("id");
+            session.setAttribute("currId",currId);
+            int i = Integer.parseInt((String) session.getAttribute("currentPoint"));
+            ArrayList<String> selectedRoute = new ArrayList<String>();
+            selectedRoute = (ArrayList<String>) session.getAttribute("selectedRoute");
 
-            System.out.println("Servlet Progress Scan executed: id = " +request.getParameter("id"));
-            response.sendRedirect("html/WayfinderStep2.jsp");
+            System.out.println("Servlet Progress Scan executed: current point = " + i + " right ID = "+ selectedRoute.get(i) );
+            System.out.println("Servlet Progress Scan executed pt2: curr ID = "+ currId );
+            if(!selectedRoute.get(i).equalsIgnoreCase(currId)){
+                response.sendRedirect("http://localhost:8080/mapServlet?error=true");
+            }
+
+            System.out.println("Servlet Progress Scan executed: current point = " + i + " right ID = "+ selectedRoute.get(i) );
+            System.out.println("Servlet Progress Scan executed pt2: curr ID = "+ currId );
+            response.sendRedirect("http://localhost:8080/mapServlet");
         }
 
     }

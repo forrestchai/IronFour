@@ -46,6 +46,10 @@
         }
     </style>
 
+    <%
+        session.setAttribute("usage", "map");
+    %>
+
 </head>
 <body>
 
@@ -97,14 +101,14 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <img id="map-canvas" src="..\..\generatedMap.png">
+                <img id="map-canvas" src="../img/generatedMap.png">
                 <%--<canvas id="map-canvas"></canvas>--%>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 text-center">
                 <br>
-                <a class="btn btn-primary">Scan QR Code</a>
+                <a class="btn btn-primary" href="WayfinderQR.jsp">Scan QR Code</a>
             </div>
         </div>
     </div>
@@ -118,7 +122,7 @@
                 <h3>To:</h3>
                 <p>Please take note of your surroundings and follow the directions given
                     on the map!</p>
-                <a class="btn btn-primary">Previous Waypoint</a>
+                <a class="btn btn-primary" href="javascript:history.back()">Previous Waypoint</a>
             </div>
         </div>
     </div>

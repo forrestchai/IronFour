@@ -55,7 +55,6 @@ public class ImageRenderController {
             west = ImageIO.read(new File(this.getSPAWNABLESRC5()));
             currentIndicator = ImageIO.read(new File(this.getSPAWNABLESRC6()));
 
-
         }catch(IOException e)
         {
             e.printStackTrace();
@@ -274,7 +273,7 @@ public class ImageRenderController {
     {
         try
         {
-            File output = new File("generatedMap.png");
+            File output = new File("web/img/generatedMap.png");
             ImageIO.write(this.getBackImage(), "png", output);
         }catch(IOException e)
         {
@@ -292,6 +291,7 @@ public class ImageRenderController {
         RoutingController rc = new RoutingController();
 
         ArrayList<String> waypointIDList = rc.routeBest("A1-005", "A1-014");
+        System.out.println(waypointIDList.get(0));
         irc.spawnWaypoints(waypointIDList);
 
         Scanner sc = new Scanner(System.in);
