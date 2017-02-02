@@ -202,7 +202,6 @@
                 <ul class="nav nav-justified nav-pills" style="border: 2px; border-color: gainsboro; margin-bottom: 10px;">
                     <li id="landmarks"><a href="#" onclick="openCity('London', 'landmarks')">Hospital Landmarks</a></li>
                     <li id="wards"><a href="#" onclick="openCity('Paris', 'wards')">Wards / Clinics</a></li>
-                    <li id="depts"><a href="#" onclick="openCity('Tokyo', 'depts')">Departments</a></li>
                 </ul>
 
                 <div id="listAll" class="w3-container city" >
