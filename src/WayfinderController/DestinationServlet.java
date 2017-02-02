@@ -39,7 +39,7 @@ public class DestinationServlet extends HttpServlet {
         }
         else
         {
-            System.out.println("Servlet executed.");
+            System.out.println("Destination Servlet executed.");
             response.sendRedirect("html/WayfinderStep2.jsp");
         }
 

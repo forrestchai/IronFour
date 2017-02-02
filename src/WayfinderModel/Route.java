@@ -534,22 +534,30 @@ public class Route {
 
     public boolean isReverse(ArrayList<Point> universalPoints, String id1, String id2, String id3)
     {
+//        for(int i=0; i<universalPoints.size(); i++){
+//            System.out.println("getoff X "+universalPoints.get(i).getOffX());
+//        }
+//        System.out.println("id1 "+id1);
+//        System.out.println("id2 "+id2);
+//        System.out.println("id3 "+id3);
+
         boolean reverse = false;
         Point point1 = null, point2 = null, point3 = null;
         for(Point p: universalPoints)
         {
+
             Point debugPoint = p;
             if(p.getId().equalsIgnoreCase(id1))
             {
-                point1 = p;
+                point1 = p;System.out.println("point 1" + point1);
             }
             if(p.getId().equalsIgnoreCase(id2))
             {
-                point2 = p;
+                point2 = p;System.out.println("point 2" + point2);
             }
             if(p.getId().equalsIgnoreCase(id3))
             {
-                point3 = p;
+                point3 = p;System.out.println("point 3" + point3);
             }
         }
         char direction1 = 0;

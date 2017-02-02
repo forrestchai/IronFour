@@ -45,9 +45,9 @@ public class MapPointServlet extends HttpServlet {
                 session.setAttribute("selectedRoute", waypointIDList);
             }
 
-            waypointIDList.add("A1-001");
-            waypointIDList.add("A1-003");
-            waypointIDList.add("A1-005");session.setAttribute("selectedRoute", waypointIDList);
+//            waypointIDList.add("A1-001");
+//            waypointIDList.add("A1-003");
+//            waypointIDList.add("A1-005");session.setAttribute("selectedRoute", waypointIDList);
 
             ImageRenderController irc = new ImageRenderController();
 

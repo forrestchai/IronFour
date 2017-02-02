@@ -130,7 +130,6 @@
     <%
         ArrayList<Waypoint> waLa = new ArrayList<Waypoint>();
         ArrayList<Waypoint> waWa = new ArrayList<Waypoint>();
-        ArrayList<Waypoint> waDept = new ArrayList<Waypoint>();
         ArrayList<Waypoint> waAll = new ArrayList<Waypoint>();
 
         try{

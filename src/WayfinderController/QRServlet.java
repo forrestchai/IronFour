@@ -42,7 +42,6 @@ public class QRServlet extends HttpServlet {
             accessRouteString = rc.routeAccess(id, destId);
             bestRouteString = rc.routeBest(id, destId);
 
-
             try
             {
                 accessRoute = WaypointDA.getWaypointList(accessRouteString);

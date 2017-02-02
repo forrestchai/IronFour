@@ -21,6 +21,6 @@ public class ChangeWaypointServlet extends HttpServlet {
         HttpSession session=request.getSession();
         session.setAttribute("changeOrigin", request.getParameter("originId"));
 
-        response.sendRedirect("WayfinderStep1.jsp");
+        response.sendRedirect("html/WayfinderStep1.jsp");
     }
 }

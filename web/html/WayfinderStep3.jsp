@@ -169,16 +169,16 @@
                     <ul class="list-group">
                         <h2>Accessibility Route</h2>
                         <p>This route is designed to aid those with accessibilities to find their way with ease.</p>
-                        <%
-                            for (int i=0;i<accessRouteList.size();i++) {
-                                String name = (String) accessRouteList.get(i).getName();
-                                String desc =  (String) accessRouteList.get(i).getDesc();
-                        %>
-                        <li class="list-group-item">
-                                <h4><%=name%></h4>
-                                <p><%=desc%></p>
-                        </li>
-                        <%}%>
+                        <%--<%--%>
+                            <%--for (int i=0;i<accessRouteList.size();i++) {--%>
+                                <%--String name = (String) accessRouteList.get(i).getName();--%>
+                                <%--String desc =  (String) accessRouteList.get(i).getDesc();--%>
+                        <%--%>--%>
+                        <%--<li class="list-group-item">--%>
+                                <%--<h4><%=name%></h4>--%>
+                                <%--<p><%=desc%></p>--%>
+                        <%--</li>--%>
+                        <%--<%}%>--%>
                     </ul>
                 </div>
 

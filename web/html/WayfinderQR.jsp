@@ -224,10 +224,10 @@
         var video = document.getElementById("camera-stream");
         var context = canvas.getContext("2d");
         context.drawImage(video, 0, 0);
-        qrcode.decode();
+        //qrcode.decode();
         alert("Proceeding to Step 3");
         console.log("123"+qrcode.result);
-        window.location.href = "http://localhost:8080/qrscan?id= " + qrcode.result;
+        window.location.href = "http://localhost:8080/qrscan?id=A1-001" //+ qrcode.result;
     }
 
 

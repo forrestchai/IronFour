@@ -19,10 +19,10 @@
 //    session.setAttribute("startPoint", waypointList.get(0));
 //    session.setAttribute("endPoint", waypointList.get(waypointList.size()-1));
 //    ArrayList<Path> allRouteList = RouteDA.getAllRoute();
-//    ArrayList<Waypoint> allWaypointList = WaypointDA.getAllWaypoint();
+    ArrayList<Waypoint> allWaypointList = WaypointDA.getAllWaypoint();
 //
 //    session.setAttribute("allRouteList", allRouteList);
-//    session.setAttribute("allWaypointList", allWaypointList);
+    session.setAttribute("allWaypointList", allWaypointList);
 
     session.setAttribute("new", "yes");
 
