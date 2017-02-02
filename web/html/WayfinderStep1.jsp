@@ -1,7 +1,9 @@
 <%@ page import="WayfinderModel.Waypoint" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="WayfinderDBController.WaypointDA" %>
-<%@ page import="java.sql.SQLException" %><%--
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="java.util.Collections" %>
+<%@ page import="java.util.Comparator" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 12/14/2016
@@ -132,13 +134,21 @@
         ArrayList<Waypoint> waWa = new ArrayList<Waypoint>();
         ArrayList<Waypoint> waAll = new ArrayList<Waypoint>();
 
+
+
         try{
             waLa = WaypointDA.getLandmarkWaypoints();
             waWa = WaypointDA.getWardWaypoints();
             waAll = WaypointDA.getAllWaypointNoAccess();
         }catch (SQLException e){e.printStackTrace();}
 
-        %>
+        Collections.sort(waAll, new Comparator<Waypoint>() {
+            public int compare(Waypoint one, Waypoint other) {
+                return one.getName().compareTo(other.getName());
+            }
+        });
+
+    %>
 
 </head>
 

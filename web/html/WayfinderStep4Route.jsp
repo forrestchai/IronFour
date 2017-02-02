@@ -59,8 +59,8 @@
         session.setAttribute("usage", "map");
         int x = (Integer) session.getAttribute("nextPoint");
         ArrayList<String> waypointIdList = (ArrayList<String>) session.getAttribute("selectedRoute");
-        String org = WaypointDA.getWaypoint(waypointIdList.get(x)).getName();
-        String dest = WaypointDA.getWaypoint(waypointIdList.get(x+1)).getName();
+        String org = WaypointDA.getWaypoint(waypointIdList.get(x-1)).getName();
+        String dest = WaypointDA.getWaypoint(waypointIdList.get(x)).getName();
     %>
 
 </head>

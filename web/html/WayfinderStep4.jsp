@@ -68,6 +68,7 @@
         String id = WaypointDA.getWaypoint(waypointIdList.get(x)).getId();
 
         String redirectAddr = "http://localhost:8080/changeServlet?originId="+id;
+        session.setAttribute("new", "no");
     %>
 
 </head>
