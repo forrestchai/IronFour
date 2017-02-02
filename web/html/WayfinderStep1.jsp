@@ -140,7 +140,6 @@
         try{
             waLa = WaypointDA.getLandmarkWaypoints();
             waWa = WaypointDA.getWardWaypoints();
-            waDept = WaypointDA.getDeptWaypoint();
             waAll = WaypointDA.getAllWaypointNoAccess();
         }catch (SQLException e){e.printStackTrace();}
 
