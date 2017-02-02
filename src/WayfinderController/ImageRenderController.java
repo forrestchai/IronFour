@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,13 +16,13 @@ import java.util.Scanner;
  * Created by admin on 2/1/2017.
  */
 public class ImageRenderController {
-    private final static String BACKIMAGESRC = "web/img/originalMap.png";
-    private final static String SPAWNABLESRC1 = "web/img/waypoint.png";
-    private final static String SPAWNABLESRC2 = "web/img/north.png";
-    private final static String SPAWNABLESRC3 = "web/img/south.png";
-    private final static String SPAWNABLESRC4 = "web/img/east.png";
-    private final static String SPAWNABLESRC5 = "web/img/west.png";
-    private final static String SPAWNABLESRC6 = "web/img/currentIndicator.png";
+    private final static String BACKIMAGESRC = "C:/img/originalMap.png";
+    private final static String SPAWNABLESRC1 = "C:/img/waypoint.png";
+    private final static String SPAWNABLESRC2 = "C:/img/north.png";
+    private final static String SPAWNABLESRC3 = "C:/img/south.png";
+    private final static String SPAWNABLESRC4 = "C:/img/east.png";
+    private final static String SPAWNABLESRC5 = "C:/img/west.png";
+    private final static String SPAWNABLESRC6 = "C:/img/currentIndicator.png";
     private BufferedImage backImage;
     private BufferedImage waypoint;
     private BufferedImage north;
@@ -48,6 +49,7 @@ public class ImageRenderController {
         try
         {
             backImage = ImageIO.read(new File(this.getBACKIMAGESRC()));
+            //backImage = ImageIO.read(new File(getClass().getResource(this.getBACKIMAGESRC()).toURI()));
             waypoint = ImageIO.read(new File(this.getSPAWNABLESRC1()));
             north = ImageIO.read(new File(this.getSPAWNABLESRC2()));
             south = ImageIO.read(new File(this.getSPAWNABLESRC3()));
@@ -226,7 +228,7 @@ public class ImageRenderController {
         }
 
     }
-    
+
     public char getDirection(Point one, Point two){
         char direction = 0;
         if((two.getOffX() - one.getOffX() == 0) && (two.getOffY() - one.getOffY() > 0))
@@ -257,13 +259,13 @@ public class ImageRenderController {
             char direction = getDirection(points.get(i), points.get(i+1));
             switch(direction){
                 case 'N':spawnNorth(points.get(i+1).getOffX(), points.get(i+1).getOffY(), (int)Math.abs(points.get(i).getOffY() - points.get(i+1).getOffY()));
-                break;
+                    break;
                 case 'S':spawnSouth(points.get(i).getOffX(), points.get(i).getOffY(), (int)Math.abs(points.get(i).getOffY() - points.get(i+1).getOffY()));
-                break;
+                    break;
                 case 'E':spawnEast(points.get(i).getOffX(), points.get(i).getOffY(), (int)Math.abs(points.get(i).getOffX() - points.get(i+1).getOffX()));
-                break;
+                    break;
                 case 'W':spawnWest(points.get(i+1).getOffX(), points.get(i+1).getOffY(), (int)Math.abs(points.get(i).getOffX() - points.get(i+1).getOffX()));
-                break;
+                    break;
             }
 
         }
@@ -273,7 +275,7 @@ public class ImageRenderController {
     {
         try
         {
-            File output = new File("web/img/generatedMap.png");
+            File output = new File("C:\\Users\\admin\\IdeaProjects\\IronFour\\web\\img\\generatedMap.png");
             ImageIO.write(this.getBackImage(), "png", output);
         }catch(IOException e)
         {

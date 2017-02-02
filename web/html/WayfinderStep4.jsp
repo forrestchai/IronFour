@@ -26,7 +26,8 @@
     <style>
         #map-canvas
         {
-            margin: 0px auto;
+            margin-left: auto;
+            margin-right: auto;
             width: 500px;
             height: 500px;
             border: 2px;
@@ -36,7 +37,8 @@
         {
             #map-canvas
             {
-                margin: auto;
+                margin-left: auto;
+                margin-right: auto;
                 width: 350px;
                 height: 350px;
                 border: 2px;
@@ -46,7 +48,8 @@
         {
             #map-canvas
             {
-                margin: 0px auto;
+                margin-left: auto;
+                margin-right: auto;
                 width: 500px;
                 height: 500px;
                 border: 2px;
@@ -106,7 +109,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <canvas id="map-canvas"></canvas>
+                <img id="map-canvas" src="../img/generatedMap.png">
             </div>
         </div>
         <div class="row">

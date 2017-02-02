@@ -12,6 +12,7 @@ public class MockConfirmationServlet {
         //prepare list of co-ordinates from session
         ArrayList<Integer> offXList = new ArrayList<Integer>();
         ArrayList<Integer> offYList = new ArrayList<Integer>();
+
         ImageRenderController irc = new ImageRenderController();
 
         //spawning waypoints

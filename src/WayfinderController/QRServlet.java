@@ -63,7 +63,7 @@ public class QRServlet extends HttpServlet {
         else if(session.getAttribute("usage").equals("map")){
             String currId = (String) session.getAttribute("id");
             session.setAttribute("currId",currId);
-            int i = Integer.parseInt((String) session.getAttribute("currentPoint"));
+            int i =  (Integer) session.getAttribute("currentPoint");
             ArrayList<String> selectedRoute = new ArrayList<String>();
             selectedRoute = (ArrayList<String>) session.getAttribute("selectedRoute");
 

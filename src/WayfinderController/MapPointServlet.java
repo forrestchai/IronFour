@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,7 +47,6 @@ public class MapPointServlet extends HttpServlet {
             waypointIDList.add("A1-003");
             waypointIDList.add("A1-005");
 
-
             ImageRenderController irc = new ImageRenderController();
 
             for(int i=0; i<waypointIDList.size(); i++)
@@ -71,7 +71,7 @@ public class MapPointServlet extends HttpServlet {
         {
             ImageRenderController irc = (ImageRenderController) session.getAttribute("irc");
             waypointIDList = (ArrayList<String>) session.getAttribute("selectedRoute");
-            int i = Integer.parseInt((String) session.getAttribute("currentPoint"));
+            int i = (Integer) session.getAttribute("currentPoint");
 
             try
             {
