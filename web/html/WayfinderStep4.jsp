@@ -2,6 +2,7 @@
 <%@ page import="WayfinderDBController.RouteDA" %>
 <%@ page import="WayfinderModel.Path" %>
 <%@ page import="WayfinderModel.Waypoint" %>
+<%@ page import="WayfinderDBController.WaypointDA" %>
 <%--
   Created by IntelliJ IDEA.
   User: User
@@ -32,6 +33,7 @@
             height: 500px;
             border: 2px;
             border-color: #0f0f0f;
+            display: block;
         }
         @media (min-width:350px)
         {
@@ -42,6 +44,7 @@
                 width: 350px;
                 height: 350px;
                 border: 2px;
+                display: block;
             }
         }
         @media (min-width:1000px)
@@ -53,10 +56,19 @@
                 width: 500px;
                 height: 500px;
                 border: 2px;
+                display: block;
             }
         }
     </style>
 
+    <%
+        int x = (Integer) session.getAttribute("nextPoint");
+        ArrayList <String> waypointIdList = (ArrayList<String>) session.getAttribute("selectedRoute");
+        String name = WaypointDA.getWaypoint(waypointIdList.get(x)).getName();
+        String id = WaypointDA.getWaypoint(waypointIdList.get(x)).getId();
+
+        String redirectAddr = "http://localhost:8080/changeServlet?originId="+id;
+    %>
 
 </head>
 <body>
@@ -125,15 +137,15 @@
         <div class="row">
             <div class="col-xs-12">
                 <h2>Current Waypoint:</h2>
-                <h3>Cardiology Department</h3>
+                <h3><%=name%></h3>
                 <br>
                 <a class="btn btn-primary">Leave Feedback</a>
                 <br>
                 <br>
-                <a class="btn btn-primary">Change Destination</a>
+                <a class="btn btn-primary" href="<%=redirectAddr%>">Change Destination</a>
                 <br>
                 <br>
-                <a class="btn btn-primary">End Wayfinding</a>
+                <a class="btn btn-primary" href="WayfinderLanding.jsp">End Wayfinding</a>
             </div>
         </div>
     </div>

@@ -152,16 +152,16 @@
                     <ul class="list-group">
                         <h2>Best Route</h2>
                         <p>The route is calcluated to be the most straightforward and least crowded based on past data.</p>
-                        <%--<%--%>
-                        <%--for (int i=0;i<bestRouteList.size();i++) {--%>
-                            <%--String name = (String) bestRouteList.get(i).getName();--%>
-                            <%--String desc =  (String) bestRouteList.get(i).getDesc();--%>
-                        <%--%>--%>
-                        <%--<li class="list-group-item">--%>
-                        <%--<h4><%=name%></h4>--%>
-                        <%--<p><%=desc%></p>--%>
-                        <%--</li>--%>
-                        <%--<%}%>--%>
+                        <%
+                        for (int i=0;i<bestRouteList.size();i++) {
+                            String name = (String) bestRouteList.get(i).getName();
+                            String desc =  (String) bestRouteList.get(i).getDesc();
+                        %>
+                        <li class="list-group-item">
+                        <h4><%=name%></h4>
+                        <p><%=desc%></p>
+                        </li>
+                        <%}%>
                     </ul>
                 </div>
 
@@ -169,16 +169,16 @@
                     <ul class="list-group">
                         <h2>Accessibility Route</h2>
                         <p>This route is designed to aid those with accessibilities to find their way with ease.</p>
-                        <%--<%--%>
-                            <%--for (int i=0;i<accessRouteList.size();i++) {--%>
-                                <%--String name = (String) accessRouteList.get(i).getName();--%>
-                                <%--String desc =  (String) accessRouteList.get(i).getDesc();--%>
-                        <%--%>--%>
-                        <%--<li class="list-group-item">--%>
-                                <%--<h4><%=name%></h4>--%>
-                                <%--<p><%=desc%></p>--%>
-                        <%--</li>--%>
-                        <%--<%}%>--%>
+                        <%
+                            for (int i=0;i<accessRouteList.size();i++) {
+                                String name = (String) accessRouteList.get(i).getName();
+                                String desc =  (String) accessRouteList.get(i).getDesc();
+                        %>
+                        <li class="list-group-item">
+                                <h4><%=name%></h4>
+                                <p><%=desc%></p>
+                        </li>
+                        <%}%>
                     </ul>
                 </div>
 

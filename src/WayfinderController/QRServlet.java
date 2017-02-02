@@ -61,21 +61,25 @@ public class QRServlet extends HttpServlet {
             response.sendRedirect("html/WayfinderStep3.jsp");
         }
         else if(session.getAttribute("usage").equals("map")){
-            String currId = (String) session.getAttribute("id");
+            String currId = request.getParameter("id");
             session.setAttribute("currId",currId);
-            int i =  (Integer) session.getAttribute("currentPoint");
+            int i =  (Integer) session.getAttribute("nextPoint");
             ArrayList<String> selectedRoute = new ArrayList<String>();
             selectedRoute = (ArrayList<String>) session.getAttribute("selectedRoute");
 
-            System.out.println("Servlet Progress Scan executed: current point = " + i + " right ID = "+ selectedRoute.get(i) );
+            System.out.println("Servlet Progress Scan executed: next Point = " + i + " right ID = "+ selectedRoute.get(i) );
             System.out.println("Servlet Progress Scan executed pt2: curr ID = "+ currId );
-            if(!selectedRoute.get(i).equalsIgnoreCase(currId)){
-                response.sendRedirect("http://localhost:8080/mapServlet?error=true");
-            }
 
-            System.out.println("Servlet Progress Scan executed: current point = " + i + " right ID = "+ selectedRoute.get(i) );
-            System.out.println("Servlet Progress Scan executed pt2: curr ID = "+ currId );
-            response.sendRedirect("http://localhost:8080/mapServlet");
+            if(selectedRoute.size() == i+1){
+                response.sendRedirect("html/WayfinderEnd.jsp");
+                System.out.println("Map point ends");
+            }else if(!selectedRoute.get(i).equalsIgnoreCase(currId)){
+                response.sendRedirect("http://localhost:8080/mapServlet?error=false");
+                System.out.println("QRServlet sent positive");
+            }else{
+                response.sendRedirect("http://localhost:8080/mapServlet?error=true");
+                System.out.println("QRServlet sent error");
+            }
         }
 
     }

@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="WayfinderDBController.WaypointDA" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 1/31/2017
@@ -15,39 +16,51 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="..\css\qq.css" rel="stylesheet" type="text/css">
 
+
+
     <style>
         #map-canvas
         {
-            margin: 0px auto;
+            margin-left: auto;
+            margin-right: auto;
             width: 500px;
             height: 500px;
             border: 2px;
             border-color: #0f0f0f;
+            display: block;
         }
         @media (min-width:350px)
         {
             #map-canvas
             {
-                margin: auto;
+                margin-left: auto;
+                margin-right: auto;
                 width: 350px;
                 height: 350px;
                 border: 2px;
+                display: block;
             }
         }
         @media (min-width:1000px)
         {
             #map-canvas
             {
-                margin: 0px auto;
+                margin-left: auto;
+                margin-right: auto;
                 width: 500px;
                 height: 500px;
                 border: 2px;
+                display: block;
             }
         }
     </style>
 
     <%
         session.setAttribute("usage", "map");
+        int x = (Integer) session.getAttribute("nextPoint");
+        ArrayList<String> waypointIdList = (ArrayList<String>) session.getAttribute("selectedRoute");
+        String org = WaypointDA.getWaypoint(waypointIdList.get(x)).getName();
+        String dest = WaypointDA.getWaypoint(waypointIdList.get(x+1)).getName();
     %>
 
 </head>
@@ -118,8 +131,8 @@
         <div class="row">
             <div class="col-xs-12">
                 <h2>On Route</h2>
-                <h3>From:</h3>
-                <h3>To:</h3>
+                <h3>From: <%=org%></h3>
+                <h3>To: <%=dest%></h3>
                 <p>Please take note of your surroundings and follow the directions given
                     on the map!</p>
                 <a class="btn btn-primary" href="javascript:history.back()">Previous Waypoint</a>

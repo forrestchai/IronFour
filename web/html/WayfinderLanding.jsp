@@ -24,9 +24,7 @@
 //    session.setAttribute("allRouteList", allRouteList);
 //    session.setAttribute("allWaypointList", allWaypointList);
 
-    ArrayList<Waypoint> allWaypointList = WaypointDA.getAllWaypoint();
-
-    session.setAttribute("allWaypointList", allWaypointList);
+    session.setAttribute("new", "yes");
 
 %>
 <html><head>

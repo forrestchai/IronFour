@@ -219,25 +219,15 @@
     }
 
     function captureToCanvas() {
-//            flash = document.getElementById("embedflash");
-//            flash.ccCapture();
-        //            var canvas = document.getElementById("qr-canvas");
-//            var context = canvas.getContext("2d");
-//            context.fillRect(0,0,w,h);
-//            context.drawImage(video, 0,0, w, h);
 
         var canvas = document.getElementById("qr-canvas");
         var video = document.getElementById("camera-stream");
         var context = canvas.getContext("2d");
-        //if (localMediaStream) {
         context.drawImage(video, 0, 0);
-        // "image/webp" works in Chrome.
-        // Other browsers will fall back to image/png.
-        //document.querySelector('img').src = canvas.toDataURL('image/webp');
-        //qrcode.decode();
+        qrcode.decode();
         alert("Proceeding to Step 3");
         console.log("123"+qrcode.result);
-        window.location.href = "http://localhost:8080/qrscan?id=A1-001";//+qrcode.result;
+        window.location.href = "http://localhost:8080/qrscan?id= " + qrcode.result;
     }
 
 

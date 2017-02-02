@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.locks.Lock;
 
 /**
  * Created by admin on 2/2/2017.
@@ -32,27 +33,23 @@ public class MapPointServlet extends HttpServlet {
         if(session.getAttribute("irc")==null)
         {
             String selR = request.getParameter("selectedRoute");
-//
-//            if(selR.equalsIgnoreCase("accessRoute"))
-//            {
-//                session.setAttribute("selectedRoute", "accessRoute");
-//                waypointIDList = (ArrayList<String>) session.getAttribute("accessRouteString");
-//            }
-//            else
-//            {
-//                session.setAttribute("selectedRoute", "bestRoute");
-//                waypointIDList = (ArrayList<String>) session.getAttribute("bestRouteString");
-//            }
+
+            if(selR.equalsIgnoreCase("accessRoute"))
+            {
+                waypointIDList = (ArrayList<String>) session.getAttribute("accessRouteString");
+                session.setAttribute("selectedRoute", waypointIDList);
+            }
+            else
+            {
+                waypointIDList = (ArrayList<String>) session.getAttribute("bestRouteString");
+                session.setAttribute("selectedRoute", waypointIDList);
+            }
+
             waypointIDList.add("A1-001");
             waypointIDList.add("A1-003");
-            waypointIDList.add("A1-005");
+            waypointIDList.add("A1-005");session.setAttribute("selectedRoute", waypointIDList);
 
             ImageRenderController irc = new ImageRenderController();
-
-            for(int i=0; i<waypointIDList.size(); i++)
-            {
-                System.out.println("STUFF "+waypointIDList.get(i));
-            }
 
             try
             {
@@ -62,8 +59,9 @@ public class MapPointServlet extends HttpServlet {
                 irc.spawnCurrentIndicator(x.get(0), x.get(1));
             }catch (SQLException e){e.printStackTrace();}
 
+
             session.setAttribute("irc", irc);
-            session.setAttribute("currentPoint", 0);
+            session.setAttribute("nextPoint", 1);
             System.out.println("Servlet Initial Map Spawn executed.");
             response.sendRedirect("html/WayfinderStep4.jsp");
         }
@@ -71,21 +69,32 @@ public class MapPointServlet extends HttpServlet {
         {
             ImageRenderController irc = (ImageRenderController) session.getAttribute("irc");
             waypointIDList = (ArrayList<String>) session.getAttribute("selectedRoute");
-            int i = (Integer) session.getAttribute("currentPoint");
+            int i = (Integer) session.getAttribute("nextPoint");
+            String error = "";
 
             try
             {
                 x = WaypointDA.getCoordinatesById(waypointIDList.get(i));
+                System.out.println(waypointIDList.get(i) + " ID. Xcordinates: " + x.get(0));
                 irc.spawnCurrentIndicator(x.get(0), x.get(1));
-            }catch (SQLException e){e.printStackTrace();}
+                error = request.getParameter("error");
 
-            if(request.getParameter("error").equalsIgnoreCase("true"))
-                session.setAttribute("currentPoint", i);
+            }catch (SQLException|NullPointerException e){e.printStackTrace();}
+
+            if(error.equalsIgnoreCase("true"))
+            {
+                session.setAttribute("nextPoint", i);
+                response.sendRedirect("html/WayfinderStep4.jsp");
+                System.out.println("Error in MapPoint");
+            }
             else
-                session.setAttribute("currentPoint", i+1);
+            {
+                session.setAttribute("nextPoint", i+1);
+                response.sendRedirect("html/WayfinderStep4.jsp");
+                System.out.println("MapPoint executed");
+            }
 
             System.out.println("Servlet Subsequent Spawn executed.");
-            response.sendRedirect("html/WayfinderStep4.jsp");
         }
     }
 }

@@ -33,8 +33,16 @@ public class DestinationServlet extends HttpServlet {
         session.setAttribute("destName", request.getParameter("name"));
         session.setAttribute("destId", request.getParameter("id"));
 
-        System.out.println("Servlet executed.");
-        response.sendRedirect("html/WayfinderStep2.jsp");
+        if(session.getAttribute("new").equals("no"))
+        {
+            response.sendRedirect("http://localhost:8080/qrscan?id="+session.getAttribute("changeOrigin"));
+        }
+        else
+        {
+            System.out.println("Servlet executed.");
+            response.sendRedirect("html/WayfinderStep2.jsp");
+        }
+
     }
 
 
