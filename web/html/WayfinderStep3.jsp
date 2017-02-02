@@ -24,6 +24,33 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="..\css\qq.css" rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+
+    <%
+        ArrayList<Waypoint> bestRouteList = new ArrayList<Waypoint>();
+        ArrayList<Waypoint> accessRouteList = new ArrayList<Waypoint>();
+
+        bestRouteList = (ArrayList<Waypoint>) session.getAttribute("bestRoute");
+        accessRouteList = (ArrayList<Waypoint>) session.getAttribute("accessRoute");
+    %>
+
+    <script>
+        function displayList(listName) {
+            var i;
+            var x = document.getElementsByClassName("city");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(listName).style.display = "block";
+        }
+    </script>
+
+    <style>
+        .routeLists{
+            width: 95%;
+            border-color: gainsboro;
+        }
+    </style>
+
 </head><body>
 <div class="navbar navbar-default navbar-static-top">
     <div class="container">
@@ -73,13 +100,13 @@
         <div class="row">
             <div class="col-sm-4">
                 <h4 class="text-center">From</h4>
-                <h1 class="text-center">Cardiology Department</h1>
+                <h1 class="text-center"><%=session.getAttribute("orgName")%></h1>
             </div>
             <div class="col-sm-4">
             </div>
             <div class="col-sm-4">
                 <h4 class="text-center">To</h4>
-                <h1 class="text-center">Macdonalds</h1>
+                <h1 class="text-center"><%=session.getAttribute("destName")%></h1>
             </div>
         </div>
     </div>
@@ -94,11 +121,45 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <ul class="nav nav-justified nav-pills">
-                    <li class=""><a href="#">Wheelchair accessible</a></li>
-                    <li class="active"><a href="#">Best Route</a></li>
-                    <li><a href="#">Less Waypoints</a></li>
+                <ul class="nav nav-justified nav-pills" style="border: 2px; border-color: gainsboro; margin-bottom: 10px;">
+                    <li id="landmarks"><a href="#" onclick="displayList('bestRouteList')">Best Route</a></li>
+                    <li id="wards"><a href="#" onclick="displayList('accessList')">Accessibility route</a></li>
                 </ul>
+
+                <div id="bestRouteList" class="city" >
+                    <ul class="list-group">
+                        <h2>Best Route</h2>
+                        <p>The route is calcluated to be the most straightforward and least crowded based on past data.</p>
+                        <%
+                        for (int i=0;i<bestRouteList.size();i++) {
+                            String name = (String) bestRouteList.get(i).getName();
+                            String desc =  (String) bestRouteList.get(i).getDesc();
+                        %>
+                        <li class="list-group-item">
+                        <h4><%=name%></h4>
+                        <p><%=desc%></p>
+                        </li>
+                        <%}%>
+                    </ul>
+                </div>
+
+                <div id="accessList" class="city" style="display:none" >
+                    <ul class="list-group">
+                        <h2>Accessibility Route</h2>
+                        <p>This route is designed to aid those with accessibilities to find their way with ease.</p>
+                        <%
+                            for (int i=0;i<accessRouteList.size();i++) {
+                                String name = (String) accessRouteList.get(i).getName();
+                                String desc =  (String) accessRouteList.get(i).getDesc();
+                        %>
+                        <li class="list-group-item">
+                                <h4><%=name%></h4>
+                                <p><%=desc%></p>
+                        </li>
+                        <%}%>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>

@@ -13,8 +13,10 @@ public class Waypoint extends Point{
     int count;
     int feedBackAmt;
     String cpString;
+    String desc;
+    boolean accL;
 
-    public Waypoint(String id, String name, int offX, int offY, String listValue, boolean access, double coeff, int count, int feedBackAmt, String cpString) {
+    public Waypoint(String id, String name, int offX, int offY, String listValue, boolean access, double coeff, int count, int feedBackAmt, String cpString, String desc, boolean accL) {
         super(id, offX, offY, access);
         this.name = name;
         this.listValue = listValue;
@@ -23,6 +25,8 @@ public class Waypoint extends Point{
         this.feedBackAmt = feedBackAmt;
         this.cpString = cpString;
         this.setConnectedPointList(this.cpString);
+        this.desc=desc;
+        this.accL=accL;
     }
 
     public String getName() {
@@ -63,6 +67,14 @@ public class Waypoint extends Point{
 
     public void setFeedBackAmt(int feedBackAmt) {
         this.feedBackAmt = feedBackAmt;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public void setConnectedPointList(String cpString)

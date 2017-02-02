@@ -61,10 +61,6 @@ public class RoutingController {
         ArrayList<String> bestRouteResult = rc.routeBest("A1-005", "A1-014");
 
 
-
-
-
-
         //Access routing test
         System.out.println("Routing for access route between 1 and 12");
         ArrayList<String> accessRouteResult = rc.routeAccess("A1-005", "A1-014");
