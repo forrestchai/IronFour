@@ -282,6 +282,10 @@ public class ImageRenderController {
         }
     }
 
+    public void nextStep(){
+
+    }
+
     public static void main(String[]args) throws SQLException
     {
         ImageRenderController irc = new ImageRenderController();

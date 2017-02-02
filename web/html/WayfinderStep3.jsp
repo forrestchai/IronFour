@@ -25,6 +25,14 @@
     <link href="..\css\qq.css" rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
 
+    <%
+        ArrayList<Waypoint> bestRouteList = new ArrayList<Waypoint>();
+        ArrayList<Waypoint> accessRouteList = new ArrayList<Waypoint>();
+
+        bestRouteList = (ArrayList<Waypoint>) session.getAttribute("bestRoute");
+        accessRouteList = (ArrayList<Waypoint>) session.getAttribute("accessRoute");
+    %>
+
     <script>
         function displayList(listName) {
             var i;
@@ -122,13 +130,16 @@
                     <ul class="list-group">
                         <h2>Best Route</h2>
                         <p>The route is calcluated to be the most straightforward and least crowded based on past data.</p>
-                        <%--<%--%>
-                            <%--for (int i=0;i<waLa.size();i++) {--%>
-                                <%--String name = (String) waLa.get(i).getName();--%>
-                                <%--String id = (String) waLa.get(i).getId();--%>
-                        <%--%>--%>
-                        <%--<li class="list-group-item"><a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>"><%=name%></a></li>--%>
-                        <%--<%}%>--%>
+                        <%
+                        for (int i=0;i<bestRouteList.size();i++) {
+                            String name = (String) bestRouteList.get(i).getName();
+                            String desc =  (String) bestRouteList.get(i).getDesc();
+                        %>
+                        <li class="list-group-item">
+                        <h4><%=name%></h4>
+                        <p><%=desc%></p>
+                        </li>
+                        <%}%>
                     </ul>
                 </div>
 
@@ -136,17 +147,16 @@
                     <ul class="list-group">
                         <h2>Accessibility Route</h2>
                         <p>This route is designed to aid those with accessibilities to find their way with ease.</p>
-                        <li class="list-group-item routeLists"><h4>Ward 6</h4><p>Adjoining Wards 5, 6, 7, 8</p></li>
-                        <li class="list-group-item routeLists">Ward 7</li>
-                        <li class="list-group-item routeLists">Ward 7</li>
-                        <li class="list-group-item routeLists">Ward 7</li>
-                        <%--<%--%>
-                        <%--for (int i=0;i<waLa.size();i++) {--%>
-                        <%--String name = (String) waLa.get(i).getName();--%>
-                        <%--String id = (String) waLa.get(i).getId();--%>
-                        <%--%>--%>
-                        <%--<li class="list-group-item"><a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>"><%=name%></a></li>--%>
-                        <%--<%}%>--%>
+                        <%
+                            for (int i=0;i<accessRouteList.size();i++) {
+                                String name = (String) accessRouteList.get(i).getName();
+                                String desc =  (String) accessRouteList.get(i).getDesc();
+                        %>
+                        <li class="list-group-item">
+                                <h4><%=name%></h4>
+                                <p><%=desc%></p>
+                        </li>
+                        <%}%>
                     </ul>
                 </div>
 

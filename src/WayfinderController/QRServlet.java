@@ -1,6 +1,8 @@
 package WayfinderController;
 
 import WayfinderDBController.WaypointDA;
+import WayfinderModel.Route;
+import WayfinderModel.Waypoint;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by User on 2/1/2017.
@@ -27,16 +30,31 @@ public class QRServlet extends HttpServlet {
         if(session.getAttribute("usage").equals("origin")){
             String name="";
             String id = request.getParameter("id");
-            System.out.println("Org id: "+ id);
+            String destId = (String) session.getAttribute("destId");
+
+            ArrayList<String> accessRouteString = new ArrayList<String>();
+            ArrayList<String> bestRouteString = new ArrayList<String>();
+            ArrayList<Waypoint> accessRoute = new ArrayList<Waypoint>();
+            ArrayList<Waypoint> bestRoute = new ArrayList<Waypoint>();
+
+            RoutingController rc = new RoutingController();
+
+            accessRouteString = rc.routeAccess(id, destId);
+            bestRouteString = rc.routeBest(id, destId);
+
+
 
             try
             {
+                accessRoute = WaypointDA.getWaypointList(accessRouteString);
+                bestRoute = WaypointDA.getWaypointList(bestRouteString);
                 name = WaypointDA.getWaypointById(id).getName();
             }catch(SQLException e){e.printStackTrace();}
 
             session.setAttribute("orgId", id);
-            System.out.println("Org Name: "+ name);
             session.setAttribute("orgName", name);
+            session.setAttribute("bestRoute", bestRoute);
+            session.setAttribute("accessRoute", accessRoute);
 
             System.out.println("Servlet Origin Scan executed.");
             response.sendRedirect("html/WayfinderStep3.jsp");

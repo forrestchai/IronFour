@@ -246,31 +246,12 @@
 
                 <div id="Paris" class="w3-container city" style="display:none">
                     <ul class="list-group myUL">
-                        <h2>Wards / Clinics</h2>
+                        <h2>Wards / Clinics / Consultation</h2>
                         <%
                             for (int i=0;i<waWa.size();i++) {
                                 String name = (String) waWa.get(i).getName();
                                 String id = (String) waWa.get(i).getId();
                                 String desc =  (String) waWa.get(i).getDesc();
-                        %>
-                        <li class="list-group-item">
-                            <a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>">
-                                <h3><%=name%></h3>
-                                <p><%=desc%></p>
-                            </a>
-                        </li>
-                        <%}%>
-                    </ul>
-                </div>
-
-                <div id="Tokyo" class="w3-container city" style="display:none">
-                    <ul class="list-group myUL">
-                        <h2>Departments</h2>
-                        <%
-                            for (int i=0;i<waDept.size();i++) {
-                                String name = (String) waDept.get(i).getName();
-                                String id = (String) waDept.get(i).getId();
-                                String desc =  (String) waDept.get(i).getDesc();
                         %>
                         <li class="list-group-item">
                             <a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>">
