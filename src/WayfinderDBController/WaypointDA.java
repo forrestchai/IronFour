@@ -140,6 +140,23 @@ public class WaypointDA {
         return pointList;
     }
 
+    public static ArrayList<Integer> getCoordinatesById(String waypointID) throws SQLException
+    {
+        ArrayList<Integer> intList = new ArrayList<Integer>();
+        ArrayList<Point> universalPoints = getUniversalPoints();
+        for(Point p: universalPoints)
+        {
+            if(p.getId().equalsIgnoreCase(waypointID))
+            {
+                intList.add(new Integer(p.getOffX()));
+                intList.add(new Integer(p.getOffY()));
+                break;
+            }
+        }
+        return intList;
+
+    }
+
     public static ArrayList<Point> getAccessPointList()throws SQLException
     {
         ArrayList<Point> accessPointList = new ArrayList<Point>();

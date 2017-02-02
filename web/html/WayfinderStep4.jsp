@@ -100,7 +100,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <h2>Waypoint Reached:</h2>
+                <h2>Current Waypoint:</h2>
                 <h3>Cardiology Department</h3>
                 <br>
                 <a class="btn btn-primary">Leave Feedback</a>

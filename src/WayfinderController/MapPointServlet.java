@@ -1,5 +1,7 @@
 package WayfinderController;
 
+import WayfinderDBController.WaypointDA;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,11 +25,11 @@ public class MapPointServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session=request.getSession();
+        ArrayList<Integer> x = new ArrayList<Integer>();
+        ArrayList<String> waypointIDList = new ArrayList<String>();
 
         if(session.getAttribute("irc")==null)
         {
-
-            ArrayList<String> waypointIDList = new ArrayList<String>();
             String selR = request.getParameter("selectedRoute");
 
             if(selR.equalsIgnoreCase("accessRoute"))
@@ -43,50 +45,37 @@ public class MapPointServlet extends HttpServlet {
 
             ImageRenderController irc = new ImageRenderController();
 
+
             try
             {
+                x = WaypointDA.getCoordinatesById(waypointIDList.get(0));
                 irc.spawnWaypoints(waypointIDList);
                 irc.spawnArrows(waypointIDList);
-                irc.spawnCurrentIndicator(200, 810);
+                irc.spawnCurrentIndicator(x.get(0), x.get(1));
             }catch (SQLException e){e.printStackTrace();}
 
             session.setAttribute("irc", irc);
+            session.setAttribute("currentPoint", 1);
             System.out.println("Servlet Origin Scan executed.");
             response.sendRedirect("html/WayfinderStep4.jsp");
         }
         else
         {
+            ImageRenderController irc = (ImageRenderController) session.getAttribute("irc");
+            waypointIDList = (ArrayList<String>) session.getAttribute("selectedRoute");
+            int i = Integer.parseInt((String) session.getAttribute("currentPoint"));
 
-        }
+            try
+            {
+                x = WaypointDA.getCoordinatesById(waypointIDList.get(i));
+                irc.spawnWaypoints(waypointIDList);
+                irc.spawnArrows(waypointIDList);
+                irc.spawnCurrentIndicator(x.get(0), x.get(1));
+            }catch (SQLException e){e.printStackTrace();}
 
-
-        ImageRenderController irc = new ImageRenderController();
-        RoutingController rc = new RoutingController();
-
-        ArrayList<String> waypointIDList = rc.routeBest("A1-005", "A1-014");
-        //irc.spawnWaypoints(waypointIDList);
-
-        Scanner sc = new Scanner(System.in);
-        //manual spawn current indicator on position 1 ( first position, which is point 5 in the routing result)
-        irc.spawnCurrentIndicator(885, 810);
-        System.out.print("Position 1 spawned, Position 2? (0/1): ");
-        if(Integer.parseInt(sc.next()) == 1)
-        {
-            //manual spawn current image on position 2 ( second position, whic is point 4 in the routing result)
-            irc.spawnCurrentIndicator(885, 550);
-        }
-        sc.nextLine();
-        System.out.print("Position 2 spawned, Position 3? (0/1): ");
-        if(Integer.parseInt(sc.next()) == 1)
-        {
-            irc.spawnCurrentIndicator(510, 810);
-        }
-        sc.nextLine();
-
-        System.out.print("Spawn arrows? (0/1): ");
-        if(Integer.parseInt(sc.next()) == 1)
-        {
-            //irc.spawnArrows(waypointIDList);
+            session.setAttribute("currentPoint", i+1);
+            System.out.println("Servlet Origin Scan executed.");
+            response.sendRedirect("html/WayfinderStep4.jsp");
         }
     }
 }
