@@ -46,15 +46,18 @@
         }
 
         function displayFilter() {
-            var input, filter, ul, li, a, i;
+            var input, filter, ul, li, a, i, b;
             input = document.getElementById('myInput');
             filter = input.value.toUpperCase();
             ul = document.getElementById("ulAll");
             li = ul.getElementsByTagName('li');
 
             for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
+                a = li[i].getElementsByTagName("h3")[0];
+                b = li[i].getElementsByTagName("p")[0];
                 if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                }else if (b.innerHTML.toUpperCase().indexOf(filter) > -1) {
                     li[i].style.display = "";
                 } else {
                     li[i].style.display = "none";
@@ -85,7 +88,7 @@
         }
 
         #ulAll li{
-            border: 1px solid #ddd; /* Add a border to all links */
+            border: 2px solid #ddd; /* Add a border to all links */
             padding:0;
         }
 
@@ -138,7 +141,7 @@
             waLa = WaypointDA.getLandmarkWaypoints();
             waWa = WaypointDA.getWardWaypoints();
             waDept = WaypointDA.getDeptWaypoint();
-            waAll = WaypointDA.getAllWaypoint();
+            waAll = WaypointDA.getAllWaypointNoAccess();
         }catch (SQLException e){e.printStackTrace();}
 
         %>
@@ -208,10 +211,16 @@
                         <h2>All locations</h2>
                         <%
                         for (int i=0;i<waAll.size();i++) {
-                        String name = (String) waAll.get(i).getName();
-                        String id = (String) waAll.get(i).getId();
+                            String name = (String) waAll.get(i).getName();
+                            String id = (String) waAll.get(i).getId();
+                            String desc =  (String) waAll.get(i).getDesc();
                         %>
-                        <li class="list-group-item"><a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>"><%=name%></a></li>
+                        <li class="list-group-item">
+                            <a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>">
+                                <h3><%=name%></h3>
+                                <p><%=desc%></p>
+                            </a>
+                        </li>
                         <%}%>
                     </ul>
                 </div>
@@ -223,8 +232,14 @@
                             for (int i=0;i<waLa.size();i++) {
                                 String name = (String) waLa.get(i).getName();
                                 String id = (String) waLa.get(i).getId();
+                                String desc =  (String) waLa.get(i).getDesc();
                         %>
-                        <li class="list-group-item"><a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>"><%=name%></a></li>
+                        <li class="list-group-item">
+                            <a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>">
+                                <h3><%=name%></h3>
+                                <p><%=desc%></p>
+                            </a>
+                        </li>
                         <%}%>
                     </ul>
                 </div>
@@ -236,8 +251,14 @@
                             for (int i=0;i<waWa.size();i++) {
                                 String name = (String) waWa.get(i).getName();
                                 String id = (String) waWa.get(i).getId();
+                                String desc =  (String) waWa.get(i).getDesc();
                         %>
-                        <li class="list-group-item"><a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>"><%=name%></a></li>
+                        <li class="list-group-item">
+                            <a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>">
+                                <h3><%=name%></h3>
+                                <p><%=desc%></p>
+                            </a>
+                        </li>
                         <%}%>
                     </ul>
                 </div>
@@ -249,8 +270,14 @@
                             for (int i=0;i<waDept.size();i++) {
                                 String name = (String) waDept.get(i).getName();
                                 String id = (String) waDept.get(i).getId();
+                                String desc =  (String) waDept.get(i).getDesc();
                         %>
-                        <li class="list-group-item"><a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>"><%=name%></a></li>
+                        <li class="list-group-item">
+                            <a href="http://localhost:8080/selectDestination?name=<%=name%>&id=<%=id%>">
+                                <h3><%=name%></h3>
+                                <p><%=desc%></p>
+                            </a>
+                        </li>
                         <%}%>
                     </ul>
                 </div>

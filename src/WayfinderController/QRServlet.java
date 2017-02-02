@@ -24,17 +24,24 @@ public class QRServlet extends HttpServlet {
 
         HttpSession session=request.getSession();
 
-        if(request.getParameter("usage").equalsIgnoreCase("origin")){
-            session.setAttribute("orgId", request.getParameter("id"));
-            String name;
-            try{
-                name = WaypointDA.getWaypointById(request.getParameter("id")).get(0).getName();
+        if(session.getAttribute("usage").equals("origin")){
+            String name="";
+            String id = request.getParameter("id");
+            System.out.println("Org id: "+ id);
+
+            try
+            {
+                name = WaypointDA.getWaypointById(id).getName();
             }catch(SQLException e){e.printStackTrace();}
+
+            session.setAttribute("orgId", id);
+            System.out.println("Org Name: "+ name);
+            session.setAttribute("orgName", name);
 
             System.out.println("Servlet Origin Scan executed.");
             response.sendRedirect("html/WayfinderStep3.jsp");
         }
-        else if(request.getParameter("usage").equalsIgnoreCase("map")){
+        else if(session.getAttribute("usage").equals("map")){
             session.setAttribute("currId", request.getParameter("id"));
 
             System.out.println("Servlet Progress Scan executed: id = " +request.getParameter("id"));

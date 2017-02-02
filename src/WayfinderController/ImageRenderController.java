@@ -15,13 +15,13 @@ import java.util.Scanner;
  * Created by admin on 2/1/2017.
  */
 public class ImageRenderController {
-    private final static String BACKIMAGESRC = "originalMap.png";
-    private final static String SPAWNABLESRC1 = "waypoint.png";
-    private final static String SPAWNABLESRC2 = "north.png";
-    private final static String SPAWNABLESRC3 = "south.png";
-    private final static String SPAWNABLESRC4 = "east.png";
-    private final static String SPAWNABLESRC5 = "west.png";
-    private final static String SPAWNABLESRC6 = "currentIndicator.png";
+    private final static String BACKIMAGESRC = "web/img/originalMap.png";
+    private final static String SPAWNABLESRC1 = "web/img/waypoint.png";
+    private final static String SPAWNABLESRC2 = "web/img/north.png";
+    private final static String SPAWNABLESRC3 = "web/img/south.png";
+    private final static String SPAWNABLESRC4 = "web/img/east.png";
+    private final static String SPAWNABLESRC5 = "web/img/west.png";
+    private final static String SPAWNABLESRC6 = "web/img/currentIndicator.png";
     private BufferedImage backImage;
     private BufferedImage waypoint;
     private BufferedImage north;
@@ -206,8 +206,7 @@ public class ImageRenderController {
         updateGeneratedImage();
     }
 
-    public void spawnWaypoints(ArrayList<String> idList) throws SQLException
-    {
+    public void spawnWaypoints(ArrayList<String> idList) throws SQLException{
         ArrayList<Integer> offXList = new ArrayList<Integer>();
         ArrayList<Integer> offYList = new ArrayList<Integer>();
         ArrayList<Point> points = new ArrayList<Point>();
@@ -229,8 +228,7 @@ public class ImageRenderController {
 
     }
     
-    public char getDirection(Point one, Point two)
-    {
+    public char getDirection(Point one, Point two){
         char direction = 0;
         if((two.getOffX() - one.getOffX() == 0) && (two.getOffY() - one.getOffY() > 0))
         {
@@ -248,8 +246,7 @@ public class ImageRenderController {
         return direction;
     }
 
-    public void spawnArrows(ArrayList<String> idList)throws SQLException
-    {
+    public void spawnArrows(ArrayList<String> idList)throws SQLException{
         ArrayList<Point> points = new ArrayList<Point>();
 
         for(String id: idList)
