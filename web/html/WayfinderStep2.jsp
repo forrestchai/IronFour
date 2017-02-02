@@ -16,22 +16,9 @@
     <link href="..\css\qq.css" rel="stylesheet" type="text/css">
     <link href="..\css\style.css" rel="stylesheet" type="text/css">
     <title>Title</title>
-    <script type="text/javascript">
-        function openAlpha(x, y) {
-            document.getElementById(x).style.display = 'block';
-            document.getElementById(y).style.display = 'none';
-        }
-        function openBravo(x, y){
-            document.getElementById(x).style.display = 'none';
-            document.getElementById(y).style.display = 'block';
-        }
-        $(document).ready(function(){
-            openAlpha('alphaList', 'bravoList');
-        });
-
-
-
-    </script>
+    <%
+        session.getAttribute("rs");
+    %>
 </head>
 <body>
 
@@ -67,14 +54,13 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-center">
                 <h1>Step 2: Finding yourself</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <p>Tell us your location by choosing from the list, or scanning a nearby
-                    NFC tag!
+            <div class="col-md-12 text-center">
+                <p>Tell us your location by scanning a nearby QR tag!
                     <br>
                 </p>
             </div>
@@ -85,47 +71,17 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-center">Search the WIHC
-                    <br>
-                </h1>
+                <h1 class="text-center">Find your nearest QR code Waypoint!</h1>
             </div>
         </div>
+        <br>
         <div class="row">
-            <div class="col-md-offset-3 col-md-6">
-                <div class="btn-group">
-                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Areas<span class="fa fa-caret-down"></span></a>
-                    <ul class="dropdown-menu" role="menu" onchange="actionChanged()">
-                        <li>
-                            <a href="#" onClick="openAlpha('alphaList', 'bravoList')">Area A</a>
-                        </li>
-                        <li>
-                            <a href="#" onClick="openBravo('alphaList', 'bravoList')">Area B</a>
-                        </li>
-                    </ul>
-                </div>
-                <ul class="list-group" id="alphaList" style="display:none">
-                    <li class="list-group-item btnList">Pharmacy</li>
-                    <li class="list-group-item btnList">Corridor A2</li>
-                    <li class="list-group-item btnList">MRT station</li>
-                    <li class="list-group-item btnList">Corridor A4</li>
-                    <li class="list-group-item btnList">Atrium North Wall</li>
-                </ul>
-                <ul class="list-group" id="bravoList" style="display:none">
-                    <li class="list-group-item btnList">MacDonalds</li>
-                    <li class="list-group-item btnList">Atrium South Wall</li>
-                    <li class="list-group-item btnList">Pharmacy Back entrance</li>
-                    <li class="list-group-item btnList">Cardiology Main Counter</li>
-                    <li class="list-group-item btnList"><a href="WayfinderStep3.jsp">Information Center</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <a class="btn btn-primary">Scan NFC tag<br></a>
+            <div class="col-md-12 text-center">
+                <a class="btn btn-primary" href="http://localhost:8080/orgscan">Scan QR Code<br></a>
             </div>
         </div>
     </div>
 </div>
-
 </body>
+
 </html>

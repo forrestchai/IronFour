@@ -109,6 +109,21 @@ public class WaypointDA {
         return waypointList;
     }
 
+    public static ArrayList<Waypoint> getWaypointById(String id) throws SQLException{
+        ArrayList<Waypoint> waypointList = new ArrayList<Waypoint>();
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("SELECT * FROM waypoint WHERE id="+id+";");
+        myRs = myStmt.executeQuery();
+        while(myRs.next())
+        {
+            waypointList.add(convertToWaypoint(myRs));
+        }
+        return waypointList;
+    }
+
     public static ArrayList<Point> getPointList() throws SQLException
     {
         ArrayList<Point> pointList = new ArrayList<Point>();

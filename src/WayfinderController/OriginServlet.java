@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Created by User on 2/1/2017.
  */
-@WebServlet(name = "OriginServlet", urlPatterns = "/Org-scan")
+@WebServlet(name = "OriginServlet", urlPatterns = "/orgscan")
 public class OriginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -20,6 +20,9 @@ public class OriginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session=request.getSession();
-        session.setAttribute("orgId", request.getParameter("id"));
+        session.setAttribute("usage", "origin");
+        System.out.println("Servlet forwarding to QR Origin. usage id="+session.getAttribute("usage"));
+        response.sendRedirect("html/WayfinderQR.jsp");
+
     }
 }
