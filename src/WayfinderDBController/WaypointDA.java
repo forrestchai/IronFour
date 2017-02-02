@@ -163,7 +163,7 @@ public class WaypointDA {
             {
                 p.getConnectedPointList().clear();
                 p.getConnectedPointList().add("A1-021");
-            }else if(p.getId().equalsIgnoreCase("B1-007"))
+            }else if(p.getId().equalsIgnoreCase("A1-007"))
             {
                 p.getConnectedPointList().clear();
                 p.getConnectedPointList().add("A1-020");
@@ -172,7 +172,7 @@ public class WaypointDA {
             {
                 p.getConnectedPointList().clear();
                 p.getConnectedPointList().add("A1-021");
-            }else if(p.getId().equals("B1-010"))
+            }else if(p.getId().equals("A1-010"))
             {
                 p.getConnectedPointList().clear();
                 p.getConnectedPointList().add("A1-020");
