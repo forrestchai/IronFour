@@ -86,7 +86,7 @@
 
         #ulAll li{
             border: 1px solid #ddd; /* Add a border to all links */
-            padding:0;
+            padding: 0px 1px;
         }
 
         #ulAll li a {
