@@ -301,7 +301,7 @@ public class ImageRenderController {
         if(Integer.parseInt(sc.next()) == 1)
         {
             //manual spawn current image on position 2 ( second position, whic is point 4 in the routing result)
-            irc.spawnCurrentIndicator(695, 810);
+            irc.spawnCurrentIndicator(885, 550);
         }
         sc.nextLine();
         System.out.print("Position 2 spawned, Position 3? (0/1): ");

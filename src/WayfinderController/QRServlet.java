@@ -43,7 +43,6 @@ public class QRServlet extends HttpServlet {
             bestRouteString = rc.routeBest(id, destId);
 
 
-
             try
             {
                 accessRoute = WaypointDA.getWaypointList(accessRouteString);
@@ -55,6 +54,8 @@ public class QRServlet extends HttpServlet {
             session.setAttribute("orgName", name);
             session.setAttribute("bestRoute", bestRoute);
             session.setAttribute("accessRoute", accessRoute);
+            session.setAttribute("accessRouteString", accessRouteString);
+            session.setAttribute("bestRouteString", bestRouteString);
 
             System.out.println("Servlet Origin Scan executed.");
             response.sendRedirect("html/WayfinderStep3.jsp");

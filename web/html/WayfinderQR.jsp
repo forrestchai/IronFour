@@ -39,7 +39,7 @@
 
     </style>
 
-    <script src="../js/scripts.js"></script>
+    <script src="../js/qrVideo.js"></script>
     <script type="text/javascript" src="../js/QRReader/grid.js"></script>
     <script type="text/javascript" src="../js/QRReader/version.js"></script>
     <script type="text/javascript" src="../js/QRReader/detector.js"></script>
@@ -229,10 +229,10 @@
         // "image/webp" works in Chrome.
         // Other browsers will fall back to image/png.
         //document.querySelector('img').src = canvas.toDataURL('image/webp');
-        qrcode.decode();
+        //qrcode.decode();
         alert("Proceeding to Step 3");
         console.log("123"+qrcode.result);
-        window.location.href = "http://localhost:8080/qrscan?id="+qrcode.result;
+        window.location.href = "http://localhost:8080/qrscan?id=A1-001";//+qrcode.result;
     }
 
 

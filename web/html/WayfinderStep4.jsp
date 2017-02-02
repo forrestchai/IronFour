@@ -23,6 +23,17 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="..\css\qq.css" rel="stylesheet" type="text/css">
 
+    <style>
+        #map-canvas{
+            margin: auto;
+            width: 500px;
+            height: 500px;
+            border: 2px;
+            border-color: #0f0f0f;
+        }
+    </style>
+
+
 </head>
 <body>
 <div class="navbar navbar-default navbar-static-top">
@@ -73,7 +84,9 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12"></div>
+            <div class="col-xs-12">
+                <canvas id="map-canvas" width="500" height="350"></canvas>
+            </div>
         </div>
         <div class="row">
             <div class="col-xs-12 text-center">

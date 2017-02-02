@@ -34,10 +34,6 @@
             document.getElementById('listAll').style.display = "none";
         }
 
-        $(document).ready(function() {
-            alert("hello world");
-        });
-
         function inputFocus() {
             document.getElementById('listAll').style.display = "";
             document.getElementById('London').style.display = "none";
