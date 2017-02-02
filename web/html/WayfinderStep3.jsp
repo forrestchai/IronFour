@@ -114,6 +114,13 @@
 <div class="section">
     <div class="container">
         <div class="row">
+            <div class="col-xs-12 text-center"><a class="btn btn-primary" href="">Confirm Route</a></div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="container">
+        <div class="row">
             <div class="col-md-12">
                 <h3>Route Preference</h3>
                 <hr>
@@ -164,13 +171,7 @@
         </div>
     </div>
 </div>
-<div class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 text-center"><a class="btn btn-primary">Confirm</a></div>
-        </div>
-    </div>
-</div>
+
 
 
 

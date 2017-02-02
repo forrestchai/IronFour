@@ -85,7 +85,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <canvas id="map-canvas" width="500" height="350"></canvas>
+                <canvas id="map-canvas"></canvas>
             </div>
         </div>
         <div class="row">

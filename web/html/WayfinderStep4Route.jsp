@@ -8,7 +8,44 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="..\css\qq.css" rel="stylesheet" type="text/css">
+
+    <style>
+        #map-canvas
+        {
+            margin: 0px auto;
+            width: 500px;
+            height: 500px;
+            border: 2px;
+            border-color: #0f0f0f;
+        }
+        @media (min-width:350px)
+        {
+            #map-canvas
+            {
+                margin: auto;
+                width: 350px;
+                height: 350px;
+                border: 2px;
+            }
+        }
+        @media (min-width:1000px)
+        {
+            #map-canvas
+            {
+                margin: 0px auto;
+                width: 500px;
+                height: 500px;
+                border: 2px;
+            }
+        }
+    </style>
+
 </head>
 <body>
 
@@ -59,7 +96,10 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12"></div>
+            <div class="col-xs-12">
+                <img id="map-canvas" src="..\..\generatedMap.png">
+                <%--<canvas id="map-canvas"></canvas>--%>
+            </div>
         </div>
         <div class="row">
             <div class="col-xs-12 text-center">

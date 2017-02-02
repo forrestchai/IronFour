@@ -56,7 +56,7 @@ public class MapPointServlet extends HttpServlet {
 
             session.setAttribute("irc", irc);
             session.setAttribute("currentPoint", 1);
-            System.out.println("Servlet Origin Scan executed.");
+            System.out.println("Servlet  executed.");
             response.sendRedirect("html/WayfinderStep4.jsp");
         }
         else
