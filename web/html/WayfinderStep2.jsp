@@ -19,6 +19,14 @@
     <%
         session.setAttribute("usage", "origin");
     %>
+
+    <style>
+        .topPart{
+            margin: 0 auto;
+            padding-top:0;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -51,7 +59,7 @@
         </div>
     </div>
 </div>
-<div class="section">
+<div class="section topPart">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
@@ -67,7 +75,7 @@
         </div>
     </div>
 </div>
-<div class="section">
+<div class="section topPart">
     <div class="container">
         <div class="row">
             <div class="col-md-12">

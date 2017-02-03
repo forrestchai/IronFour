@@ -11,9 +11,9 @@
     <link href="..\css\style.css" rel="stylesheet" type="text/css">
     <style>
         body {
-            background: #F7F7F7;
-            margin: 0;
-            padding: 0;
+            /*background: #F7F7F7;*/
+            /*margin: 0;*/
+            /*padding: 0;*/
         }
 
         #video-container {
@@ -78,12 +78,8 @@
 <div class="section" style="margin-top: 0;">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                <div id="video-container">
-
-                    <video id="camera-stream" width="400" height="300" autoplay></video>
-
-                </div>
+            <div class="col-xs-12 text-center">
+                <video id="camera-stream" width="400" height="300" autoplay></video>
             </div>
         </div>
     </div>
@@ -224,10 +220,10 @@
         var video = document.getElementById("camera-stream");
         var context = canvas.getContext("2d");
         context.drawImage(video, 0, 0);
-        //qrcode.decode();
+        qrcode.decode();
         alert("Proceeding to Step 3");
         console.log("123"+qrcode.result);
-        window.location.href = "http://localhost:8080/qrscan?id=A1-001" //+ qrcode.result;
+        window.location.href = "http://localhost:8080/qrscan?id="+qrcode.result;
     }
 
 

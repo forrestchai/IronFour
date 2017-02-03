@@ -73,16 +73,13 @@ public class QRServlet extends HttpServlet {
             if(selectedRoute.size() == i+1){
                 response.sendRedirect("html/WayfinderEnd.jsp");
                 System.out.println("Map point ends");
-            }else if(!selectedRoute.get(i).equalsIgnoreCase(currId)){
+            }else if(!selectedRoute.get(i-1).equalsIgnoreCase(currId)){
                 response.sendRedirect("http://localhost:8080/mapServlet?error=false");
                 System.out.println("QRServlet sent positive");
             }else{
                 response.sendRedirect("http://localhost:8080/mapServlet?error=true");
                 System.out.println("QRServlet sent error");
             }
-        }
-        else{
-            response.sendRedirect("http://localhost:8080/selectDestination?name=Ward 3&id=A1-003");
         }
 
     }

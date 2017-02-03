@@ -35,7 +35,7 @@ public class DestinationServlet extends HttpServlet {
         session.setAttribute("destName", request.getParameter("name"));
         session.setAttribute("destId", request.getParameter("id"));
 
-        if(yesno==null)
+        if(yesno==null || yesno.equalsIgnoreCase("yes"))
         {
             System.out.println("Destination Servlet executed.");
             response.sendRedirect("html/WayfinderStep2.jsp");
@@ -43,7 +43,11 @@ public class DestinationServlet extends HttpServlet {
         else
         {
             response.sendRedirect("http://localhost:8080/qrscan?id="+session.getAttribute("changeOrigin"));
+            session.setAttribute("usage", "origin");
             session.removeAttribute("irc");
+            session.removeAttribute("selectedRoute");
+            session.removeAttribute("nextPoint");
+            session.removeAttribute("currId");
         }
 
     }

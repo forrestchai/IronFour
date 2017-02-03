@@ -25,6 +25,11 @@
     <link href="..\css\qq.css" rel="stylesheet" type="text/css">
 
     <style>
+        .topPart{
+            margin: 0 auto;
+            padding-top:0;
+        }
+
         #map-canvas
         {
             margin-left: auto;
@@ -62,11 +67,12 @@
     </style>
 
     <%
-        int x = (Integer) session.getAttribute("nextPoint");
+        int x = (Integer) session.getAttribute("nextPoint")-1;
         ArrayList <String> waypointIdList = (ArrayList<String>) session.getAttribute("selectedRoute");
         String name = WaypointDA.getWaypoint(waypointIdList.get(x)).getName();
         String id = WaypointDA.getWaypoint(waypointIdList.get(x)).getId();
 
+        session.setAttribute("id", id);
         String redirectAddr = "http://localhost:8080/changeServlet?originId="+id;
         session.setAttribute("new", "no");
     %>
@@ -102,7 +108,7 @@
         </div>
     </div>
 </div>
-<div class="section text-center">
+<div class="section text-center topPart">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -126,17 +132,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 text-center">
-                <br>
-                <a class="btn btn-primary" href="WayfinderStep4Route.jsp">Continue</a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="section" style="padding-top: 0;">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-6 text-left">
                 <h2>Current Waypoint:</h2>
                 <h3><%=name%></h3>
                 <br>
@@ -148,6 +144,17 @@
                 <br>
                 <a class="btn btn-primary" href="WayfinderLanding.jsp">End Wayfinding</a>
             </div>
+            <div class="col-xs-6 text-right">
+                <br>
+                <a class="btn btn-primary" href="WayfinderStep4Route.jsp">Continue</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section" style="padding-top: 0;">
+    <div class="container">
+        <div class="row">
+
         </div>
     </div>
 </div>

@@ -60,6 +60,10 @@
     </script>
 
     <style>
+        .topPart{
+            margin: 0 auto;
+            padding-top:0;
+        }
         .routeLists{
             width: 95%;
             border-color: gainsboro;
@@ -96,7 +100,7 @@
         </div>
     </div>
 </div>
-<div class="section">
+<div class="section topPart">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -110,7 +114,7 @@
         </div>
     </div>
 </div>
-<div class="section">
+<div class="section topPart">
     <div class="container">
         <div class="row">
             <div class="col-sm-4">

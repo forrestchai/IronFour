@@ -19,6 +19,10 @@
 
 
     <style>
+        .topPart{
+            margin: 0 auto;
+            padding-top:0;
+        }
         #map-canvas
         {
             margin-left: auto;
@@ -96,7 +100,7 @@
     </div>
 </div>
 
-<div class="section text-center">
+<div class="section text-center topPart">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -110,11 +114,11 @@
         </div>
     </div>
 </div>
-<div class="section">
+<div class="section topPart">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <img id="map-canvas" src="../img/generatedMap.png">
+                <img id="map-canvas" src="\img\generatedMap.png">
                 <%--<canvas id="map-canvas"></canvas>--%>
             </div>
         </div>

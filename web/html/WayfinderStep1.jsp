@@ -67,6 +67,11 @@
 
     <style>
 
+        .topPart{
+            margin: 0 auto;
+            padding-top:0;
+        }
+
         #myInput {
             background-position: 10px 12px; /* Position the search icon */
             background-repeat: no-repeat; /* Do not repeat the icon image */
@@ -182,7 +187,7 @@
         </div>
     </div>
 </div>
-<div class="section">
+<div class="section topPart">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -196,7 +201,7 @@
         </div>
     </div>
 </div>
-<div class="section">
+<div class="section topPart">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">

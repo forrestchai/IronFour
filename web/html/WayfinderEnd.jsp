@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="WayfinderDBController.WaypointDA" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 1/29/2017
@@ -15,6 +16,56 @@
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="..\css\qq.css" rel="stylesheet" type="text/css">
+
+    <style>
+
+        .topPart{
+            margin: 0 auto;
+            padding-top:0;
+        }
+
+        #map-canvas
+        {
+            margin-left: auto;
+            margin-right: auto;
+            width: 500px;
+            height: 350px;
+            border: 2px;
+            border-color: #0f0f0f;
+            display: block;
+        }
+        @media (min-width:350px)
+        {
+            #map-canvas
+            {
+                margin-left: auto;
+                margin-right: auto;
+                width: 350px;
+                height: 210px;
+                border: 2px;
+                display: block;
+            }
+        }
+        @media (min-width:1000px)
+        {
+            #map-canvas
+            {
+                margin-left: auto;
+                margin-right: auto;
+                width: 500px;
+                height: 300px;
+                border: 2px;
+                display: block;
+            }
+        }
+    </style>
+
+    <%
+        ArrayList<String> selectedRoute = (ArrayList<String>) session.getAttribute("selectedRoute");
+        String name = WaypointDA.getWaypointById(selectedRoute.get(selectedRoute.size()-1)).getName();
+        String id = selectedRoute.get(selectedRoute.size()-1);
+    %>
+
 </head>
 <body>
 <div class="navbar navbar-default navbar-static-top">
@@ -47,36 +98,12 @@
     </div>
 </div>
 
-<div class="section">
+
+<div class="section topPart">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-center">Feedback</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <p class="text-center">Give us some feedback on the waypoint's issues that you have experienced.
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                    <br>
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Location:</h2>
-                <h3>Cardiology Department</h3>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center">The End
-                    <br>
-                </h1>
+                <h1 class="text-center">The End</h1>
             </div>
         </div>
         <div class="row">
@@ -88,14 +115,23 @@
         </div>
     </div>
 </div>
-<div class="section">
+<div class="topPart section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <img id="map-canvas" src="/img/<%=id%>.jpg">
+                <h2>Location:</h2>
+                <h3><%=name%></h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section topPart">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 text-center">
                 <a class="btn btn-primary">Back to main page</a>
-                <h3>Or</h3>
-                <br>
-                <a class="btn btn-primary">Feedback</a>
+                <a class="btn btn-primary" style="margin-left: 15px;">Give us Feedback</a>
             </div>
         </div>
     </div>
