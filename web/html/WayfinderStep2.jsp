@@ -17,7 +17,7 @@
     <link href="..\css\style.css" rel="stylesheet" type="text/css">
     <title>Title</title>
     <%
-        session.getAttribute("rs");
+        session.setAttribute("usage", "origin");
     %>
 </head>
 <body>

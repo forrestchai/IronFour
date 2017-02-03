@@ -5,29 +5,9 @@
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
 
-//    RouteDA rda = new RouteDA();
-//    ArrayList<String> routeIDList = RouteDA.getDummyRoute1();
-//    ArrayList<Path> pathList = rda.getRouteList(routeIDList);
-//    ArrayList<String> waypointIDList = WaypointDA.getDummyWaypoint1();
-//    ArrayList<Waypoint> waypointList = WaypointDA.getWaypointList(waypointIDList);
-//
-//    session.setAttribute("pathList", pathList);
-//    session.setAttribute("waypointList", waypointList);
-//
-//    session.setAttribute("startPoint", waypointList.get(0));
-//    session.setAttribute("endPoint", waypointList.get(waypointList.size()-1));
-//    ArrayList<Path> allRouteList = RouteDA.getAllRoute();
-    ArrayList<Waypoint> allWaypointList = WaypointDA.getAllWaypoint();
-//
-//    session.setAttribute("allRouteList", allRouteList);
-    session.setAttribute("allWaypointList", allWaypointList);
-
-    session.setAttribute("new", "yes");
-
-%>
-<html><head>
+<html>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -35,7 +15,11 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="..\css\qq.css" rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
-</head><body>
+
+    <%session.setAttribute("new", "yes"); System.out.println("initial: "+session.getAttribute("new"));%>
+
+</head>
+<body>
 <div class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">

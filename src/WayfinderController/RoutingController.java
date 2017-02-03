@@ -58,12 +58,12 @@ public class RoutingController {
         //Best routing test
         System.out.println("Routing for best between 1 and 12: ");
         RoutingController rc = new RoutingController();
-        ArrayList<String> bestRouteResult = rc.routeBest("A1-005", "A1-014");
+        ArrayList<String> bestRouteResult = rc.routeBest("A1-001", "A1-011");
 
 
         //Access routing test
         System.out.println("Routing for access route between 1 and 12");
-        ArrayList<String> accessRouteResult = rc.routeAccess("A1-005", "A1-014");
+        ArrayList<String> accessRouteResult = rc.routeAccess("A1-004", "A1-011");
         System.out.println("");
         System.out.println("");
         System.out.print("End Test Best Route: ");

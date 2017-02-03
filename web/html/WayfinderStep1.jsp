@@ -135,7 +135,6 @@
         ArrayList<Waypoint> waAll = new ArrayList<Waypoint>();
 
 
-
         try{
             waLa = WaypointDA.getLandmarkWaypoints();
             waWa = WaypointDA.getWardWaypoints();
@@ -147,7 +146,6 @@
                 return one.getName().compareTo(other.getName());
             }
         });
-
     %>
 
 </head>

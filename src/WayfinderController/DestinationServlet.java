@@ -29,11 +29,13 @@ public class DestinationServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        HttpSession session=request.getSession();
+        HttpSession session=request.getSession(true);
+        String yesno = (String) session.getAttribute("new");
+        System.out.println("new: "+ yesno);
         session.setAttribute("destName", request.getParameter("name"));
         session.setAttribute("destId", request.getParameter("id"));
 
-        if(session.getAttribute("new").equals("yes"))
+        if(yesno==null)
         {
             System.out.println("Destination Servlet executed.");
             response.sendRedirect("html/WayfinderStep2.jsp");

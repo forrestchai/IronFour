@@ -292,24 +292,26 @@ public class ImageRenderController {
         ImageRenderController irc = new ImageRenderController();
         RoutingController rc = new RoutingController();
 
-        ArrayList<String> waypointIDList = rc.routeBest("A1-005", "A1-014");
+        ArrayList<String> waypointIDList = rc.routeBest("A1-005", "A1-012");
         System.out.println(waypointIDList.get(0));
         irc.spawnWaypoints(waypointIDList);
 
         Scanner sc = new Scanner(System.in);
         //manual spawn current indicator on position 1 ( first position, which is point 5 in the routing result)
         irc.spawnCurrentIndicator(885, 810);
+        ArrayList<Integer> intList1 = WaypointDA.getCoordinatesById(waypointIDList.get(0));
         System.out.print("Position 1 spawned, Position 2? (0/1): ");
         if(Integer.parseInt(sc.next()) == 1)
         {
             //manual spawn current image on position 2 ( second position, whic is point 4 in the routing result)
-            irc.spawnCurrentIndicator(885, 550);
+            irc.spawnCurrentIndicator(intList1.get(0), intList1.get(1));
         }
         sc.nextLine();
         System.out.print("Position 2 spawned, Position 3? (0/1): ");
+        ArrayList<Integer> intList2 = WaypointDA.getCoordinatesById(waypointIDList.get(1));
         if(Integer.parseInt(sc.next()) == 1)
         {
-            irc.spawnCurrentIndicator(510, 810);
+            irc.spawnCurrentIndicator(intList2.get(0), intList2.get(1));
         }
         sc.nextLine();
 

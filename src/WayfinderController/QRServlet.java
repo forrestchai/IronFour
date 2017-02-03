@@ -25,9 +25,10 @@ public class QRServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        HttpSession session=request.getSession();
+        HttpSession session=request.getSession(true);
+        String usage = (String) session.getAttribute("usage");
 
-        if(session.getAttribute("usage").equals("origin")){
+        if((usage!=null && usage.equals("origin"))){
             String name="";
             String id = request.getParameter("id");
             String destId = (String) session.getAttribute("destId");
@@ -59,7 +60,7 @@ public class QRServlet extends HttpServlet {
             System.out.println("Servlet Origin Scan executed.");
             response.sendRedirect("html/WayfinderStep3.jsp");
         }
-        else if(session.getAttribute("usage").equals("map")){
+        else if((usage!=null && usage.equals("map"))){
             String currId = request.getParameter("id");
             session.setAttribute("currId",currId);
             int i =  (Integer) session.getAttribute("nextPoint");
@@ -79,6 +80,9 @@ public class QRServlet extends HttpServlet {
                 response.sendRedirect("http://localhost:8080/mapServlet?error=true");
                 System.out.println("QRServlet sent error");
             }
+        }
+        else{
+            response.sendRedirect("http://localhost:8080/selectDestination?name=Ward 3&id=A1-003");
         }
 
     }
