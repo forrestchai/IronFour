@@ -30,7 +30,7 @@
             margin-left: auto;
             margin-right: auto;
             width: 500px;
-            height: 500px;
+            height: 350px;
             border: 2px;
             border-color: #0f0f0f;
             display: block;
@@ -42,7 +42,7 @@
                 margin-left: auto;
                 margin-right: auto;
                 width: 350px;
-                height: 350px;
+                height: 210px;
                 border: 2px;
                 display: block;
             }
@@ -54,7 +54,7 @@
                 margin-left: auto;
                 margin-right: auto;
                 width: 500px;
-                height: 500px;
+                height: 300px;
                 border: 2px;
                 display: block;
             }
@@ -122,7 +122,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <img id="map-canvas" src="../img/generatedMap.png">
+                <img id="map-canvas" src="/img/<%=id%>.jpg">
             </div>
         </div>
         <div class="row">

@@ -82,32 +82,31 @@ public class WaypointDA {
     }
 
     public static ArrayList<Waypoint> getLandmarkWaypoints() throws SQLException{
+
         ArrayList<Waypoint> waypointList = new ArrayList<Waypoint>();
-        DBController dbController = new DBController();
-        Connection myConn = dbController.getConnection();
-        PreparedStatement myStmt = null;
-        ResultSet myRs = null;
-        myStmt = myConn.prepareStatement("SELECT * FROM waypoint WHERE id LIKE 'B%' AND accessLimiter = 0;");
-        myRs = myStmt.executeQuery();
-        while(myRs.next())
-        {
-            waypointList.add(convertToWaypoint(myRs));
+        String[] waypointId =
+                {"A1-001","A1-009","A1-011","A1-007","A1-016", "A1-010"
+                };
+
+        for(int i=waypointId.length-1; i>0; i--){
+            waypointList.add(WaypointDA.getWaypointById(waypointId[i]));
         }
+
         return waypointList;
     }
 
     public static ArrayList<Waypoint> getWardWaypoints() throws SQLException{
+
         ArrayList<Waypoint> waypointList = new ArrayList<Waypoint>();
-        DBController dbController = new DBController();
-        Connection myConn = dbController.getConnection();
-        PreparedStatement myStmt = null;
-        ResultSet myRs = null;
-        myStmt = myConn.prepareStatement("SELECT * FROM waypoint WHERE id LIKE 'A%' AND accessLimiter = 0;");
-        myRs = myStmt.executeQuery();
-        while(myRs.next())
-        {
-            waypointList.add(convertToWaypoint(myRs));
+        String[] waypointId =
+                {"A1-017","A1-013","A1-005","A1-008","A1-012",
+                        "A1-014","A1-002","A1-003","A1-004"
+                };
+
+        for(int i=waypointId.length-1; i>0; i--){
+            waypointList.add(WaypointDA.getWaypointById(waypointId[i]));
         }
+
         return waypointList;
     }
 
@@ -229,4 +228,5 @@ public class WaypointDA {
 
         return universalPoints;
     }
+
 }
