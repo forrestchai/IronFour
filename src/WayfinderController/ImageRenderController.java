@@ -48,6 +48,7 @@ public class ImageRenderController {
         this.setPreviousCurrentY(-1);
         try
         {
+            //backImage = ImageIO.read(new File(this.getBACKIMAGESRC()));
             backImage = ImageIO.read(new File(this.getBACKIMAGESRC()));
             //backImage = ImageIO.read(new File(getClass().getResource(this.getBACKIMAGESRC()).toURI()));
             waypoint = ImageIO.read(new File(this.getSPAWNABLESRC1()));
@@ -275,7 +276,7 @@ public class ImageRenderController {
     {
         try
         {
-            File output = new File("C:\\Users\\admin\\IdeaProjects\\IronFour\\web\\img\\generatedMap.png");
+            File output = new File("C:\\Users\\User\\IdeaProjects\\IronFour\\web\\img\\generatedMap.png");
             ImageIO.write(this.getBackImage(), "png", output);
         }catch(IOException e)
         {
@@ -320,7 +321,6 @@ public class ImageRenderController {
         {
             irc.spawnArrows(waypointIDList);
         }
-
 
     }
 }
