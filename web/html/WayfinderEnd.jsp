@@ -64,6 +64,11 @@
         ArrayList<String> selectedRoute = (ArrayList<String>) session.getAttribute("selectedRoute");
         String name = WaypointDA.getWaypointById(selectedRoute.get(selectedRoute.size()-1)).getName();
         String id = selectedRoute.get(selectedRoute.size()-1);
+
+        //HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
     %>
 
 </head>
@@ -130,8 +135,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 text-center">
-                <a class="btn btn-primary">Back to main page</a>
-                <a class="btn btn-primary" style="margin-left: 15px;">Give us Feedback</a>
+                <a class="btn btn-primary" href="WayfinderLanding.jsp">Back to Landing page</a>
             </div>
         </div>
     </div>

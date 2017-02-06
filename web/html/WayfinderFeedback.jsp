@@ -21,6 +21,12 @@
         }
     </script>
 
+    <%
+        String waId = (String) session.getAttribute("currId");
+        Waypoint wa = WaypointDA.getWaypoint(waId);
+        String name = wa.getName();
+    %>
+
 </head>
 <body>
 <div class="navbar navbar-default navbar-static-top">
@@ -71,7 +77,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>Location:</h2>
-                <h3>Cardiology Department</h3>
+                <h3><%=name%></h3>
             </div>
         </div>
     </div>

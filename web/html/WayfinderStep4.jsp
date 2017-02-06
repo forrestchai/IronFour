@@ -150,8 +150,6 @@
                 <br>
                 <a class="btn btn-primary" href="<%=redirectAddr%>">Change Destination</a>
                 <br>
-                <br>
-                <a class="btn btn-primary" href="WayfinderLanding.jsp">End Wayfinding</a>
             </div>
             <div class="col-xs-6 text-right">
                 <br>
