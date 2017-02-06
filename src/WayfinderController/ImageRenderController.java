@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -168,38 +169,43 @@ public class ImageRenderController {
         this.currentIndicator = currentIndicator;
     }
 
-    public void spawnWaypoint(int offX, int offY) {
+    public String spawnWaypoint(int offX, int offY) {
         Graphics2D wp2d = backImage.createGraphics();
         wp2d.drawImage(this.getWaypoint(), offX - this.getWaypoint().getWidth()/2, offY - this.getWaypoint().getHeight()/2, null);
-        updateGeneratedImage();
+        String name = updateGeneratedImage();
+        return name;
     }
 
-    public void spawnNorth(int offX, int offY, int height) {
+    public String spawnNorth(int offX, int offY, int height) {
         Graphics2D n2d = backImage.createGraphics();
         n2d.drawImage(this.getNorth(), offX - this.getNorth().getWidth()/2, offY, this.getNorth().getWidth(), height, null);
-        updateGeneratedImage();
+        String name = updateGeneratedImage();
+        return name;
 
     }
 
-    public void spawnSouth(int offX, int offY, int height) {
+    public String spawnSouth(int offX, int offY, int height) {
         Graphics2D s2d = backImage.createGraphics();
         s2d.drawImage(this.getSouth(), offX - this.getSouth().getWidth()/2, offY, this.getSouth().getWidth(), height, null);
-        updateGeneratedImage();
+        String name = updateGeneratedImage();
+        return name;
     }
 
-    public void spawnEast(int offX, int offY, int width) {
+    public String spawnEast(int offX, int offY, int width) {
         Graphics2D e2d = backImage.createGraphics();
         e2d.drawImage(this.getEast(), offX, offY, width, this.getEast().getHeight(), null);
-        updateGeneratedImage();
+        String name = updateGeneratedImage();
+        return name;
     }
 
-    public void spawnWest(int offX, int offY, int width) {
+    public String spawnWest(int offX, int offY, int width) {
         Graphics2D w2d = backImage.createGraphics();
         w2d.drawImage(this.getWest(), offX, offY, width, this.getWest().getHeight(), null);
-        updateGeneratedImage();
+        String name = updateGeneratedImage();
+        return name;
     }
 
-    public void spawnCurrentIndicator(int offX, int offY) {
+    public String spawnCurrentIndicator(int offX, int offY) {
         if(this.getPreviousCurrentX() != -1 && this.getPreviousCurrentY() != -1) {
             this.spawnWaypoint(this.getPreviousCurrentX(), this.getPreviousCurrentY());
         }
@@ -207,7 +213,8 @@ public class ImageRenderController {
         ci2d.drawImage(this.getCurrentIndicator(), offX - this.getCurrentIndicator().getWidth()/2, offY - this.getCurrentIndicator().getHeight()/2, null);
         this.setPreviousCurrentX(offX);
         this.setPreviousCurrentY(offY);
-        updateGeneratedImage();
+        String name = updateGeneratedImage();
+        return name;
     }
 
     public void spawnWaypoints(ArrayList<String> idList) throws SQLException{
@@ -277,18 +284,21 @@ public class ImageRenderController {
         }
     }
 
-    public void updateGeneratedImage()
+    public String updateGeneratedImage()
     {
+        String name = "generatedMap.png" + new Date().getTime();
         try
         {
-            String name = "generatedMap.png";
+
             File output = new File("C:/Users/admin/IdeaProjects/IronFour/web/img/"+name);
 //            File output = new File("img/"+name);
             ImageIO.write(this.getBackImage(), "png", output);
+
         }catch(IOException e)
         {
             e.printStackTrace();
         }
+        return name;
     }
 
     public static void main(String[]args) throws SQLException

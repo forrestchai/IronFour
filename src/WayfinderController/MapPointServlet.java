@@ -58,6 +58,7 @@ public class MapPointServlet extends HttpServlet {
             lock.lock();
             System.out.println("PROCESS LOCKED *********************");
             ImageRenderController irc = new ImageRenderController();
+            String imgPath = "";
             try {
 
 
@@ -69,7 +70,7 @@ public class MapPointServlet extends HttpServlet {
                     x = WaypointDA.getCoordinatesById(waypointIDList.get(0));
                     irc.spawnWaypoints(waypointIDList);
                     irc.spawnArrows(waypointIDList);
-                    irc.spawnCurrentIndicator(x.get(0), x.get(1));
+                    imgPath = irc.spawnCurrentIndicator(x.get(0), x.get(1));
                 }catch (SQLException e){e.printStackTrace();}
 
             } finally {
@@ -79,6 +80,7 @@ public class MapPointServlet extends HttpServlet {
 
                 session.setAttribute("irc", irc);
                 session.setAttribute("nextPoint", 1);
+                session.setAttribute("imgPath", imgPath);
                 System.out.println("Servlet Initial Map Spawn executed.");
                 response.sendRedirect("html/WayfinderStep4.jsp");
             }
@@ -90,6 +92,7 @@ public class MapPointServlet extends HttpServlet {
             waypointIDList = (ArrayList<String>) session.getAttribute("selectedRoute");
             int i = (Integer) session.getAttribute("nextPoint");
             String error = "";
+            String imgPath = "";
 
             lock.lock();
 
@@ -102,7 +105,7 @@ public class MapPointServlet extends HttpServlet {
 
                     x = WaypointDA.getCoordinatesById(waypointIDList.get(i));
                     System.out.println(waypointIDList.get(i) + " ID. Xcordinates: " + x.get(0));
-                    irc.spawnCurrentIndicator(x.get(0), x.get(1));
+                    imgPath = irc.spawnCurrentIndicator(x.get(0), x.get(1));
                     error = request.getParameter("error");
 
                 }catch (SQLException|NullPointerException e){e.printStackTrace();}
@@ -113,12 +116,14 @@ public class MapPointServlet extends HttpServlet {
                 if(error.equalsIgnoreCase("true"))
                 {
                     session.setAttribute("nextPoint", i);
+                    session.setAttribute("imgPath", imgPath);
                     response.sendRedirect("html/WayfinderStep4.jsp");
                     System.out.println("Error in MapPoint");
                 }
                 else
                 {
                     session.setAttribute("nextPoint", i+1);
+                    session.setAttribute("imgPath", imgPath);
                     response.sendRedirect("html/WayfinderStep4.jsp");
                     System.out.println("MapPoint executed");
                 }
