@@ -1,29 +1,8 @@
 <%@ page import="WayfinderDBController.WaypointDA" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="WayfinderModel.Waypoint" %>
-<%@ page import="WayfinderDBController.RouteDA" %>
-<%@ page import="WayfinderModel.Path" %><%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 12/13/2016
-  Time: 10:15 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
 
-//    ArrayList<String> routeIDList = RouteDA.getDummyRoute2();
-//    RouteDA rd = new RouteDA();
-//    ArrayList<Path> pathList =rd.getRouteList(routeIDList);
-//    ArrayList<String> waypointIDList = WaypointDA.getDummyWaypoint2();
-//    ArrayList<Waypoint> waypointList = WaypointDA.getWaypointList(waypointIDList);
-//
-//    waypointList.add(3, new Waypoint("","","",false,false));
-//
-//
-//    session.setAttribute("pathList", pathList);
-//    session.setAttribute("waypointList", waypointList);
-%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
@@ -32,17 +11,16 @@
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
+          rel="stylesheet" type="text/css">
     <link href="..\css\qq.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript">
-        var x;
-        function setAOC(x){
-            if(x>1){
-                document.getElementById('aoc').innerHTML = Waypoint;            }
-            else{
-                document.getElementById('aoc').innerHTML = Route;
-            }
+
+    <script>
+        function thanks(){
+            alert("Your feedback has been submitted successfully!")
         }
     </script>
+
 </head>
 <body>
 <div class="navbar navbar-default navbar-static-top">
@@ -104,21 +82,21 @@
             <div class="col-md-12 text-right">
                 <h3 class="text-left">Inaccessible</h3>
                 <p class="text-left">Was the area blocked, or the QR code inaccessible to you?</p>
-                <a class="btn btn-primary">Send Feedback</a>
+                <a class="btn btn-primary" onclick="thanks()" href="http://localhost:8080/feedbackServlet?type=1">Send Feedback</a>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 text-right">
                 <h3 class="text-left">Area Busy</h3>
                 <p class="text-left">Is the area around the QR code too busy and/or crowded?</p>
-                <a class="btn btn-primary">Send Feedback</a>
+                <a class="btn btn-primary" onclick="thanks()" href="http://localhost:8080/feedbackServlet?type=2">Send Feedback</a>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 text-right">
                 <h3 class="text-left">Missing QR Code</h3>
                 <p class="text-left">Is the QR code missing, damaged or lost?</p>
-                <a class="btn btn-primary">Send Feedback</a>
+                <a class="btn btn-primary" onclick="thanks()" href="http://localhost:8080/feedbackServlet?type=3">Send Feedback</a>
             </div>
         </div>
         <div class="row">
@@ -126,7 +104,7 @@
                 <h3 class="text-left">Hard to find QR Code</h3>
                 <p class="text-left">Have you experienced a hard time finding the QR code, is it placed in
                     an inconvenient location?</p>
-                <a class="btn btn-primary">Send Feedback</a>
+                <a class="btn btn-primary" onclick="thanks()" href="http://localhost:8080/feedbackServlet?type=4">Send Feedback</a>
             </div>
         </div>
     </div>

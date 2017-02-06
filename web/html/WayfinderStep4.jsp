@@ -145,7 +145,7 @@
                 <h2>Current Waypoint:</h2>
                 <h3><%=name%></h3>
                 <br>
-                <a class="btn btn-primary">Leave Feedback</a>
+                <a class="btn btn-primary" href="WayfinderFeedback.jsp">Leave Feedback</a>
                 <br>
                 <br>
                 <a class="btn btn-primary" href="<%=redirectAddr%>">Change Destination</a>

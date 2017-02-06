@@ -51,6 +51,7 @@ public class QRServlet extends HttpServlet {
             }catch(SQLException e){e.printStackTrace();}
 
             session.setAttribute("orgId", id);
+            session.setAttribute("currId", id);
             session.setAttribute("orgName", name);
             session.setAttribute("bestRoute", bestRoute);
             session.setAttribute("accessRoute", accessRoute);

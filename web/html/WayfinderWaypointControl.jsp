@@ -13,6 +13,116 @@
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
           rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
+    <script>
+
+        $(document).ready(function()
+        {
+            getAllFeedback();
+        })
+
+        function appendTableFeedback(waypointId, waypointName, isEnabled, amt, date, time){
+
+            console.log(waypointId + 'WHAT');
+
+            var feedbackTable = $('#feedbackTable > tbody:last');
+            feedbackTable.append(
+                '<tr>'+
+                '<td>'+ waypointId +'</td>'+
+                '<td>'+ date +'</td>'+
+                '<td>'+ time +'</td>'+
+                '<td>'+waypointName+'</td>'+
+                '<td>'+isEnabled+'</td>'+
+                '<td>'+amt+'</td>'+
+                '<td>'+
+                '<a class="btn btn-primary" href="http://localhost:8080/waypointRedirect?waypointId='+waypointId+'">View</a>' +
+                '</td>' +
+                '</tr>'
+            );
+        }
+
+        function getAllFeedback(){
+
+            var url = '/services/wayfinderFeedback/getWaypoint';
+            var allFeedback = [];
+
+            $.ajax({
+
+                async:false,
+                url: url,
+                type: 'GET',
+                datatype: 'json',
+                success:function(response)
+                {
+                    allFeedback = response;
+
+                    for(var i=0; i<response.length; i++)
+                    {
+                        var f =response[i];
+                        var isEnabled = "Enabled";
+
+                        if(f.listValue == "1"){
+                            isEnabled = "Disabled";
+                        }
+
+                        getTimeFeedback(f.id, f.name, isEnabled, f.feedBackAmt);
+                    }
+
+                }
+
+
+            })
+
+        }
+
+        function getTimeFeedback(id, name, isEnabled, feedBackAmt){
+
+            var url = '/services/wayfinderFeedback/getFeedbackTime/'+id;
+
+            $.ajax({
+
+                async:false,
+                url: url,
+                type: 'GET',
+                datatype: 'json',
+                success:function(response)
+                {
+                    var date = "NIL", time = "NIL";
+                    var f =response[0];
+
+                    if(response[0] != null){
+                        date = f.date;
+                        time = f.time;
+                    }
+
+                    appendTableFeedback(id, name, isEnabled, feedBackAmt, date, time);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    //alert("Status: " + textStatus); alert("Error: " + errorThrown);
+                    appendTableFeedback(id, name, isEnabled, feedBackAmt, 'None', 'None');
+                }
+
+
+            })
+
+        }
+
+        function dismissAndReset() {
+            if(confirm("Are you sure about deleting and resetting all feedback Data?")){
+                var cnfm = prompt("To Delete all feedback here please type \"Confirm Delete All\" ", "");
+                if (cnfm == "Confirm Delete All") {
+                    alert("All entries deleted from waypoint");
+                    window.location = "/feedbackDismiss?from=menu&all=yes&delAllId=no&delId=no";
+                }
+                else{
+                    alert("Feedback Delete Cancelled");
+                }
+            }
+        }
+
+    </script>
+
+
 </head>
 
 <body>
@@ -49,12 +159,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-left">Step 1: Set your sights</h1>
+                <h1 class="text-left">Feedback</h1>
+                <p class="text-left">A table of locations and the amount of feedback the user have on them</p>
             </div>
-        </div>
-        <div class="row">
             <div class="col-md-12">
-                <p class="text-left">Select the type of Location that you want to find.</p>
+                <h3 class="text-left">Reset Table</h3>
+                <p class="text-left">Resets all feedback tables to empty, and enables all Waypoints</p>
+                <h4 class="text-left"> <a class="btn btn-primary text-right" onclick="dismissAndReset()">Reset</a></h4>
             </div>
         </div>
     </div>
@@ -63,33 +174,20 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <table class="table">
+                <table class="table" id="feedbackTable">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th style="width:130px">Waypoint #</th>
+                            <th style="width:150px">Latest Date</th>
+                            <th style="width:150px">Latest Time</th>
                             <th>Waypoint</th>
                             <th>Status</th>
                             <th style="width:130px">Faults</th>
-                            <th style="width:130px">Crit. Faults</th>
-                            <th style="width:150px">View</th>
                             <th style="width:150px">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>A&E Entrance</td>
-                            <td>
-                                <select class="btn btn-primary dropdown-toggle">
-                                    <option value="volvo" href="">Enable</option>
-                                    <option value="volvo" href="">Disable</option>
-                                </select>
-                            </td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>
-                                <a class="btn btn-primary">Click me</a>
-                            </td>
                         </tr>
                     </tbody>
                 </table>

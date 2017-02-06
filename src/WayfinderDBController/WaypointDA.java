@@ -1,8 +1,8 @@
 package WayfinderDBController;
 
+import WayfinderModel.Point;
 import WayfinderModel.Waypoint;
 import wayfinder.db.DBController;
-import WayfinderModel.Point;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,8 +39,8 @@ public class WaypointDA {
         String name = myRs.getString(2);
         int pointX = myRs.getInt(3);
         int pointY = myRs.getInt(4);
-        String listValue = myRs.getString(5);
-        boolean access = myRs.getBoolean(6);
+        boolean access = myRs.getBoolean(5);
+        String listValue = myRs.getString(6);
         double coeff = myRs.getDouble(7);
         int count = myRs.getInt(8);
         int feedbackAmt = myRs.getInt(9);
@@ -227,6 +227,42 @@ public class WaypointDA {
         }
 
         return universalPoints;
+    }
+
+    public static void increaseWaypointFeedback(String waypointId)throws SQLException{
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("UPDATE waypoint SET feedbackAmt = feedbackAmt+1 WHERE id = '" + waypointId + "';");
+        myStmt.executeUpdate();
+    }
+
+    public static void decreaseWaypointFeedback(String waypointId, int amt)throws SQLException{
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("UPDATE waypoint SET feedbackAmt = feedbackAmt-"+amt+" WHERE id = '" + waypointId + "';");
+        myStmt.executeUpdate();
+    }
+
+    public static void enableWaypoint(String waypointId)throws SQLException{
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("UPDATE waypoint SET listValue = 0, coeff = 1 WHERE id = '" + waypointId + "';");
+        myStmt.executeUpdate();
+    }
+
+    public static void disableWaypoint(String waypointId)throws SQLException{
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("UPDATE waypoint SET listValue = 1, coeff = 100 WHERE id = '" + waypointId + "';");
+        myStmt.executeUpdate();
     }
 
 }

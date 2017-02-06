@@ -1,23 +1,37 @@
 package WayfinderModel;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDateTime;
+
 /**
  * Created by admin on 12/13/2016.
  */
 public class Feedback {
     String id;
-    String routeId;
+    String name;
     String waypointId;
-    String feedback;
-    int accessible;
-    int available;
+    boolean crit;
+    int type;
+    Date date;
+    Time time;
 
-    public Feedback(String id, String routeId, String waypointId, String feedback, int accessible, int available) {
+    public Feedback(String id, String name, String waypointId, boolean crit, int type, Date date, Time time) {
         this.id = id;
-        this.routeId = routeId;
+        this.name = name;
         this.waypointId = waypointId;
-        this.feedback = feedback;
-        this.accessible = accessible;
-        this.available = available;
+        this.crit = crit;
+        this.type = type;
+        this.date = date;
+        this.time = time;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
     }
 
     public String getId() {
@@ -28,12 +42,12 @@ public class Feedback {
         this.id = id;
     }
 
-    public String getRouteId() {
-        return routeId;
+    public String getName() {
+        return name;
     }
 
-    public void setRouteId(String routeId) {
-        this.routeId = routeId;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getWaypointId() {
@@ -44,27 +58,27 @@ public class Feedback {
         this.waypointId = waypointId;
     }
 
-    public String getFeedback() {
-        return feedback;
+    public boolean getCrit() {
+        return crit;
     }
 
-    public void setFeedback(String feedback) {
-        this.feedback = feedback;
+    public void setCrit(boolean crit) {
+        this.crit = crit;
     }
 
-    public int getAccessible() {
-        return accessible;
+    public int getType() {
+        return type;
     }
 
-    public void setAccessible(int accessible) {
-        this.accessible = accessible;
+    public void setType(int type) {
+        this.type = type;
     }
 
-    public int getAvailable() {
-        return available;
+    public Date getDate() {
+        return date;
     }
 
-    public void setAvailable(int available) {
-        this.available = available;
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

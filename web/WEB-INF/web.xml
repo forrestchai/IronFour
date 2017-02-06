@@ -4,25 +4,29 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+    <servlet>
+        <servlet-name>RestServlet</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>WayfinderController</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </servlet>
     <!--<servlet>-->
-        <!--<servlet-name>RestServlet</servlet-name>-->
-        <!--<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>-->
-
-        <!--<init-param>-->
-            <!--<param-name>com.sun.jersey.config.property.packages</param-name>-->
-            <!--<param-value>src/restful</param-value>-->
-        <!--</init-param>-->
-
-        <!--<init-param>-->
-            <!--<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>-->
-            <!--<param-value>true</param-value>-->
-        <!--</init-param>-->
+        <!--<servlet-name>FeedbackReceiveServlet</servlet-name>-->
+        <!--<servlet-class>WayfinderController.FeedbackReceiveServlet</servlet-class>-->
     <!--</servlet>-->
 
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>RestServlet</servlet-name>-->
-        <!--<url-pattern>/services/*</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>RestServlet</servlet-name>
+        <url-pattern>/services/*</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>
