@@ -11,14 +11,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    ArrayList<Path> pathList = (ArrayList) session.getAttribute("pathList");
-    ArrayList<Waypoint> waypointList = (ArrayList) session.getAttribute("waypointList");
-    System.out.println(session.getAttribute("current"));
-%>
+<%--<%--%>
+
+<%--%>--%>
 <html><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -67,6 +68,14 @@
     </style>
 
     <%
+        response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
+        response.setHeader("Pragma","no-cache"); //HTTP 1.0
+        response.setDateHeader ("Expires", -1); //prevents caching at the proxy server
+        ArrayList<Path> pathList = (ArrayList) session.getAttribute("pathList");
+        ArrayList<Waypoint> waypointList = (ArrayList) session.getAttribute("waypointList");
+        System.out.println(session.getAttribute("current"));
+
+
         int x = (Integer) session.getAttribute("nextPoint")-1;
         ArrayList <String> waypointIdList = (ArrayList<String>) session.getAttribute("selectedRoute");
         String name = WaypointDA.getWaypoint(waypointIdList.get(x)).getName();

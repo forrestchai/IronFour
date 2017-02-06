@@ -197,8 +197,7 @@ public class ImageRenderController {
     }
 
     public void spawnCurrentIndicator(int offX, int offY) {
-        if(this.getPreviousCurrentX() != -1 && this.getPreviousCurrentY() != -1)
-        {
+        if(this.getPreviousCurrentX() != -1 && this.getPreviousCurrentY() != -1) {
             this.spawnWaypoint(this.getPreviousCurrentX(), this.getPreviousCurrentY());
         }
         Graphics2D ci2d = backImage.createGraphics();
@@ -235,13 +234,16 @@ public class ImageRenderController {
         if((two.getOffX() - one.getOffX() == 0) && (two.getOffY() - one.getOffY() > 0))
         {
             direction = 'S';
-        }else if((two.getOffX() - one.getOffX() == 0) && (two.getOffY() - one.getOffY() < 0))
+        }
+        else if((two.getOffX() - one.getOffX() == 0) && (two.getOffY() - one.getOffY() < 0))
         {
             direction = 'N';
-        }else if((two.getOffX() - one.getOffX() > 0) && (two.getOffY() - one.getOffY() == 0))
+        }
+        else if((two.getOffX() - one.getOffX() > 0) && (two.getOffY() - one.getOffY() == 0))
         {
             direction = 'E';
-        }else if((two.getOffX() - one.getOffX() < 0) && (two.getOffY() - one.getOffY() == 0))
+        }
+        else if((two.getOffX() - one.getOffX() < 0) && (two.getOffY() - one.getOffY() == 0))
         {
             direction = 'W';
         }
@@ -276,16 +278,13 @@ public class ImageRenderController {
     {
         try
         {
-            File output = new File("C:\\Users\\User\\IdeaProjects\\IronFour\\web\\img\\generatedMap.png");
+            File output = new File("C:/Users/admin/IdeaProjects/IronFour/web/img/generatedMap.png");
+//            File output = new File("/img/generatedMap.png");
             ImageIO.write(this.getBackImage(), "png", output);
         }catch(IOException e)
         {
             e.printStackTrace();
         }
-    }
-
-    public void nextStep(){
-
     }
 
     public static void main(String[]args) throws SQLException

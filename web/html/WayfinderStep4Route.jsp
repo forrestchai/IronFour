@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="WayfinderDBController.WaypointDA" %><%--
+<%@ page import="WayfinderDBController.WaypointDA" %>
+<%@ page import="java.util.Date" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 1/31/2017
@@ -11,6 +12,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -60,11 +64,18 @@
     </style>
 
     <%
+        response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
+        response.setHeader("Pragma","no-cache"); //HTTP 1.0
+        response.setDateHeader ("Expires", -1); //prevents caching at the proxy server
+
         session.setAttribute("usage", "map");
         int x = (Integer) session.getAttribute("nextPoint");
         ArrayList<String> waypointIdList = (ArrayList<String>) session.getAttribute("selectedRoute");
         String org = WaypointDA.getWaypoint(waypointIdList.get(x-1)).getName();
         String dest = WaypointDA.getWaypoint(waypointIdList.get(x)).getName();
+
+        String imgSrc = "/img/generatedMap.png?t=" + new Date().getTime();
+        System.out.println("New Img Source: "+ imgSrc);
     %>
 
 </head>
@@ -118,7 +129,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <img id="map-canvas" src="\img\generatedMap.png">
+                <img id="map-canvas" src="<%=imgSrc%>">
                 <%--<canvas id="map-canvas"></canvas>--%>
             </div>
         </div>
