@@ -286,7 +286,7 @@ public class ImageRenderController {
 
     public String updateGeneratedImage()
     {
-        String name = "generatedMap.png" + new Date().getTime();
+        String name = "generatedMap" + new Date().getTime() + ".png";
         try
         {
 
