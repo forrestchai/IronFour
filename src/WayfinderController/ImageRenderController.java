@@ -8,6 +8,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -278,8 +281,9 @@ public class ImageRenderController {
     {
         try
         {
-            File output = new File("C:/Users/admin/IdeaProjects/IronFour/web/img/generatedMap.png");
-//            File output = new File("/img/generatedMap.png");
+            String name = "generatedMap.png";
+            File output = new File("C:/Users/admin/IdeaProjects/IronFour/web/img/"+name);
+//            File output = new File("img/"+name);
             ImageIO.write(this.getBackImage(), "png", output);
         }catch(IOException e)
         {

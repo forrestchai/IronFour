@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by admin on 2/2/2017.
@@ -25,6 +29,8 @@ public class MapPointServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        ReentrantLock lock = new ReentrantLock();
 
         HttpSession session=request.getSession();
         ArrayList<Integer> x = new ArrayList<Integer>();
@@ -49,21 +55,34 @@ public class MapPointServlet extends HttpServlet {
 //            waypointIDList.add("A1-003");
 //            waypointIDList.add("A1-005");session.setAttribute("selectedRoute", waypointIDList);
 
+            lock.lock();
+            System.out.println("PROCESS LOCKED *********************");
             ImageRenderController irc = new ImageRenderController();
-
-            try
-            {
-                x = WaypointDA.getCoordinatesById(waypointIDList.get(0));
-                irc.spawnWaypoints(waypointIDList);
-                irc.spawnArrows(waypointIDList);
-                irc.spawnCurrentIndicator(x.get(0), x.get(1));
-            }catch (SQLException e){e.printStackTrace();}
+            try {
 
 
-            session.setAttribute("irc", irc);
-            session.setAttribute("nextPoint", 1);
-            System.out.println("Servlet Initial Map Spawn executed.");
-            response.sendRedirect("html/WayfinderStep4.jsp");
+
+                try
+                {
+                    //Path path = FileSystems.getDefault().getPath("C:/Users/admin/IdeaProjects/IronFour/web/img/", "generatedMap.png");
+                    //Files.delete(path);
+                    x = WaypointDA.getCoordinatesById(waypointIDList.get(0));
+                    irc.spawnWaypoints(waypointIDList);
+                    irc.spawnArrows(waypointIDList);
+                    irc.spawnCurrentIndicator(x.get(0), x.get(1));
+                }catch (SQLException e){e.printStackTrace();}
+
+            } finally {
+                lock.unlock();
+                System.out.println("PROCESS UNLOCKED ***********************");
+
+
+                session.setAttribute("irc", irc);
+                session.setAttribute("nextPoint", 1);
+                System.out.println("Servlet Initial Map Spawn executed.");
+                response.sendRedirect("html/WayfinderStep4.jsp");
+            }
+
         }
         else
         {
@@ -72,29 +91,41 @@ public class MapPointServlet extends HttpServlet {
             int i = (Integer) session.getAttribute("nextPoint");
             String error = "";
 
-            try
-            {
-                x = WaypointDA.getCoordinatesById(waypointIDList.get(i));
-                System.out.println(waypointIDList.get(i) + " ID. Xcordinates: " + x.get(0));
-                irc.spawnCurrentIndicator(x.get(0), x.get(1));
-                error = request.getParameter("error");
+            lock.lock();
 
-            }catch (SQLException|NullPointerException e){e.printStackTrace();}
+            try {
 
-            if(error.equalsIgnoreCase("true"))
-            {
-                session.setAttribute("nextPoint", i);
-                response.sendRedirect("html/WayfinderStep4.jsp");
-                System.out.println("Error in MapPoint");
+                try
+                {
+//                    Path path = FileSystems.getDefault().getPath("C:/Users/admin/IdeaProjects/IronFour/web/img/", "generatedMap.png");
+//                    Files.delete(path);
+
+                    x = WaypointDA.getCoordinatesById(waypointIDList.get(i));
+                    System.out.println(waypointIDList.get(i) + " ID. Xcordinates: " + x.get(0));
+                    irc.spawnCurrentIndicator(x.get(0), x.get(1));
+                    error = request.getParameter("error");
+
+                }catch (SQLException|NullPointerException e){e.printStackTrace();}
+
+            } finally {
+                lock.unlock();
+
+                if(error.equalsIgnoreCase("true"))
+                {
+                    session.setAttribute("nextPoint", i);
+                    response.sendRedirect("html/WayfinderStep4.jsp");
+                    System.out.println("Error in MapPoint");
+                }
+                else
+                {
+                    session.setAttribute("nextPoint", i+1);
+                    response.sendRedirect("html/WayfinderStep4.jsp");
+                    System.out.println("MapPoint executed");
+                }
+
+                System.out.println("Servlet Subsequent Spawn executed.");
+
             }
-            else
-            {
-                session.setAttribute("nextPoint", i+1);
-                response.sendRedirect("html/WayfinderStep4.jsp");
-                System.out.println("MapPoint executed");
-            }
-
-            System.out.println("Servlet Subsequent Spawn executed.");
         }
     }
 }

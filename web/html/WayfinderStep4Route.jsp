@@ -64,8 +64,12 @@
     </style>
 
     <%
+        try{
+            Thread.sleep(3000);
+        }catch(InterruptedException e){e.printStackTrace();}
+
         response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
-        response.setHeader("Pragma","no-cache"); //HTTP 1.0
+        response.setHeader("Pragma","no-cache"); //HTTP 1.0C:\Users\admin\IdeaProjects\IronFour\web\img\generatedMap.png
         response.setDateHeader ("Expires", -1); //prevents caching at the proxy server
 
         session.setAttribute("usage", "map");
@@ -73,10 +77,27 @@
         ArrayList<String> waypointIdList = (ArrayList<String>) session.getAttribute("selectedRoute");
         String org = WaypointDA.getWaypoint(waypointIdList.get(x-1)).getName();
         String dest = WaypointDA.getWaypoint(waypointIdList.get(x)).getName();
-
         String imgSrc = "/img/generatedMap.png?t=" + new Date().getTime();
-        System.out.println("New Img Source: "+ imgSrc);
+//        String imgSrc = "/img/generatedMap.png";
+//        String imgSrc = "C:/Users/admin/IdeaProjects/IronFour/web/img/generatedMap.png?t=" + new Date().getTime();
+
+        //System.out.println("New Img Source: "+ imgSrc);
     %>
+
+    <%--<script>--%>
+        <%--window.onload(setTimeout(function(){--%>
+<%--//            var img = new Image();--%>
+<%--//            var div = document.getElementById('foo');--%>
+<%--//--%>
+<%--//            img.onload = function() {--%>
+<%--//                div.appendChild(img);--%>
+<%--//            };--%>
+<%--//--%>
+<%--//            img.src = '/img/generatedMap.png?t=' + new Date().getTime();--%>
+
+            <%--$('#mapArea').prepend('<img id="map-canvas" src="/img/generatedMap.png">')--%>
+        <%--}),3000);--%>
+    <%--</script>--%>
 
 </head>
 <body>
@@ -128,13 +149,13 @@
 <div class="section topPart">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-12" id="mapArea">
                 <img id="map-canvas" src="<%=imgSrc%>">
                 <%--<canvas id="map-canvas"></canvas>--%>
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 text-center">
+            <div class="col-xs-12 text-center" >
                 <br>
                 <a class="btn btn-primary" href="WayfinderQR.jsp">Scan QR Code</a>
             </div>
