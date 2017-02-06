@@ -287,11 +287,12 @@ public class ImageRenderController {
     public String updateGeneratedImage()
     {
         String name = "generatedMap" + new Date().getTime() + ".png";
-        name = "/img/" + name;
+        //name = "/img/" + name;
+        name = "/out/artifacts/IronFour_war_exploded/img/" + name;
         try
         {
 
-            File output = new File("C:/Users/admin/IdeaProjects/IronFour/web" + name);
+            File output = new File("C:/Users/admin/IdeaProjects/IronFour/" + name);
 //            File output = new File("img/"+name);
             ImageIO.write(this.getBackImage(), "png", output);
 

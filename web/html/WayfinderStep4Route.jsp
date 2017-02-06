@@ -78,6 +78,9 @@
         String org = WaypointDA.getWaypoint(waypointIdList.get(x-1)).getName();
         String dest = WaypointDA.getWaypoint(waypointIdList.get(x)).getName();
         String imgSrc = (String)session.getAttribute("imgPath");
+        imgSrc = "../img/"+ imgSrc.substring(imgSrc.lastIndexOf('/'));
+
+
 //        String imgSrc = "/img/generatedMap.png";
 //        String imgSrc = "C:/Users/admin/IdeaProjects/IronFour/web/img/generatedMap.png?t=" + new Date().getTime();
 

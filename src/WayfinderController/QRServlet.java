@@ -69,17 +69,17 @@ public class QRServlet extends HttpServlet {
             selectedRoute = (ArrayList<String>) session.getAttribute("selectedRoute");
 
             System.out.println("Servlet Progress Scan executed: next Point = " + i + " right ID = "+ selectedRoute.get(i) );
-            System.out.println("Servlet Progress Scan executed pt2: curr ID = "+ currId );
+            System.out.println("Servlet Progress Scan executed pt2: curr ID = "+ currId + " Selected route size: "+ selectedRoute.size());
 
-            if(selectedRoute.size() == i+1){
-                response.sendRedirect("html/WayfinderEnd.jsp");
-                System.out.println("Map point ends");
-            }else if(!selectedRoute.get(i-1).equalsIgnoreCase(currId)){
+            if(selectedRoute.get(i).equalsIgnoreCase(currId)){
                 response.sendRedirect("http://localhost:8080/mapServlet?error=false");
                 System.out.println("QRServlet sent positive");
-            }else{
+            }else if(!selectedRoute.get(i).equalsIgnoreCase(currId)){
                 response.sendRedirect("http://localhost:8080/mapServlet?error=true");
                 System.out.println("QRServlet sent error");
+            }else{
+                response.sendRedirect("html/WayfinderEnd.jsp");
+                System.out.println("Map point ends");
             }
         }
 

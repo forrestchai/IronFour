@@ -40,20 +40,20 @@ public class MapPointServlet extends HttpServlet {
         {
             String selR = request.getParameter("selectedRoute");
 
-//            if(selR.equalsIgnoreCase("accessRoute"))
-//            {
-//                waypointIDList = (ArrayList<String>) session.getAttribute("accessRouteString");
-//                session.setAttribute("selectedRoute", waypointIDList);
-//            }
-//            else
-//            {
-//                waypointIDList = (ArrayList<String>) session.getAttribute("bestRouteString");
-//                session.setAttribute("selectedRoute", waypointIDList);
-//            }
+            if(selR.equalsIgnoreCase("accessRoute"))
+            {
+                waypointIDList = (ArrayList<String>) session.getAttribute("accessRouteString");
+                session.setAttribute("selectedRoute", waypointIDList);
+            }
+            else
+            {
+                waypointIDList = (ArrayList<String>) session.getAttribute("bestRouteString");
+                session.setAttribute("selectedRoute", waypointIDList);
+            }
 
-            waypointIDList.add("A1-001");
-            waypointIDList.add("A1-003");
-            waypointIDList.add("A1-005");session.setAttribute("selectedRoute", waypointIDList);
+//            waypointIDList.add("A1-001");
+//            waypointIDList.add("A1-003");
+//            waypointIDList.add("A1-005");session.setAttribute("selectedRoute", waypointIDList);
 
             lock.lock();
             System.out.println("PROCESS LOCKED *********************");
