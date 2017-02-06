@@ -287,10 +287,11 @@ public class ImageRenderController {
     public String updateGeneratedImage()
     {
         String name = "generatedMap" + new Date().getTime() + ".png";
+        name = "C:/Users/admin/IdeaProjects/IronFour/web/img/" + name;
         try
         {
 
-            File output = new File("C:/Users/admin/IdeaProjects/IronFour/web/img/"+name);
+            File output = new File(name);
 //            File output = new File("img/"+name);
             ImageIO.write(this.getBackImage(), "png", output);
 
